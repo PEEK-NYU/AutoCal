@@ -3,7 +3,7 @@
 -HEROKU:  https://dashboard.heroku.com/apps/peek-nyu/deploy/heroku-git
 -TRAVIS:  
 
-## Org Founders:
+## Organization Founders:
 #### Kora Hughes
 #### Elizabeth Akindeko
 #### Ethan Philpott
