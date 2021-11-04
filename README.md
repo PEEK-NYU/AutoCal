@@ -5,6 +5,12 @@
 #### HEROKU:  https://dashboard.heroku.com/apps/peek-nyu/deploy/heroku-git
 #### TRAVIS:  https://app.travis-ci.com/github/PEEK-NYU/PEEK
 
+## Project Idea:
+ -- a software that aids users in scheduling <br/>
+ --- story: user queries software for the best time(s) to study for an exam next week... software loads user's google calendar data and returns some suggested time/duration slots compatible with the user's schedule along with event-creation links... <br/>
+ -- takes imported google calendar data and exports google calender (either through calendar event creation links or direct editing <br/>
+ --- main features include automatic scheduling suggestions <br/>
+ 
 ## Organization Founders:
 #### Kora Hughes
 #### Elizabeth Akindeko
