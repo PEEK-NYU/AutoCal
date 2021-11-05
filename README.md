@@ -71,16 +71,16 @@ Break
 ## CRUD
 
 **Create**
-* `/create_user` Fulfills requirement 1 of Create. Users can create an account by passing a email (required), password (required), and name (required). Returns a success message + user_id if it works.
-* `/create_break` Fulfills requirement 2 of Create. Users can create a break time during which no events will be scheduled. The break time will have a name (required), start_time (required), end_time (required), and duration (required) passed by the user. Returns a success message + break_id if it works.
-* `/import_events` Fulfills requirement 3 of Create. Users can import events from their Google Calendar. The user sends a request with start_time (required) and end_time (required). The API server uses the user's Google API key stored in the database to get the events from Google Calendar and add to the user calendar. These events passed in from Google Calendar have a name, start_time, end_time, duration and location. Returns a success message and the imported events if it works.
-* `/create_event` Fulfills requirement 4 of Create. Users can add an event. These events have a name (required), start_time (optional), end_time (optional), duration (required) and location (optional) passed by the user. Events without a start_time AND end_time are considered unscheduled events and will be displayed in a separate section on the side of the website. Returns a success message + event_id if it works.
+1. `/create_user` Fulfills requirement 1 of Create. Users can create an account by passing a email (required), password (required), and name (required). Returns a success message + user_id if it works.
+2. `/create_break` Fulfills requirement 2 of Create. Users can create a break time during which no events will be scheduled. The break time will have a name (required), start_time (required), end_time (required), and duration (required) passed by the user. Returns a success message + break_id if it works.
+3. `/import_events` Fulfills requirement 3 of Create. Users can import events from their Google Calendar. The user sends a request with start_time (required) and end_time (required). The API server uses the user's Google API key stored in the database to get the events from Google Calendar and add to the user calendar. These events passed in from Google Calendar have a name, start_time, end_time, duration and location. Returns a success message and the imported events if it works.
+4. `/create_event` Fulfills requirement 4 of Create. Users can add an event. These events have a name (required), start_time (optional), end_time (optional), duration (required) and location (optional) passed by the user. Events without a start_time AND end_time are considered unscheduled events and will be displayed in a separate section on the side of the website. Returns a success message + event_id if it works.
 
 **Read**
 1. `/get_events/<user_ID>`. Fulfills requirement 1 of Read. Users can get multiple scheduled events from a given time frame. The users must pass in a user_ID (required), start_time (required) and end_time (required). It returns a list of the event_id (required), name (required), start_time (required), end_time (required), duration (required), and location (optional) for the events.
 2. `/get_unscheduled/<user_ID>` Fulfills requirement 2 of Read. Users can get all unscheduled events. Users pass in a user_ID (required). It returns an event_id (required), name (required), duration (required), and location (optional). No start_time or end_time is returned because all unscheduled events have none scheduled yet.
 3. `/get_event/<event_ID>` Fulfills requirement 3 of Read. Users can get a specific event (scheduled or unscheduled). Users pass in an event_ID (required). The result will have a  event_id (required), name (required), start_time (optional), end_time (optional), duration (required), location (optional) and if it is unscheduled or not (required).
-4. `/get_times/<user_ID>` Fulfills requirement 4 of Read. Users can get a list of suggested times for a given time duration. Users pass in duration (required) and a user_ID (required). The result is an array of start_time (required) and end_time(required).
+4. `/get_times/<user_ID>` Fulfills requirement 4 of Read. Users can get a list of suggested times for a given time duration. Users pass in duration (required) and a user_ID (required). The result is an array of start_time (required) and end_time(required). These times can later be used with update_event to apply the suggested times.
 5. `/get_user/<user_ID>` Fulfills requirement 5 of Read. Users can get their user info. Users pass in their user_ID (required). Returns a user_id (required), email (required) and name (required). Does not return a password for security reasons.
 6. `/get_break/<break_ID>` Fulfills requirement 6 of Read. Users can get a specific break. Users pass in an break_ID (required). The result will have a break_ID (required), name (required), start_time (optional), end_time (optional), and duration (required).
 7. `/get_breaks/<user_ID>` Fulfills requirement 7 of Read. Users can get breaks from a timeframe. The users must pass in a start_time (required) and end_time (required) and a user_ID (required). The result will have an array of breaks with each having break_ID (required), name (required), start_time (optional), end_time (optional), and duration (required).
@@ -96,9 +96,9 @@ Break
 7. `/update_break/<break_ID>` Fulfills requirement 7 of Update. Users can update their break times. Users pass in a break_ID (required), start_time (optional), end_time (optional) to change the event. Returns a success message + user_ID if it works.
 
 **Delete**
-* `/delete_event/<event_ID>` Fulfills requirement 1 of Delete. Users can delete a given event using an event ID. Users pass in an event_ID (required). Returns a success message + event_ID if it works.
-* `/delete_break/<break_ID>` Fulfills requirement 2 of Delete. Users can delete a given break using a break ID. Users pass in a break_ID (required). Returns a success message + break_ID if it works.
-* `/delete_user/<user_ID>` Fulfills requirement 3 of Delete. Users can delete a given user using a user ID. Users pass in a user_ID (required). Returns a success message + user_ID if it works.
+1. `/delete_event/<event_ID>` Fulfills requirement 1 of Delete. Users can delete a given event using an event ID. Users pass in an event_ID (required). Returns a success message + event_ID if it works.
+2. `/delete_break/<break_ID>` Fulfills requirement 2 of Delete. Users can delete a given break using a break ID. Users pass in a break_ID (required). Returns a success message + break_ID if it works.
+3. `/delete_user/<user_ID>` Fulfills requirement 3 of Delete. Users can delete a given user using a user ID. Users pass in a user_ID (required). Returns a success message + user_ID if it works.
 
 **Important: all items passed into REST not in the URL are in the body of the request**
  
