@@ -12,17 +12,29 @@
  --- main features include automatic scheduling suggestions <br/>
  
  ## CRUD Overview:
-** Create**
-* Users can ceate a new schedule in the database.
+**Create**
+* Users can insert, work, sleep, and break times
+* Users can insert a week schedule in the database
+* Week schedule
+    * An already established schedule on one's calender for a particular week
+    * That is, events with speficific times, durations, and on specific days
+    * Week schedule is stored in database after confirmation
 
-** Read **
-* Users can access new and previous schedule records.
+* Users can insert a new event with a duration time
+* A suggested time and day for the new event is a calculated
+* Calculation is based on entered data (inserted work, sleep, and break times, and already established schedule)
 
-** Update **
-* Users can modify existing schedule data. For example, adding notes.
+**Read**
+* Users can search and retrieve week schedules on database
+* Users can read calculated time suggestion for new events 
 
-** Delete **
-* Users can hard or soft delete existing schedule records from database.
+**Update**
+* Users can modify existing week schedule data
+* Users can add calculated suggested times for new events to week schedule data
+
+**Delete**
+* Users can hard or soft delee existing events on week schedules
+* Users can hard or soft delete existing week schedule records from database
 
  
 ## Organization Founders:
