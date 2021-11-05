@@ -14,28 +14,28 @@
  ## CRUD Overview:
 **Create**
 * Users can insert, work, sleep, and break times
-* Users can insert a week schedule in the database
-* Week schedule
-    * An already established schedule on one's calender for a particular week
-    * That is, events with speficific times, durations, and on specific days
-    * Week schedule is stored in database after confirmation
+* Users can insert a day's schedule in the database
+* Day schedule
+    * An already established schedule on one's calender for a particular day
+    * That is, events with speficific times, durations
+    * Day schedule is stored in database after confirmation
 
 * Users can insert a new event with a duration time
-* Suggested times/days for the new event are calculated
+* Suggested times for the new event are calculated
 * Calculation is based on entered data (inserted work, sleep, and break times, and already established schedule)
     * Calculated suggested times are not saved on database unless user confirms
 
 **Read**
-* Users can search and retrieve week schedules on database
+* Users can search and retrieve day schedules on database
 * Users can read calculated time suggestions for new events 
 
 **Update**
-* Users can modify existing week schedule data
-* Users can add calculated suggested times for new events to week schedule data
+* Users can modify existing day schedule data
+* Users can add calculated suggested times for new events to day schedule data
 
 **Delete**
-* Users can hard or soft delete existing events on week schedules
-* Users can hard or soft delete existing week schedule records from database
+* Users can hard or soft delete existing events on day schedules
+* Users can hard or soft delete existing day schedule records from database
 
  
 ## Organization Founders:
