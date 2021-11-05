@@ -7,17 +7,14 @@ Gradually, we will fill in actual calls to our datastore.
 import json
 import os
 
-DEMO_HOME = os.environ["DEMO_HOME"]
-
-EVENTS_DB = f"{DEMO_HOME}/db/events.json"
-# Note: we save events to preserve the possibility of multiple users containing the same event
-
-def get_rooms():
+def get_event():
     """
-    A function to return all events in database.
+    A function to return all events in the data store.
     """
-    try:
-        with open(EVENTS_DB) as file:
-            return json.loads(file.read())
-    except FileNotFoundError:
-        return None
+    return {"event_ID": 1234,
+    "name": "Software Engineering",
+    "start_time": 1636038000,
+    "end_time": 1636043400,
+    "duration": 90,
+    "location": "Bern Dibner",
+    "unscheduled": False}
