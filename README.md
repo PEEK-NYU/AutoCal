@@ -11,6 +11,20 @@
  -- takes imported google calendar data and exports google calender (either through calendar event creation links or direct editing <br/>
  --- main features include automatic scheduling suggestions <br/>
  
+ ## CRUD Overview:
+** Create**
+* Users can ceate a new schedule in the database.
+
+** Read **
+* Users can access new and previous schedule records.
+
+** Update **
+* Users can modify existing schedule data. For example, adding notes.
+
+** Delete **
+* Users can hard or soft delete existing schedule records from database.
+
+ 
 ## Organization Founders:
 #### Kora Hughes
 #### Elizabeth Akindeko
