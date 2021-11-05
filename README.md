@@ -6,36 +6,68 @@
 #### TRAVIS:  https://app.travis-ci.com/github/PEEK-NYU/PEEK
 
 ## Project Idea:
- -- a software that aids users in scheduling <br/>
- --- story: user queries software for the best time(s) to study for an exam next week... software loads user's google calendar data and returns some suggested time/duration slots compatible with the user's schedule along with event-creation links... <br/>
- -- takes imported google calendar data and exports google calender (either through calendar event creation links or direct editing <br/>
- --- main features include automatic scheduling suggestions <br/>
+* A website that aids users in scheduling events. Website pulls data from Google Calendar and suggests the best time for an event.
+* Story: User queries software for the best time(s) to study for an exam next week => Software loads user's google calendar data and returns some suggested time/duration slots compatible with the user's schedule => Server automatically adds event to Google Calendar using Google's Calendar API. Users can also add breaks for when they want no events added.
  
- ## CRUD Overview:
+ ## Design
+ 
 **Create**
-* Users can insert, work, sleep, and break times
-* Users can insert a day's schedule in the database
-* Day schedule
-    * An already established schedule on one's calender for a particular day
-    * That is, events with speficific times, durations
-    * Day schedule is stored in database after confirmation
-
-* Users can insert a new event with a duration time
-* Suggested times for the new event are calculated
-* Calculation is based on entered data (inserted work, sleep, and break times, and already established schedule)
-    * Calculated suggested times are not saved on database unless user confirms
+1. Users can create an account with an email, password, and name.
+2. Users can create a break during which no events will be scheduled. The user would specify a given time period for the break and name the break.
+3. Users can import events from their Google Calendar. These events passed in from Google Calendar have a name, start_time, end_time, duration and location.
+4. Users can add an event with a name (required), start_time (optional), end_time (optional), duration (required) and location (optional) passed by the user. Events without a start_time AND end_time are considered unscheduled events and will be displayed in a separate section on the side of the website.
 
 **Read**
-* Users can search and retrieve day schedules on database
-* Users can read calculated time suggestions for new events 
+1. Users can get multiple scheduled events from a given time frame.
+2. Users can get all unscheduled events.
+3. Users can get a specific event given an event ID.
+4. Users can get a list of suggested times for a given time duration.
+5. Users can get their user info.
+6. Users can get a break.
+7. Users can get all breaks from a given time frame.
+8. Users can get both scheduled breaks and scheduled events from a given time frame.
 
 **Update**
-* Users can modify existing day schedule data
-* Users can add calculated suggested times for new events to day schedule data
+1. Users can change an event's properties.
+2. Users can add a suggested time or a custom time to an existing unscheduled event.
+3. Users can change their password.
+4. Users can change their email.
+5. Users can change their name.
+6. Users can update their account to add/modify their linked Google Calendar account.
+7. Users can update the breaks.
 
 **Delete**
-* Users can hard or soft delete existing events on day schedules
-* Users can hard or soft delete existing day schedule records from database
+1. Users can delete a given event.
+2. Users can delete a given break.
+3. Users can delete their account.
+
+## CRUD
+
+**Create**
+* '/create_user' Fulfills requirement 1 of Create. Users can create an account by passing a email (required), password (required), and name (required). Returns a success message + user_id if it works.
+* '/create_break' Fulfills requirement 2 of Create. Users can create a break time during which no events will be scheduled. The break time will have a name (required), start_time (required), end_time (required), and duration (required) passed by the user. Returns a success message + break_id if it works.
+* '/import_events' Fulfills requirement 3 of Create. Users can import events from their Google Calendar. The user sends a request with start_time (required) and end_time (required). The API server uses the user's Google API key stored in the database to get the events from Google Calendar and add to the user calendar. These events passed in from Google Calendar have a name, start_time, end_time, duration and location. Returns a success message and the imported events if it works.
+* '/create_event' Fulfills requirement 4 of Create. Users can add an event. These events have a name (required), start_time (optional), end_time (optional), duration (required) and location (optional) passed by the user. Events without a start_time AND end_time are considered unscheduled events and will be displayed in a separate section on the side of the website. Returns a success message + event_id if it works.
+
+**Read**
+1. '/get_events'. Fulfills requirement 1 of Read. Users can get multiple scheduled events from a given time frame. The users must pass in a start_time (required) and end_time (required). It returns a list of the event_id (required), name (required), start_time (required), end_time (required), duration (required), and location (optional) for the events.
+2. '/get_unscheduled' Fulfills requirement 2 of Read. Users can get all unscheduled events. It returns an event_id (required), name (required), duration (required), and location (optional). No start_time or end_time is returned because all unscheduled events have none scheduled yet.
+3. '/get_event' Fulfills requirement 3 of Read. Users can get a specific event. Users pass in an event_ID (required). The result will have a  event_id (required), name (required), start_time (optional), end_time (optional), duration (required), location (optional) and if it is unscheduled or not (required).
+4. '/get_times' Fulfills requirement 4 of Read. Users can get a list of suggested times for a given time duration. Users pass in duration (required). The result is an array of start_time (required) and end_time(required).
+5. '/get_user' Fulfills requirement 5 of Read. Users can get their user info. Users pass in their user_ID (required). Returns a user_id (required), email (required) and name (required). Does not return a password for security reasons.
+
+**Update**
+1.'/update_event' Fulfills requirement 1 and 2 of Update.  Users can change an event's properties. The event is specified with event_ID (required). User can specify a name (optional), start_time (optional), end_time (optional), duration (optional) and location (optional) to change. Note if you change duration and have a specified end_time and start_time you also must change those times. Returns a success message + event_ID if it works.
+2. '/update_password' Fulfills requirement 3 of Update. Users can change their password. Users pass in their existing_password (required) and new_password (required). Returns a message if successfully changed. Returns a success message + user_ID if it works.
+3. '/update_email' Fulfills requirement 4 of Update. Users can change their email. Users pass in their new_email (required). Returns a message if successfully changed. Returns a success message + user_ID if it works.
+5. '/update_name' Fulfills requirement 5 of Update. Users can change their name. Users pass in their new_name (required). Returns a message if successfully changed. Returns a success message + user_ID if it works.
+6. '/update_google' Fulfills requirement 6 of Update. Users can add or update their linked Google Calendar account. Users pass in the google_ID (required). Returns a message if successfully changed. Returns a success message + user_ID if it works.
+7. '/update_break' Fulfills requirement 7 of Update. Users can update their break times. Users pass in a break_ID (required), start_time (optional), end_time (optional) to change the event. Returns a success message + user_ID if it works.
+
+**Delete**
+* '/delete_event' Fulfills requirement 1 of Delete. Users can delete a given event using an event ID. Users pass in an event_ID (required). Returns a success message + event_ID if it works.
+* '/delete_break' Fulfills requirement 2 of Delete. Users can delete a given break using a break ID. Users pass in a break_ID (required). Returns a success message + break_ID if it works.
+* '/delete_user' Fulfills requirement 3 of Delete. Users can delete a given user using a user ID. Users pass in a user_ID (required). Returns a success message + user_ID if it works.
 
  
 ## Organization Founders:
