@@ -42,6 +42,7 @@ class Endpoints(Resource):
         endpoints = sorted(rule.rule for rule in api.app.url_map.iter_rules())
         return {"Available endpoints": endpoints}
 
+
 @api.route('/get_event/<event_id>')
 class GetEvent(Resource):
     """
@@ -64,6 +65,7 @@ class Pets(Resource):
         This method returns all pets.
         """
         return db.fetch_pets()
+
 
 @api.route('/create_user/<username>')
 class CreateUser(Resource):
