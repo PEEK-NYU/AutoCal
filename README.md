@@ -7,7 +7,7 @@
 
 ## Project Idea:
 * A website that aids users in scheduling events. Website pulls data from Google Calendar and suggests the best time for an event.
-* Story: User queries software for the best time(s) to study for an exam next week => Software loads user's google calendar data and returns some suggested time/duration slots compatible with the user's schedule => Server automatically adds event to Google Calendar using Google's Calendar API. Users can also add breaks for when they want no events added.
+* Story: User queries software for the best time(s) to study for an exam next week => Software loads user's google calendar data and returns some suggested time/duration slots compatible with the user's schedule => Server automatically adds event to Google Calendar using Google's Calendar API. Users can also add breaks for when they want no events added for that time period
  
  ## Design
 
@@ -77,29 +77,30 @@ Break
 * `/create_event` Fulfills requirement 4 of Create. Users can add an event. These events have a name (required), start_time (optional), end_time (optional), duration (required) and location (optional) passed by the user. Events without a start_time AND end_time are considered unscheduled events and will be displayed in a separate section on the side of the website. Returns a success message + event_id if it works.
 
 **Read**
-1. `/get_events`. Fulfills requirement 1 of Read. Users can get multiple scheduled events from a given time frame. The users must pass in a start_time (required) and end_time (required). It returns a list of the event_id (required), name (required), start_time (required), end_time (required), duration (required), and location (optional) for the events.
-2. `/get_unscheduled` Fulfills requirement 2 of Read. Users can get all unscheduled events. It returns an event_id (required), name (required), duration (required), and location (optional). No start_time or end_time is returned because all unscheduled events have none scheduled yet.
+1. `/get_events/<user_ID>`. Fulfills requirement 1 of Read. Users can get multiple scheduled events from a given time frame. The users must pass in a user_ID (required), start_time (required) and end_time (required). It returns a list of the event_id (required), name (required), start_time (required), end_time (required), duration (required), and location (optional) for the events.
+2. `/get_unscheduled/<user_ID>` Fulfills requirement 2 of Read. Users can get all unscheduled events. Users pass in a user_ID (required). It returns an event_id (required), name (required), duration (required), and location (optional). No start_time or end_time is returned because all unscheduled events have none scheduled yet.
 3. `/get_event/<event_ID>` Fulfills requirement 3 of Read. Users can get a specific event (scheduled or unscheduled). Users pass in an event_ID (required). The result will have a  event_id (required), name (required), start_time (optional), end_time (optional), duration (required), location (optional) and if it is unscheduled or not (required).
-4. `/get_times` Fulfills requirement 4 of Read. Users can get a list of suggested times for a given time duration. Users pass in duration (required). The result is an array of start_time (required) and end_time(required).
+4. `/get_times/<user_ID>` Fulfills requirement 4 of Read. Users can get a list of suggested times for a given time duration. Users pass in duration (required) and a user_ID (required). The result is an array of start_time (required) and end_time(required).
 5. `/get_user/<user_ID>` Fulfills requirement 5 of Read. Users can get their user info. Users pass in their user_ID (required). Returns a user_id (required), email (required) and name (required). Does not return a password for security reasons.
 6. `/get_break/<break_ID>` Fulfills requirement 6 of Read. Users can get a specific break. Users pass in an break_ID (required). The result will have a break_ID (required), name (required), start_time (optional), end_time (optional), and duration (required).
-7. `/get_breaks` Fulfills requirement 7 of Read. Users can get breaks from a timeframe. The users must pass in a start_time (required) and end_time (required). The result will have an array of breaks with each having break_ID (required), name (required), start_time (optional), end_time (optional), and duration (required).
-8. `/get_calendar`  Fulfills requirement 8 of Read. Users can get breaks and events from a timeframe. The users must pass in a start_time (required) and end_time (required). The result will have an array of breaks with each having break_ID (required), name (required), start_time (optional), end_time (optional), and duration (required). It also returns a list of the event_id (required), name (required), start_time (required), end_time (required), duration (required), and location (optional) for the events.
+7. `/get_breaks/<user_ID>` Fulfills requirement 7 of Read. Users can get breaks from a timeframe. The users must pass in a start_time (required) and end_time (required) and a user_ID (required). The result will have an array of breaks with each having break_ID (required), name (required), start_time (optional), end_time (optional), and duration (required).
+8. `/get_calendar/<user_ID>`  Fulfills requirement 8 of Read. Users can get breaks and events from a timeframe. The users must pass in a start_time (required) and end_time (required) and a user_ID (required). The result will have an array of breaks with each having break_ID (required), name (required), start_time (optional), end_time (optional), and duration (required). It also returns a list of the event_id (required), name (required), start_time (required), end_time (required), duration (required), and location (optional) for the events.
 
 **Update**
 
-1. `/update_event` Fulfills requirement 1 and 2 of Update.  Users can change an event's properties. The event is specified with event_ID (required). User can specify a name (optional), start_time (optional), end_time (optional), duration (optional) and location (optional) to change. Note if you change duration and have a specified end_time and start_time you also must change those times. Returns a success message + event_ID if it works.
-2. `/update_password` Fulfills requirement 3 of Update. Users can change their password. Users pass in their existing_password (required) and new_password (required). Returns a message if successfully changed. Returns a success message + user_ID if it works.
-3. `/update_email` Fulfills requirement 4 of Update. Users can change their email. Users pass in their new_email (required). Returns a message if successfully changed. Returns a success message + user_ID if it works.
-5. `/update_name` Fulfills requirement 5 of Update. Users can change their name. Users pass in their new_name (required). Returns a message if successfully changed. Returns a success message + user_ID if it works.
-6. `/update_google` Fulfills requirement 6 of Update. Users can add or update their linked Google Calendar account. Users pass in the google_ID (required). Returns a message if successfully changed. Returns a success message + user_ID if it works.
-7. `/update_break` Fulfills requirement 7 of Update. Users can update their break times. Users pass in a break_ID (required), start_time (optional), end_time (optional) to change the event. Returns a success message + user_ID if it works.
+1. `/update_event/<event_ID>` Fulfills requirement 1 and 2 of Update.  Users can change an event's properties. The event is specified with event_ID (required). User can specify a name (optional), start_time (optional), end_time (optional), duration (optional) and location (optional) to change. Note if you change duration and have a specified end_time and start_time you also must change those times. Returns a success message + event_ID if it works.
+2. `/update_password/<user_ID>` Fulfills requirement 3 of Update. Users can change their password. Users pass in their existing_password (required) and new_password (required) and a user_ID (required). Returns a message if successfully changed. Returns a success message + user_ID if it works.
+3. `/update_email/<user_ID>` Fulfills requirement 4 of Update. Users can change their email. Users pass in their new_email (required) and a user_ID (required). Returns a message if successfully changed. Returns a success message + user_ID if it works.
+5. `/update_name/<user_ID>` Fulfills requirement 5 of Update. Users can change their name. Users pass in their new_name (required) and a user_ID (required). Returns a message if successfully changed. Returns a success message + user_ID if it works.
+6. `/update_google/<user_ID>` Fulfills requirement 6 of Update. Users can add or update their linked Google Calendar account. Users pass in the google_ID (required) and a user_ID (required). Returns a message if successfully changed. Returns a success message + user_ID if it works.
+7. `/update_break/<break_ID>` Fulfills requirement 7 of Update. Users can update their break times. Users pass in a break_ID (required), start_time (optional), end_time (optional) to change the event. Returns a success message + user_ID if it works.
 
 **Delete**
-* `/delete_event` Fulfills requirement 1 of Delete. Users can delete a given event using an event ID. Users pass in an event_ID (required). Returns a success message + event_ID if it works.
-* `/delete_break` Fulfills requirement 2 of Delete. Users can delete a given break using a break ID. Users pass in a break_ID (required). Returns a success message + break_ID if it works.
-* `/delete_user` Fulfills requirement 3 of Delete. Users can delete a given user using a user ID. Users pass in a user_ID (required). Returns a success message + user_ID if it works.
+* `/delete_event/<event_ID>` Fulfills requirement 1 of Delete. Users can delete a given event using an event ID. Users pass in an event_ID (required). Returns a success message + event_ID if it works.
+* `/delete_break/<break_ID>` Fulfills requirement 2 of Delete. Users can delete a given break using a break ID. Users pass in a break_ID (required). Returns a success message + break_ID if it works.
+* `/delete_user/<user_ID>` Fulfills requirement 3 of Delete. Users can delete a given user using a user ID. Users pass in a user_ID (required). Returns a success message + user_ID if it works.
 
+**Important: all items passed into REST not in the URL are in the body of the request**
  
 ## Organization Founders:
 #### Kora Hughes
