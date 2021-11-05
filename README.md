@@ -21,19 +21,20 @@
     * Week schedule is stored in database after confirmation
 
 * Users can insert a new event with a duration time
-* A suggested time and day for the new event is a calculated
+* Suggested times/days for the new event are calculated
 * Calculation is based on entered data (inserted work, sleep, and break times, and already established schedule)
+    * Calculated suggested times are not saved on database unless user confirms
 
 **Read**
 * Users can search and retrieve week schedules on database
-* Users can read calculated time suggestion for new events 
+* Users can read calculated time suggestions for new events 
 
 **Update**
 * Users can modify existing week schedule data
 * Users can add calculated suggested times for new events to week schedule data
 
 **Delete**
-* Users can hard or soft delee existing events on week schedules
+* Users can hard or soft delete existing events on week schedules
 * Users can hard or soft delete existing week schedule records from database
 
  
