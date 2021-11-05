@@ -52,7 +52,7 @@ class GetEvent(Resource):
         """
         This method returns info for an event.
         """
-        return db.get_event()
+        return db.get_event(event_id)
 
 
 @api.route('/pets')

@@ -5,9 +5,9 @@ Gradually, we will fill in actual calls to our datastore.
 """
 
 
-def get_event():
+def get_event(event_ID):
     """
-    A function to return all events in the data store.
+    A function to return event in the data store.
     """
     return {
         "event_ID": 1234,
