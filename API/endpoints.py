@@ -55,26 +55,20 @@ class GetEvent(Resource):
         return db.get_event(event_id)
 
 
-@api.route('/pets')
-class Pets(Resource):
+@api.route('/events')
+class Events(Resource):
     """
-    This class supports fetching a list of all pets.
+    This class supports fetching a list of all events and adding a user to an event
     """
     def get(self):
         """
         This method returns all pets.
         """
-        return db.fetch_pets()
-
-
-@api.route('/create_user/<username>')
-class CreateUser(Resource):
-    """
-    This class supports adding a user to the chat room.
-    """
+        return db.fetch_events()
+        
     @api.response(HTTPStatus.OK, 'Success')
-    def post(self, username):
+    def add_user(self, user):
         """
-        This method adds a user to the chatroom.
+        This method adds a user to an event
         """
-        return username
+        return user
