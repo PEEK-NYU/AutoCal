@@ -5,20 +5,27 @@ Gradually, we will fill in actual calls to our datastore.
 """
 
 import json
-import interactions
+import os
 
 OK = 0
 NOT_FOUND = 1
 DUPLICATE = 2
 
-EVENTS_DB = o.environ["EVENTS_DB"]
-DB_DIR = f"{EVENTS_DB}/db"
+DB_DIR = os.environ["DB_DIR"]
+
+EVENTS_DB = f"{DB_DIR}/db/events.json"
+USERS_DB = f"{DB_DIR}/db/users.json"
 
 shell_event = {"name":"Software Engineering: CS-UY 4513-C", "descr":"", "start_time":0, "end_time":0, "duration": 90, "location": "2 Metrotech", "unscheduled": False, "attendees":[]}
 
 def write_events(events):
     with open(EVENTS_DB, 'w') as f:
-        json.dump(rooms, f, indent=4)
+        json.dump(events, f, indent=4)
+
+
+def write_users(users):
+    with open(USERS_DB, 'w') as f:
+        json.dump(users, f, indent=4)
 
 
 def get_events():
