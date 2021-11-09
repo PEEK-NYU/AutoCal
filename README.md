@@ -18,7 +18,7 @@ User
 * name (string)
 * password (string)
 * google_key (string)
-* user_id (string)
+* user_id (int)
 * array of events (if we are using nosql that is, if we use sql we don't need this)
 
 Event
@@ -29,8 +29,8 @@ Event
 * end_time (int)
 * duration (int)
 * unscheduled (bool)
-* owner (user_id: string)
-* attendees(list: (user_id: string))
+* owner (user_id: int)
+* attendees(list: (user_id: int))
 
 Break
 * break_id (string)
