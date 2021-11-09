@@ -46,29 +46,18 @@ class Endpoints(Resource):
 @api.route('/get_event/<event_id>')
 class GetEvent(Resource):
     """
-    This class supports fetching an event.
+    This class supports fetching an event and
+    adding a user to an event
     """
     def get(self, event_id):
         """
         This method returns info for an event.
         """
         return db.get_event(event_id)
-
-
-@api.route('/events')
-class Events(Resource):
-    """
-    This class supports fetching a list of all events and adding a user to an event
-    """
-    def get(self):
-        """
-        This method returns all pets.
-        """
-        return db.fetch_events()
-        
-    @api.response(HTTPStatus.OK, 'Success')
-    def add_user(self, user):
-        """
-        This method adds a user to an event
-        """
-        return user
+#    @api.response(HTTPStatus.OK, 'Success')
+#    def add_event(self, eventname):
+#        """
+#        This method adds a user to an event
+#        """
+#        return db.add_event_by_name(eventname)
+    

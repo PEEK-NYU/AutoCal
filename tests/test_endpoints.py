@@ -8,6 +8,6 @@ class EndpointTestCase(TestCase):
         pass
     def tearDown(self):
         pass
-    def test_hellp(self):
+    def test_hello(self):
         self.assertTrue(False)
         self.assertIn(ep.HELLO, ret)
