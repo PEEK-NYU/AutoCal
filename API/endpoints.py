@@ -49,12 +49,12 @@ class GetEvent(Resource):
     This class supports fetching an event and
     adding a user to an event
     """
+    @api.response(HTTPStatus.OK, 'Success')
     def get(self, event_id):
         """
         This method returns info for an event.
         """
         return db.get_event(event_id)
-#    @api.response(HTTPStatus.OK, 'Success')
 #    def add_event(self, eventname):
 #        """
 #        This method adds a user to an event
