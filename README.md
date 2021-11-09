@@ -8,6 +8,7 @@
 ## Project Idea:
 * A website that aids users in scheduling events. Website pulls data from Google Calendar and suggests the best time for an event.
 * Story: User queries software for the best time(s) to study for an exam next week => Website loads user's google calendar data and returns some suggested time/duration slots compatible with the user's schedule => User selects one and the server automatically adds event to Google Calendar using Google's Calendar API. Users can also add breaks for when they want no events added for that time period.
+Over time, the system learns the user's prefered time slot for various events.
  
 ## Requirements
 **Database** 
@@ -28,7 +29,8 @@ Event
 * end_time (int)
 * duration (int)
 * unscheduled (bool)
-* user_id (string)
+* owner (user_id: string)
+* attendees(list: (user_id: string))
 
 Break
 * break_id (string)
