@@ -2,7 +2,7 @@
 #### This is the main repository of our Software Engineering project as part of CS-UY 4513 section C.
 ![](https://app.travis-ci.com/PEEK-NYU/PEEK.svg?branch=main)
 
-#### HEROKU:  https://dashboard.heroku.com/apps/peek-nyu/deploy/heroku-git
+#### HEROKU:  https://peek-nyu.herokuapp.com/
 #### TRAVIS:  https://app.travis-ci.com/github/PEEK-NYU/PEEK
 
 ## Project Idea:
