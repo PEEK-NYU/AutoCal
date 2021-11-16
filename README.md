@@ -15,7 +15,7 @@ Over time, the system learns the user's prefered time slot for various events.
 (note: for simplicity, all ints are posative where 0 represents an uninitialized value.)
 
 User
-* user_id (int)  //unique database key
+* user_id (string)  //unique database key
 * email (string)
 * name (string)
 * password (string)
@@ -23,7 +23,7 @@ User
 * array of events (if we are using nosql that is, if we use sql we don't need this)
 
 Event
-* event_id (int)  //unique database key
+* event_id (string)  //unique database key
 * name (string)
 * location (string)
 * start_time (int)
