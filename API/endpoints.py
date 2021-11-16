@@ -111,7 +111,7 @@ class CreateUser(Resource):
     @api.response(HTTPStatus.NOT_ACCEPTABLE, 'A duplicate key')
     def create(self, username):
         """
-        This method adds a user to the user databse.
+        This method adds a user to the user database.
         """
         ret = db.add_user(username)
         if ret == db.NOT_FOUND:
