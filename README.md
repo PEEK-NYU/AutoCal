@@ -10,8 +10,9 @@
 * Story: User queries software for the best time(s) to study for an exam next week => Website loads user's google calendar data and returns some suggested time/duration slots compatible with the user's schedule => User selects one and the server automatically adds event to Google Calendar using Google's Calendar API. Users can also add breaks for when they want no events added for that time period.
 Over time, the system learns the user's prefered time slot for various events.
  
-## Requirements
+## Requirements:
 **Database** 
+(note: for simplicity, all ints are posative where 0 represents an uninitialized value.)
 
 User
 * email (string)
@@ -22,7 +23,7 @@ User
 * array of events (if we are using nosql that is, if we use sql we don't need this)
 
 Event
-* event_id (string)
+* event_id (int)
 * name (string)
 * location (string)
 * start_time (int)
@@ -69,7 +70,7 @@ Break
 2. Users can delete a given break.
 3. Users can delete their account.
 
-## Design
+## Design:
 
 **Create**
 1. `/create_user` Fulfills requirement 1 of Create. Users can create an account by passing a email (required), password (required), and name (required). Returns a success message + user_id if it works.
