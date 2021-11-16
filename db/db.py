@@ -16,7 +16,9 @@ DB_DIR = os.environ["PEEK_DIR"]
 EVENTS_DB = f"{PEEK_DIR}/db/events.json"
 USERS_DB = f"{PEEK_DIR}/db/users.json"
 
-shell_event = {"name":"Software Engineering: CS-UY 4513-C", "descr":"", "start_time":0, "end_time":0, "duration": 90, "location": "2 Metrotech", "unscheduled": False, "attendees":[]}
+shell_event = {"name": "Software Engineering: CS-UY 4513-C", "descr": "",
+"start_time":0, "end_time": 0, "duration": 90, "location": "2 Metrotech",
+ "unscheduled": False, "attendees": []}
 
 def write_events(events):
     with open(EVENTS_DB, 'w') as f:
@@ -26,6 +28,15 @@ def write_events(events):
 def write_users(users):
     with open(USERS_DB, 'w') as f:
         json.dump(users, f, indent=4)
+    
+    
+def get_events_by_name(event_name):
+    events = get_events()
+    temp_events = []
+    for key, value in events:
+        if value["name"] == event_name:
+            temp_events.append(key)
+    return temp_events
 
 
 def get_events():
@@ -79,20 +90,3 @@ def add_event_by_name(eventname):
         events[num_events()+1] = new_event
         write_rooms(rooms)
         return OK
-
-
-def get_event(event_ID):
-    """
-    A function to return event in the data store.
-    """
-    events = get_events()
-    return events[event_ID]
-    
-    
-def get_events_by_name(event_name):
-    events = get_events()
-    temp_events = []
-    for key, value in events:
-        if value["name"] == event_name:
-            temp_events.append(key)
-    return temp_events
