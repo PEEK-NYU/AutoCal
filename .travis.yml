@@ -1,9 +1,7 @@
 language: python
 python:
     - '3.8'
-    
-HEROKU_API_KEY = '68a46c41-c03a-4676-bf03-50bbf17e2375'
-    
+        
 install:
     - pip install -r requirements-dev.txt
     
