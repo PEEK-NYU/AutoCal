@@ -60,4 +60,3 @@ class GetEvent(Resource):
 #        This method adds a user to an event
 #        """
 #        return db.add_event_by_name(eventname)
-    

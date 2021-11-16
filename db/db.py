@@ -11,10 +11,10 @@ OK = 0
 NOT_FOUND = 1
 DUPLICATE = 2
 
-DB_DIR = os.environ["DB_DIR"]
+DB_DIR = os.environ["PEEK_DIR"]
 
-EVENTS_DB = f"{DB_DIR}/db/events.json"
-USERS_DB = f"{DB_DIR}/db/users.json"
+EVENTS_DB = f"{PEEK_DIR}/db/events.json"
+USERS_DB = f"{PEEK_DIR}/db/users.json"
 
 shell_event = {"name":"Software Engineering: CS-UY 4513-C", "descr":"", "start_time":0, "end_time":0, "duration": 90, "location": "2 Metrotech", "unscheduled": False, "attendees":[]}
 
