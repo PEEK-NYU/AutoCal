@@ -11,14 +11,20 @@ OK = 0
 NOT_FOUND = 1
 DUPLICATE = 2
 
-DB_DIR = os.environ["PEEK_DIR"]
+PEEK_DIR = os.environ["PEEK_DIR"]
 
 EVENTS_DB = f"{PEEK_DIR}/db/events.json"
 USERS_DB = f"{PEEK_DIR}/db/users.json"
 
-shell_event = {"name": "Software Engineering: CS-UY 4513-C", "descr": "",
-"start_time":0, "end_time": 0, "duration": 90, "location": "2 Metrotech",
- "unscheduled": False, "attendees": []}
+shell_event = {"name": "Software Engineering: CS-UY 4513-C",
+               "descr": "",
+               "start_time": 0,
+               "end_time": 0,
+               "duration": 90,
+               "location": "2 Metrotech",
+               "unscheduled": False,
+               "attendees": []}
+
 
 def write_events(events):
     with open(EVENTS_DB, 'w') as f:
@@ -28,8 +34,8 @@ def write_events(events):
 def write_users(users):
     with open(USERS_DB, 'w') as f:
         json.dump(users, f, indent=4)
-    
-    
+
+
 def get_events_by_name(event_name):
     events = get_events()
     temp_events = []
@@ -66,12 +72,13 @@ def add_event():
     Until we are using a real DB, we have a potential
     race condition here.
     """
+    events = get_events()
     if events is None:
         return NOT_FOUND
     else:
         events[num_events()+1] = shell_event
-        
-        
+
+
 def add_event_by_name(eventname):
     """
     Add an event to the room database by name.
@@ -79,7 +86,6 @@ def add_event_by_name(eventname):
     race condition here.
     """
     events = get_events()
-    
     if events is None:
         return NOT_FOUND
     elif eventname in events:
@@ -88,5 +94,5 @@ def add_event_by_name(eventname):
         new_event = shell_event
         new_event["name"] = eventname
         events[num_events()+1] = new_event
-        write_rooms(rooms)
+        write_events(events)
         return OK
