@@ -2,17 +2,29 @@ language: python
 python:
     - '3.8'
     
+HEROKU_API_KEY = '68a46c41-c03a-4676-bf03-50bbf17e2375'
+    
 install:
     - pip install -r requirements-dev.txt
     
 env:
-    - PYTHONPATH=/home/travis/build/AlphaError/swe-demo
+    - PYTHONPATH=/home/travis/build/AlphaError/PEEK
     
 script:
     - make tests
     
-#after_success:
-#    - ./deploy.sh
-#
-#notifications:
-#    slack: devops.nyu:...
+# deploy to heroku on push to master
+deploy:
+    - provider: heroku
+      api_key: $HEROKU_API_KEY
+#      app: demo-repo23
+#      on:
+#          branch: master
+
+notifications:
+    slack: '<account>:<token>#peek-nyu'
+      if: branch = master
+      template:
+      - "%{repository_slug} (%{commit}) : %{message}"
+      - "Build details: %{build_url}"
+# TODO: encrypt tokens
