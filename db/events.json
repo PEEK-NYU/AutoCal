@@ -1,5 +1,5 @@
 
 {
-    1: {"name":"Software Engineering: CS-UY 4513-C", "descr":"", "start_time":0, "end_time":0, "duration": 90, "location": "2 Metrotech", "unscheduled": False, "attendees":[], "owner":0}
-    2: {"name":"Operating Systems: CS-UY 3224-A", "descr":"", "start_time":1, "end_time":1, "duration": 90, "location": "Bern Dibner", "unscheduled": False, "attendees":[], "owner":0}
+    "1": {"name":"Software Engineering: CS-UY 4513-C", "descr":"", "start_time":0, "end_time":0, "duration": 90, "location": "2 Metrotech", "unscheduled": False, "attendees":[], "owner":""}
+    "2": {"name":"Operating Systems: CS-UY 3224-A", "descr":"", "start_time":1, "end_time":1, "duration": 90, "location": "Bern Dibner", "unscheduled": False, "attendees":[], "owner":""}
 }
