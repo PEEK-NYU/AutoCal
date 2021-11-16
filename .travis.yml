@@ -18,11 +18,10 @@ deploy:
 #      app: demo-repo23
 #      on:
 #          branch: master
-
-notifications:
-    slack: '<account>:<token>#peek-nyu'
-      if: branch = master
-      template:
-      - "%{repository_slug} (%{commit}) : %{message}"
-      - "Build details: %{build_url}"
+#notifications:
+#    slack: '<account>:<token>#peek-nyu'
+#      if: branch = master
+#      template:
+#      - "%{repository_slug} (%{commit}) : %{message}"
+#      - "Build details: %{build_url}"
 # TODO: encrypt tokens
