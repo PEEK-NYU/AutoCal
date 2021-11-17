@@ -7,7 +7,7 @@ from http import HTTPStatus
 from flask import Flask
 from flask_restx import Resource, Api
 import werkzeug.exceptions as wz
-
+import os
 import db.data as db
 
 app = Flask(__name__)
@@ -113,9 +113,18 @@ class CreateUser(Resource):
         """
         This method adds a user to the app
         """
+        PEEK_DIR = os.environ["PEEK_DIR"]
+        TEST_MODE = os.environ.get("TEST_MODE") == "True"
+
+        if TEST_MODE:
+            DB_DIR = f"{PEEK_DIR}/db/test_dbs"
+        else:
+            DB_DIR = f"{PEEK_DIR}/db"
+
+        USER_COLLECTION = f"{DB_DIR}/users.json"
         ret = db.add_user(username)
         if ret == db.NOT_FOUND:
             raise (wz.NotFound("User db not found."))
         elif ret == db.DUPLICATE:
             raise (wz.NotAcceptable("User name already exists."))
-        return f"{username} added."
+        return f"{USER_COLLECTION} added."
