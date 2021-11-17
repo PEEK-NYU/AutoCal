@@ -18,6 +18,7 @@ else:
 EVENT_COLLECTION = f"{DB_DIR}/events.json"
 USER_COLLECTION = f"{DB_DIR}/users.json"
 
+print(f"{EVENT_COLLECTION}")
 
 shell_event = {"name": "shell event name",
                "descr": "",
