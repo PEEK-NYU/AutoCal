@@ -11,10 +11,10 @@ env:
 script:
     - make all_tests
 
-# deploy to heroku on push to master
+# deploy to heroku on push to main
 deploy:
     - provider: heroku
       api_key: $HEROKU_API_KEY
       app: peek-nyu
       on:
-          branch: master
+          branch: main
