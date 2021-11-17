@@ -26,7 +26,6 @@ class EndpointTestCase(TestCase):
         self.assertIsInstance(ret, dict)
         self.assertIn(ep.WORKING_MSG, ret)
 
-    @skip("In the middle of making this work.")
     def test_create_user(self):
         """
         See if we can successfully create a new user.
@@ -34,7 +33,7 @@ class EndpointTestCase(TestCase):
         """
         cu = ep.CreateUser(Resource)
         new_user = new_entity_name("user")
-        ret = cu.create(new_user)
+        ret = cu.post(new_user)
         users = db.get_users()
         self.assertIn(new_user, users)
 
