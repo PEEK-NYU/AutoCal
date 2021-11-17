@@ -25,12 +25,13 @@ shell_event = {"name": "shell event name",
                "duration": 0,
                "location": "2 Metrotech",
                "unscheduled": False,
+               "break": False,
+               "owner": "",
                "attendees": []}
 
-
-shell_user = {"name": "shell user name",
+# Note: username is the unique key so its not in the structure
+shell_user = {"username": "shell user name",
               "email": "",
-              "descr": "",
               "password": "",
               "google_key": "",
               "events": []}
