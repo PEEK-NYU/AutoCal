@@ -1,8 +1,10 @@
-
 {
-    "1":{"email":"",
-        "name": "",
+    "1": {
+        "name": "testing",
+        "email": "",
+        "descr": "",
         "password": "",
         "google_key": "",
-        "events": []}
+        "events": []
+    }
 }

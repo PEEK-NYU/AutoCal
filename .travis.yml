@@ -1,27 +1,20 @@
 language: python
 python:
     - '3.8'
-        
+
 install:
     - pip install -r requirements-dev.txt
-    
+
 env:
     - PYTHONPATH=/home/travis/build/PEEK-NYU/PEEK
-    
+
 script:
-    - make tests
-    
+    - make all_tests
+
 # deploy to heroku on push to master
 deploy:
     - provider: heroku
       api_key: $HEROKU_API_KEY
-#      app: demo-repo23
-#      on:
-#          branch: master
-#notifications:
-#    slack: '<account>:<token>#peek-nyu'
-#      if: branch = master
-#      template:
-#      - "%{repository_slug} (%{commit}) : %{message}"
-#      - "Build details: %{build_url}"
-# TODO: encrypt tokens
+      app: peek-nyu
+      on:
+          branch: master

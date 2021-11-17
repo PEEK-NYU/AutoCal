@@ -3,7 +3,7 @@ from flask_restx import Resource, Api
 import random
 
 import API.endpoints as ep
-import db.db as db
+import db.data as db
 
 HUGE_NUM = 10000000000000  # any big number will do!
 
@@ -44,8 +44,8 @@ class EndpointTestCase(TestCase):
         Post-condition: event is in DB.
         """
         cr = ep.CreateEvent(Resource)
-        new_event = new_entity_name("room")
-        ret = cr.create(new_event)
+        new_event = new_entity_name("event")
+        ret = cr.post(new_event)
         events = db.get_events()
         self.assertIn(new_event, events)
 

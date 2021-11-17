@@ -8,7 +8,7 @@ from flask import Flask
 from flask_restx import Resource, Api
 import werkzeug.exceptions as wz
 
-import db.db as db
+import db.data as db
 
 app = Flask(__name__)
 api = Api(app)
@@ -63,26 +63,6 @@ class ListEvents(Resource):
         else:
             return events
 
-
-@api.route('/create_event/<eventname>')
-class CreateEvent(Resource):
-    """
-    This class supports adding a chat event.
-    """
-    @api.response(HTTPStatus.OK, 'Success')
-    @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
-    @api.response(HTTPStatus.NOT_ACCEPTABLE, 'A duplicate key')
-    def create(self, eventname):
-        """
-        This method adds a event to the event db.
-        """
-        ret = db.add_event(eventname)
-        if ret == db.NOT_FOUND:
-            raise (wz.NotFound("Chat event db not found."))
-        elif ret == db.DUPLICATE:
-            raise (wz.NotAcceptable("Chat event name already exists."))
-
-
 @api.route('/list_users')
 class ListUsers(Resource):
     """
@@ -100,22 +80,20 @@ class ListUsers(Resource):
         else:
             return users
 
-
-@api.route('/create_user/<username>')
-class CreateUser(Resource):
+@api.route('/create_event/<eventname>')
+class CreateEvent(Resource):
     """
-    This class supports adding a user to the chat event.
+    This class supports adding an event.
     """
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
     @api.response(HTTPStatus.NOT_ACCEPTABLE, 'A duplicate key')
-    def create(self, username):
+    def post(self, eventname):
         """
-        This method adds a user to the user database.
+        This method adds an event
         """
-        ret = db.add_user(username)
+        ret = db.add_event(eventname)
         if ret == db.NOT_FOUND:
-            raise (wz.NotFound("User db not found."))
+            raise (wz.NotFound("Event db not found."))
         elif ret == db.DUPLICATE:
-            raise (wz.NotAcceptable("User name already exists."))
-        return f"{username} added."
+            raise (wz.NotAcceptable("Event name already exists."))

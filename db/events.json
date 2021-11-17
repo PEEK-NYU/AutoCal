@@ -1,5 +1,43 @@
-
 {
-    "1": {"name":"Software Engineering: CS-UY 4513-C", "descr":"", "start_time":0, "end_time":0, "duration": 90, "location": "2 Metrotech", "unscheduled": 0, "attendees":[], "owner":""},
-    "2": {"name":"Operating Systems: CS-UY 3224-A", "descr":"", "start_time":1, "end_time":1, "duration": 90, "location": "Bern Dibner", "unscheduled": 0, "attendees":[], "owner":""}
+    "1": {
+        "name": "Software Engineering: CS-UY 4513-C",
+        "descr": "",
+        "start_time": 0,
+        "end_time": 0,
+        "duration": 90,
+        "location": "2 Metrotech",
+        "unscheduled": false,
+        "attendees": [],
+        "owner": ""
+    },
+    "2": {
+        "name": "new event7687314265053",
+        "descr": "",
+        "start_time": 0,
+        "end_time": 0,
+        "duration": 0,
+        "location": "2 Metrotech",
+        "unscheduled": false,
+        "attendees": []
+    },
+    "new event4125113161655": {
+        "name": "new event4125113161655",
+        "descr": "",
+        "start_time": 0,
+        "end_time": 0,
+        "duration": 0,
+        "location": "2 Metrotech",
+        "unscheduled": false,
+        "attendees": []
+    },
+    "new event2758676502399": {
+        "name": "new event2758676502399",
+        "descr": "",
+        "start_time": 0,
+        "end_time": 0,
+        "duration": 0,
+        "location": "2 Metrotech",
+        "unscheduled": false,
+        "attendees": []
+    }
 }
