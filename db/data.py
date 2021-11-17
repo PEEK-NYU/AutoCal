@@ -15,8 +15,8 @@ if TEST_MODE:
 else:
     DB_DIR = f"{PEEK_DIR}/db"
 
-EVENT_COLLECTION = f"{PEEK_DIR}/db/events.json"
-USER_COLLECTION = f"{PEEK_DIR}/db/users.json"
+EVENT_COLLECTION = f"{DB_DIR}/events.json"
+USER_COLLECTION = f"{DB_DIR}/users.json"
 
 
 shell_event = {"name": "shell event name",
