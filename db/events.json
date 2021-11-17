@@ -1,17 +1,6 @@
 {
-    "1": {
-        "name": "Software Engineering: CS-UY 4513-C",
-        "descr": "",
-        "start_time": 0,
-        "end_time": 0,
-        "duration": 90,
-        "location": "2 Metrotech",
-        "unscheduled": false,
-        "attendees": [],
-        "owner": ""
-    },
-    "2": {
-        "name": "new event7687314265053",
+    "new event4989404976544": {
+        "name": "new event4989404976544",
         "descr": "",
         "start_time": 0,
         "end_time": 0,
@@ -20,8 +9,8 @@
         "unscheduled": false,
         "attendees": []
     },
-    "new event4125113161655": {
-        "name": "new event4125113161655",
+    "new event5934592764921": {
+        "name": "new event5934592764921",
         "descr": "",
         "start_time": 0,
         "end_time": 0,
@@ -30,8 +19,8 @@
         "unscheduled": false,
         "attendees": []
     },
-    "new event2758676502399": {
-        "name": "new event2758676502399",
+    "new event5168138806194": {
+        "name": "new event5168138806194",
         "descr": "",
         "start_time": 0,
         "end_time": 0,

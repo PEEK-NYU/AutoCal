@@ -63,6 +63,7 @@ class ListEvents(Resource):
         else:
             return events
 
+
 @api.route('/list_users')
 class ListUsers(Resource):
     """
@@ -79,6 +80,7 @@ class ListUsers(Resource):
             raise (wz.NotFound("User db not found."))
         else:
             return users
+
 
 @api.route('/create_event/<eventname>')
 class CreateEvent(Resource):

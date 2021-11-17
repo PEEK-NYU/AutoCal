@@ -27,7 +27,8 @@ shell_event = {"name": "shell event name",
                "location": "2 Metrotech",
                "unscheduled": False,
                "attendees": []}
-               
+
+
 shell_user = {"name": "shell user name",
               "email": "",
               "descr": "",
