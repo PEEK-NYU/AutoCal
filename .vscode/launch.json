@@ -12,7 +12,8 @@
             "env": {
                 "FLASK_APP": "API.endpoints",
                 "FLASK_ENV": "development",
-                "PEEK_DIR": "/Users/ethanphilpott/PEEK"
+                "PEEK_DIR": "/Users/ethanphilpott/PEEK",
+                "TEST_MODE": 0
             },
             "args": [
                 "run",
