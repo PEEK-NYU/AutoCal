@@ -4,7 +4,7 @@ prod: all_tests github
 
 github: FORCE
 	- git commit -a
-	git push origin master
+	git push origin main
 
 dev_env: FORCE
 	pip3 install -r $(REQ_DIR)/requirements-dev.txt

@@ -1,2 +1,58 @@
 {
+    "namehello": {
+        "name": "namehello",
+        "email": "",
+        "descr": "",
+        "password": "",
+        "google_key": "",
+        "events": []
+    },
+    "namehello2": {
+        "name": "namehello2",
+        "email": "",
+        "descr": "",
+        "password": "",
+        "google_key": "",
+        "events": []
+    },
+    "namehello23": {
+        "name": "namehello23",
+        "email": "",
+        "descr": "",
+        "password": "",
+        "google_key": "",
+        "events": []
+    },
+    "Ethan": {
+        "name": "Ethan",
+        "email": "",
+        "descr": "",
+        "password": "",
+        "google_key": "",
+        "events": []
+    },
+    "kora": {
+        "name": "kora",
+        "email": "",
+        "descr": "",
+        "password": "",
+        "google_key": "",
+        "events": []
+    },
+    "sfd": {
+        "name": "sfd",
+        "email": "",
+        "descr": "",
+        "password": "",
+        "google_key": "",
+        "events": []
+    },
+    "sfd2": {
+        "name": "sfd2",
+        "email": "",
+        "descr": "",
+        "password": "",
+        "google_key": "",
+        "events": []
+    }
 }

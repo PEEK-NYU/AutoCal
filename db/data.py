@@ -8,7 +8,7 @@ import os
 import copy
 
 PEEK_DIR = os.environ["PEEK_DIR"]
-TEST_MODE = os.environ.get("TEST_MODE", 0)
+TEST_MODE = os.environ.get("TEST_MODE") == "True"
 
 if TEST_MODE:
     DB_DIR = f"{PEEK_DIR}/db/test_dbs"
