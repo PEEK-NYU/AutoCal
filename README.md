@@ -8,11 +8,12 @@
 ## Project Idea:
 * A website that aids users in scheduling events. Website pulls data from Google Calendar and suggests the best time for an event.
 * Story: User queries software for the best time(s) to study for an exam next week => Website loads user's google calendar data and returns some suggested time/duration slots compatible with the user's schedule => User selects one and the server automatically adds event to Google Calendar using Google's Calendar API. Users can also add breaks for when they want no events added for that time period.
+* The user can also create an event with a duration only. This event will be listed as unscheduled and the future can change the time later.
 Over time, the system learns the user's prefered time slot for various events.
  
 ## Requirements:
 **Database** 
-(note: for simplicity, all ints are posative where 0 represents an uninitialized value.)
+(note: for simplicity, all ints are positive where 0 represents an uninitialized value.)
 
 User
 * user_id (string)  //unique database key
