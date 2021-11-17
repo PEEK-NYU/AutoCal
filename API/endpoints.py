@@ -7,7 +7,6 @@ from http import HTTPStatus
 from flask import Flask
 from flask_restx import Resource, Api
 import werkzeug.exceptions as wz
-import os
 import db.data as db
 
 app = Flask(__name__)
@@ -55,11 +54,11 @@ class ListEvents(Resource):
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
     def get(self):
         """
-        Returns a list of all chat events.
+        Returns a list of all events.
         """
         events = db.get_events()
         if events is None:
-            raise (wz.NotFound("Chat event db not found."))
+            raise (wz.NotFound("Event db not found."))
         else:
             return events
 
@@ -99,6 +98,7 @@ class CreateEvent(Resource):
             raise (wz.NotFound("Event db not found."))
         elif ret == db.DUPLICATE:
             raise (wz.NotAcceptable("Event name already exists."))
+        return f"{eventname} added."
 
 
 @api.route('/create_user/<username>')
@@ -113,18 +113,9 @@ class CreateUser(Resource):
         """
         This method adds a user to the app
         """
-        PEEK_DIR = os.environ["PEEK_DIR"]
-        TEST_MODE = os.environ.get("TEST_MODE") == "True"
-
-        if TEST_MODE:
-            DB_DIR = f"{PEEK_DIR}/db/test_dbs"
-        else:
-            DB_DIR = f"{PEEK_DIR}/db"
-
-        USER_COLLECTION = f"{DB_DIR}/users.json"
         ret = db.add_user(username)
         if ret == db.NOT_FOUND:
             raise (wz.NotFound("User db not found."))
         elif ret == db.DUPLICATE:
             raise (wz.NotAcceptable("User name already exists."))
-        return f"{USER_COLLECTION} added."
+        return f"{username} added."

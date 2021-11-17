@@ -1,2 +1,22 @@
 {
+    "testevent1": {
+        "name": "testevent1",
+        "descr": "",
+        "start_time": 0,
+        "end_time": 0,
+        "duration": 0,
+        "location": "2 Metrotech",
+        "unscheduled": false,
+        "attendees": []
+    },
+    "testevent2": {
+        "name": "testevent2",
+        "descr": "",
+        "start_time": 0,
+        "end_time": 0,
+        "duration": 0,
+        "location": "2 Metrotech",
+        "unscheduled": false,
+        "attendees": []
+    }
 }

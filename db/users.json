@@ -1,2 +1,10 @@
 {
+    "Fake user": {
+        "name": "Fake user",
+        "email": "",
+        "descr": "",
+        "password": "",
+        "google_key": "",
+        "events": []
+    }
 }
