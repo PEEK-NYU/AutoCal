@@ -99,3 +99,23 @@ class CreateEvent(Resource):
             raise (wz.NotFound("Event db not found."))
         elif ret == db.DUPLICATE:
             raise (wz.NotAcceptable("Event name already exists."))
+
+
+@api.route('/create_user/<username>')
+class CreateUser(Resource):
+    """
+    This class supports adding a user to the app
+    """
+    @api.response(HTTPStatus.OK, 'Success')
+    @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
+    @api.response(HTTPStatus.NOT_ACCEPTABLE, 'A duplicate key')
+    def post(self, username):
+        """
+        This method adds a user to the app
+        """
+        ret = db.add_user(username)
+        if ret == db.NOT_FOUND:
+            raise (wz.NotFound("User db not found."))
+        elif ret == db.DUPLICATE:
+            raise (wz.NotAcceptable("User name already exists."))
+        return f"{username} added."
