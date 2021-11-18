@@ -52,7 +52,7 @@ class ListEvents(Resource):
     """
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
-    def get(self):
+    def get(self, raw_data=False):
         """
         Returns a list of all events.
         """
@@ -60,17 +60,10 @@ class ListEvents(Resource):
         if events is None:
             raise (wz.NotFound("Event db not found."))
         else:
-            return events
-
-    def get_rawdata(self):
-        """
-        Returns a list of all events without database keys.
-        """
-        events = db.get_events()
-        if events is None:
-            raise (wz.NotFound("Event db not found."))
-        else:
-            return events.values()
+            if raw_data:
+                return events.values
+            else:
+                return events
 
 
 @api.route('/list_users')
@@ -80,7 +73,7 @@ class ListUsers(Resource):
     """
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
-    def get(self):
+    def get(self, raw_data=False):
         """
         Returns a list of all users.
         """
@@ -88,17 +81,10 @@ class ListUsers(Resource):
         if users is None:
             raise (wz.NotFound("User db not found."))
         else:
-            return users
-
-    def get_rawdata(self):
-        """
-        Returns a list of all users without database keys.
-        """
-        users = db.get_users()
-        if users is None:
-            raise (wz.NotFound("User db not found."))
-        else:
-            return users.values()
+            if raw_data:
+                return users.values()
+            else:
+                return users
 
 
 @api.route('/create_event/<eventname>')
