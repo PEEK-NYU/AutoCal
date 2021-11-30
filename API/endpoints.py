@@ -99,7 +99,7 @@ class CreateEvent(Resource):
         """
         This method adds an event
         """
-        ret = db.add_event(eventname)
+        ret = db.add_event({"name": eventname})
         if ret == db.NOT_FOUND:
             raise (wz.NotFound("Event db not found."))
         elif ret == db.DUPLICATE:
