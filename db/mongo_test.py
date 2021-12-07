@@ -10,6 +10,9 @@ import bson.json_util as bsutil
 client = pm.MongoClient()
 print(client)
 
+db = client = ["CalendarDB"]
+print(db)
+
 #db = client ["ChatDB"]
 #print(db)
 #
@@ -17,4 +20,4 @@ print(client)
 #print(f"colect_nm=}")
 #collection = db[collect_nm]
 
-# Professor said we won't need this for the project, but to run it locally on computer to see what it does
+# Prof Cal: "You won't need this for the project, but to run it locally on computer to see what it does"
