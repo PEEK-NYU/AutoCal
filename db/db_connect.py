@@ -10,11 +10,11 @@ import bson.json_util as bsutil
 
 # all of these will eventually be put in the env:
 user_nm = os.environ.get("USER_NAME", '')
-cloud_svc = "serverlessinstance0.irvgp.mongodb.net"
+cloud_svc = "serverlessinstance0.mvrqy.mongodb.net"
 passwd = os.environ.get("MONGO_PASSWD", '')
 cloud_mdb = "mongodb+srv"
 db_params = "retryWrites=true&w=majority"
-db_nm = "chatDB"
+db_nm = "peekDB"
 
 REMOTE = "0"
 LOCAL = "1"
