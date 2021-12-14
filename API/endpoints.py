@@ -66,6 +66,26 @@ class ListEvents(Resource):
                 return events
 
 
+@api.route('/create_event/<eventname>')
+class CreateEvent(Resource):
+    """
+    This class supports adding an event.
+    """
+    @api.response(HTTPStatus.OK, 'Success')
+    @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
+    @api.response(HTTPStatus.NOT_ACCEPTABLE, 'A duplicate key')
+    def post(self, eventname):
+        """
+        This method adds an event
+        """
+        ret = db.add_event({"name": eventname})
+        if ret == db.NOT_FOUND:
+            raise (wz.NotFound("Event db not found."))
+        elif ret == db.DUPLICATE:
+            raise (wz.NotAcceptable("Event name already exists."))
+        return f"{eventname} added."
+
+
 @api.route('/list_users')
 class ListUsers(Resource):
     """
@@ -85,26 +105,6 @@ class ListUsers(Resource):
                 return users.values()
             else:
                 return users
-
-
-@api.route('/create_event/<eventname>')
-class CreateEvent(Resource):
-    """
-    This class supports adding an event.
-    """
-    @api.response(HTTPStatus.OK, 'Success')
-    @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
-    @api.response(HTTPStatus.NOT_ACCEPTABLE, 'A duplicate key')
-    def post(self, eventname):
-        """
-        This method adds an event
-        """
-        ret = db.add_event({"name": eventname})
-        if ret == db.NOT_FOUND:
-            raise (wz.NotFound("Event db not found."))
-        elif ret == db.DUPLICATE:
-            raise (wz.NotAcceptable("Event name already exists."))
-        return f"{eventname} added."
 
 
 @api.route('/create_user/<username>')
