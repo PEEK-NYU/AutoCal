@@ -17,7 +17,7 @@ db_params = "retryWrites=true&w=majority"
 
 db_nm = 'peekDB'
 if os.environ.get("TEST_MODE", ''):
-    db_nm = "test_chatDB"
+    db_nm = "test_peekDB"
 
 REMOTE = "0"
 LOCAL = "1"
