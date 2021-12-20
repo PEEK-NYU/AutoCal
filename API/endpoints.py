@@ -82,6 +82,83 @@ class CreateEvent(Resource):
             raise (wz.NotAcceptable("Event name already exists."))
         return f"{eventname} added."
 
+'''
+@api.route('/create_event/<eventname>')
+class CreateEventWithDuration(Resource):
+    """
+    This class supports adding an event with a specific duration.
+    """
+    @api.response(HTTPStatus.OK, 'Success')
+    @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
+    @api.response(HTTPStatus.NOT_ACCEPTABLE, 'A duplicate key')
+    def post(self, eventname, eventduration):
+        """
+        This method adds an event with a specific duration
+        """
+        ret = db.add_event({"name": eventname, "duration": eventduration})
+        if ret == db.NOT_FOUND:
+            raise (wz.NotFound("Event db not found."))
+        elif ret == db.DUPLICATE:
+            raise (wz.NotAcceptable("Event name already exists."))
+        return f"{eventname} added."
+
+@api.route('/events/set_fields/<eventname>')
+class SetEventDuration(Resource):
+    """
+    This class supports setting the duration of an event.
+    """
+    @api.response(HTTPStatus.OK, 'Success')
+    @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
+    @api.response(HTTPStatus.NOT_ACCEPTABLE, 'A duplicate key')
+    def post(self, eventname, eventduration):
+        """
+        This method sets the duration of an event.
+        """
+        ret = db.set_event_field({"name": eventname, "duration": event_duration})
+        if ret == db.NOT_FOUND:
+            raise (wz.NotFound("Event db not found."))
+        //elif ret == db.DUPLICATE:
+        //    raise (wz.NotAcceptable("Event name already exists."))
+        return f"{eventname} duration successfully set."
+        
+@api.route('/events/set_fields/<eventname>')
+class SetEventTime(Resource):
+    """
+    This class supports setting the time of an event.
+    """
+    @api.response(HTTPStatus.OK, 'Success')
+    @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
+    @api.response(HTTPStatus.NOT_ACCEPTABLE, 'A duplicate key')
+    def post(self, eventname, starttime, endtime):
+        """
+        This method sets the time of an event.
+        """
+        ret = db.set_event_field({"name": eventname, "start_time" = starttime, "end_time" = endtime, "unscheduled" = false})
+        if ret == db.NOT_FOUND:
+            raise (wz.NotFound("Event db not found."))
+        //elif ret == db.DUPLICATE:
+        //    raise (wz.NotAcceptable("Event name already exists."))
+        return f"{eventname} time successfully set."
+        
+@api.route('/events/set_fields/<eventname>')
+class SetEventLocation(Resource):
+    """
+    This class supports setting the location of an event.
+    """
+    @api.response(HTTPStatus.OK, 'Success')
+    @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
+    @api.response(HTTPStatus.NOT_ACCEPTABLE, 'A duplicate key')
+    def post(self, eventname, eventlocation):
+        """
+        This method sets the location of an event.
+        """
+        ret = db.set_event_field({"name": eventname, "location": eventlocation})
+        if ret == db.NOT_FOUND:
+            raise (wz.NotFound("Event db not found."))
+        //elif ret == db.DUPLICATE:
+        //    raise (wz.NotAcceptable("Event name already exists."))
+        return f"{eventname} location successfully set."
+'''
 
 @api.route('/events/delete/<eventname>')
 class DeleteEvent(Resource):
