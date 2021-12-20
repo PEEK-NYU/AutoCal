@@ -15,6 +15,15 @@ USER_NM = "userName"
 EVENTS_NM = "eventName"
 NUM_USERS = "num_users"
 
+'''
+Could be unecessary
+
+EVENTS_LOCATION = "eventLocation"
+EVENTS_DURATION = "eventDuration"
+EVENTS_START_TIME = "eventStartTime"
+EVENTS_END_TIME = "eventEndTime"
+'''
+
 OK = 0
 NOT_FOUND = 1
 DUPLICATE = 2
@@ -63,6 +72,29 @@ def add_event(event_traits):
             EVENTS_NM: event_traits['name']
         })
         return OK
+    
+'''
+def set_event_fields(event_traits):
+    """
+    Set fields of an existing event.
+    - event_traits is a collection of info for the event
+    - event_traits must include "name" for now
+    """
+    events = get_events()
+    print(f"{event_traits['name']=}")
+    if not(event_exists(event_traits['name'])):
+        return NOT_FOUND
+    else:
+        newvals = {"$set": {}}
+        for key in event_traits:
+            if key == "name":
+                filters = {"name": event_traits[key]}
+            else:
+                newvals["$set"][key] = event_traits[key]  
+        dbc.update_one(EVENTS, filters, newvals)
+        return OK
+'''
+
 
 def get_users():
     """

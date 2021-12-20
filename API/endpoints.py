@@ -114,11 +114,11 @@ class SetEventDuration(Resource):
         """
         This method sets the duration of an event.
         """
-        ret = db.set_event_field({"name": eventname, "duration": event_duration})
+        ret = db.set_event_fields({"name": eventname, "duration": eventduration})
         if ret == db.NOT_FOUND:
             raise (wz.NotFound("Event db not found."))
-        //elif ret == db.DUPLICATE:
-        //    raise (wz.NotAcceptable("Event name already exists."))
+        #elif ret == db.DUPLICATE:
+        #    raise (wz.NotAcceptable("Event name already exists."))
         return f"{eventname} duration successfully set."
         
 @api.route('/events/set_fields/<eventname>')
@@ -133,11 +133,11 @@ class SetEventTime(Resource):
         """
         This method sets the time of an event.
         """
-        ret = db.set_event_field({"name": eventname, "start_time" = starttime, "end_time" = endtime, "unscheduled" = false})
+        ret = db.set_event_fields({"name": eventname, "start_time": starttime, "end_time": endtime, "unscheduled": False})
         if ret == db.NOT_FOUND:
             raise (wz.NotFound("Event db not found."))
-        //elif ret == db.DUPLICATE:
-        //    raise (wz.NotAcceptable("Event name already exists."))
+        #elif ret == db.DUPLICATE:
+        #    raise (wz.NotAcceptable("Event name already exists."))
         return f"{eventname} time successfully set."
         
 @api.route('/events/set_fields/<eventname>')
@@ -152,11 +152,11 @@ class SetEventLocation(Resource):
         """
         This method sets the location of an event.
         """
-        ret = db.set_event_field({"name": eventname, "location": eventlocation})
+        ret = db.set_event_fields({"name": eventname, "location": eventlocation})
         if ret == db.NOT_FOUND:
             raise (wz.NotFound("Event db not found."))
-        //elif ret == db.DUPLICATE:
-        //    raise (wz.NotAcceptable("Event name already exists."))
+        #elif ret == db.DUPLICATE:
+        #    raise (wz.NotAcceptable("Event name already exists."))
         return f"{eventname} location successfully set."
 '''
 
