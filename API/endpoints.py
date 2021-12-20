@@ -13,7 +13,7 @@ app = Flask(__name__)
 api = Api(app)
 
 WORKING_MSG = "I'm working!"
-WORKING_VAL = "\\(^-^)/"
+WORKING_VAL = "\(^-^)/"
 
 
 @api.route('/endpoints')
@@ -52,7 +52,7 @@ class ListEvents(Resource):
     """
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
-    def get(self, raw_data=False):
+    def get(self):
         """
         Returns a list of all events.
         """
@@ -60,10 +60,7 @@ class ListEvents(Resource):
         if events is None:
             raise (wz.NotFound("Event db not found."))
         else:
-            if raw_data:
-                return events.values
-            else:
-                return events
+            return events
 
 
 @api.route('/create_event/<eventname>')
@@ -78,7 +75,7 @@ class CreateEvent(Resource):
         """
         This method adds an event
         """
-        ret = db.add_event({"name": eventname})
+        ret = db.add_event(eventname)
         if ret == db.NOT_FOUND:
             raise (wz.NotFound("Event db not found."))
         elif ret == db.DUPLICATE:
@@ -103,7 +100,7 @@ class DeleteEvent(Resource):
         """
         ret = db.del_event(eventname)
         if ret == db.NOT_FOUND:
-            raise (wz.NotFound(f"Chat room {eventname} not found."))
+            raise (wz.NotFound(f"Event {eventname} not found."))
         else:
             return f"{eventname} deleted."
 
@@ -115,7 +112,7 @@ class ListUsers(Resource):
     """
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
-    def get(self, raw_data=False):
+    def get(self):
         """
         Returns a list of all users.
         """
@@ -123,10 +120,7 @@ class ListUsers(Resource):
         if users is None:
             raise (wz.NotFound("User db not found."))
         else:
-            if raw_data:
-                return users.values()
-            else:
-                return users
+            return users
 
 
 @api.route('/create_user/<username>')
