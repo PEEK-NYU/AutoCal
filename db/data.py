@@ -93,8 +93,27 @@ def set_event_fields(event_traits):
                 newvals["$set"][key] = event_traits[key]  
         dbc.update_one(EVENTS, filters, newvals)
         return OK
-'''
 
+def set_user_fields(user_traits):
+    """
+    Set fields of an existing user.
+    - user_traits is a collection of info for the user
+    - user_traits must include "name" for now
+    """
+    users = get_users()
+    print(f"{user_traits['name']=}")
+    if not(user_exists(user_traits['name'])):
+        return NOT_FOUND
+    else:
+        newvals = {"$set": {}}
+        for key in user_traits:
+            if key == "name":
+                filters = {"name": user_traits[key]}
+            else:
+                newvals["$set"][key] = user_traits[key]  
+        dbc.update_one(USERS, filters, newvals)
+        return OK
+'''
 
 def get_users():
     """

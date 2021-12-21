@@ -63,11 +63,13 @@ class ListEvents(Resource):
             return events
 
 
-@api.route('/create_event/<eventname>')
+@api.route('/create_event/<eventname>') 
 class CreateEvent(Resource):
     """
     This class supports adding an event.
     """
+    #Paul: seems like duration is not a mandatory parameter, different from README
+    #Paul: should probably name this function CreateEmptyEvent
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
     @api.response(HTTPStatus.NOT_ACCEPTABLE, 'A duplicate key')
@@ -81,7 +83,7 @@ class CreateEvent(Resource):
         elif ret == db.DUPLICATE:
             raise (wz.NotAcceptable("Event name already exists."))
         return f"{eventname} added."
-
+###############################################################################
 '''
 @api.route('/create_event/<eventname>')
 class CreateEventWithDuration(Resource):
@@ -102,14 +104,13 @@ class CreateEventWithDuration(Resource):
             raise (wz.NotAcceptable("Event name already exists."))
         return f"{eventname} added."
 
-@api.route('/events/set_fields/<eventname>')
+@api.route('/events/update_event/<eventname>')
 class SetEventDuration(Resource):
     """
     This class supports setting the duration of an event.
     """
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
-    @api.response(HTTPStatus.NOT_ACCEPTABLE, 'A duplicate key')
     def post(self, eventname, eventduration):
         """
         This method sets the duration of an event.
@@ -117,18 +118,15 @@ class SetEventDuration(Resource):
         ret = db.set_event_fields({"name": eventname, "duration": eventduration})
         if ret == db.NOT_FOUND:
             raise (wz.NotFound("Event db not found."))
-        #elif ret == db.DUPLICATE:
-        #    raise (wz.NotAcceptable("Event name already exists."))
         return f"{eventname} duration successfully set."
         
-@api.route('/events/set_fields/<eventname>')
+@api.route('/events/update_event/<eventname>')
 class SetEventTime(Resource):
     """
     This class supports setting the time of an event.
     """
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
-    @api.response(HTTPStatus.NOT_ACCEPTABLE, 'A duplicate key')
     def post(self, eventname, starttime, endtime):
         """
         This method sets the time of an event.
@@ -136,18 +134,15 @@ class SetEventTime(Resource):
         ret = db.set_event_fields({"name": eventname, "start_time": starttime, "end_time": endtime, "unscheduled": False})
         if ret == db.NOT_FOUND:
             raise (wz.NotFound("Event db not found."))
-        #elif ret == db.DUPLICATE:
-        #    raise (wz.NotAcceptable("Event name already exists."))
         return f"{eventname} time successfully set."
         
-@api.route('/events/set_fields/<eventname>')
+@api.route('/events/update_event/<eventname>')
 class SetEventLocation(Resource):
     """
     This class supports setting the location of an event.
     """
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
-    @api.response(HTTPStatus.NOT_ACCEPTABLE, 'A duplicate key')
     def post(self, eventname, eventlocation):
         """
         This method sets the location of an event.
@@ -155,10 +150,41 @@ class SetEventLocation(Resource):
         ret = db.set_event_fields({"name": eventname, "location": eventlocation})
         if ret == db.NOT_FOUND:
             raise (wz.NotFound("Event db not found."))
-        #elif ret == db.DUPLICATE:
-        #    raise (wz.NotAcceptable("Event name already exists."))
         return f"{eventname} location successfully set."
+    
+@api.route('/users/update_password/<username>')
+class SetUserPassword(Resource):
+    """
+    This class supports setting the password of a user.
+    """
+    @api.response(HTTPStatus.OK, 'Success')
+    @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
+    def post(self, username, password):
+        """
+        This method sets the password of a user.
+        """
+        ret = db.set_event_fields({"name": username, "password": password})
+        if ret == db.NOT_FOUND:
+            raise (wz.NotFound("User db not found."))
+        return f"{username} password successfully set."
+    
+@api.route('/users/update_email/<username>')
+class SetUserEmail(Resource):
+    """
+    This class supports setting the email of a user.
+    """
+    @api.response(HTTPStatus.OK, 'Success')
+    @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
+    def post(self, username, email):
+        """
+        This method sets the email of a user.
+        """
+        ret = db.set_event_fields({"name": username, "email": email})
+        if ret == db.NOT_FOUND:
+            raise (wz.NotFound("User db not found."))
+        return f"{username} email successfully set."
 '''
+###############################################################################
 
 @api.route('/events/delete/<eventname>')
 class DeleteEvent(Resource):
