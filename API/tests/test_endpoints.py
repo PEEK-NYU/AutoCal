@@ -36,6 +36,29 @@ class EndpointTestCase(TestCase):
         ret = cu.post(new_user)
         users = db.get_users()
         self.assertIn(new_user, users)
+        
+       
+    def test_delete_user(self):
+        """
+        See if we can successfully delete a user.
+        Post-condition: user no longer in DB.
+        """
+        usrname = "delete_test_user"
+        db.add_user(usrname);
+        ret = ep.DeleteUser(Resource).post(usrname)
+        users = db.get_users()
+        self.assertFalse((usrname in users))
+ 
+        
+    def test_list_users(self):
+        """
+        See if we can successfully list all users.
+        Post-condition: nothing changes.
+        """
+        ret = ep.ListUsers(Resource).get()
+        users = db.get_users()
+        msg = "test_list_users: Error, returned users aren't equivalent to databse users"
+        self.assertEqual(ret, users, msg)
 
     def test_create_event(self):
         """
@@ -47,6 +70,29 @@ class EndpointTestCase(TestCase):
         ret = cr.post(new_event)
         events = db.get_events()
         self.assertIn(new_event, events)
+
+
+    def test_delete_event(self):
+        """
+        See if we can successfully delete a event.
+        Post-condition: event no longer in DB.
+        """
+        evntname = {"name": "delete_test_event"}
+        db.add_event(evntname)
+        ret = ep.DeleteEvent(Resource).post(evntname)
+        events = db.get_events()
+        self.assertFalse((evntname in events))      
+        
+    def test_list_events(self):
+        """
+        See if we can successfully list all events.
+        Post-condition: noting changes.
+        """
+        ret = ep.ListEvents(Resource).get()
+        events = db.get_events()
+        msg = "test_list_events: Error, returned events aren't equivalent to databse events"
+        self.assertEqual(ret, events, msg)
+
 
     def event_test1(self):
         """
