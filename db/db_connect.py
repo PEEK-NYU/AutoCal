@@ -61,17 +61,9 @@ def del_one(collect_nm, filters={}):
 def fetch_all(collect_nm, key_nm):
     all_docs = {}
     for doc in client[db_nm][collect_nm].find():
-        # print(doc)
-        all_docs[doc[key_nm]] = json.loads(bsutil.dumps(doc))
+        all_docs[str(doc[key_nm])] = json.loads(bsutil.dumps(doc))
     return all_docs
 
 
 def insert_doc(collect_nm, doc):
-    client[db_nm][collect_nm].insert_one(doc)
-    
-'''
-UNFINISHED PROTOTYPES, PLEASE DON'T UNCOMMENT THE FOLLOWING
-
-def update_one(collect_nm, filters={}, newvals={}):
-    return client[db_nm][collect_nm].update_one(filters, newvals)
-'''
+    return client[db_nm][collect_nm].insert_one(doc)

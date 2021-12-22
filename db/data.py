@@ -5,16 +5,19 @@ Gradually, we will fill in actual calls to our datastore.
 """
 import os
 
+from bson.objectid import ObjectId, InvalidId
+
 import db.db_connect as dbc
 
 EVENTS = "events"
 USERS = "users"
+BREAKS = "breaks"
 
 # field names in our DB:
 USER_NM = "userName"
 EVENTS_NM = "eventName"
-NUM_USERS = "num_users"
-
+ID = "_id"
+BREAKS_NM = "breakName"
 
 OK = 0
 NOT_FOUND = 1
@@ -25,45 +28,99 @@ if client is None:
     print("Failed to connect to MongoDB.")
     exit(1)
 
+def get_breaks():
+    """
+    A function to return a dictionary of all breaks.
+    """
+    return dbc.fetch_all(BREAKS, ID)
+
 def get_events():
     """
     A function to return a dictionary of all events.
     """
-    return dbc.fetch_all(EVENTS, EVENTS_NM)
+    return dbc.fetch_all(EVENTS, ID)
 
-def event_exists(event_name):
+def event_exists(event_id):
     """
     Return True if event exists.
     """
-    rec = dbc.fetch_one(EVENTS, filters={EVENTS_NM: event_name})
-    print(f"{rec=}")
-    return rec is not None
+    try:
+        rec = dbc.fetch_one(EVENTS, filters={ID: ObjectId(event_id)})
+        print(f"{rec=}")
+        return rec is not None
+    except (InvalidId, TypeError):
+        return False
 
-def del_event(event_name):
+def break_exists(break_id):
+    """
+    Return True if event exists.
+    """
+    try:
+        rec = dbc.fetch_one(BREAKS, filters={ID: ObjectId(break_id)})
+        print(f"{rec=}")
+        return rec is not None
+    except (InvalidId, TypeError):
+        return False
+
+def del_event(event_id):
     """
     Delete a event from the database.
     """
-    if not event_exists(event_name):
+    if not event_exists(event_id):
         return NOT_FOUND
     else:
-        dbc.del_one(EVENTS, filters={EVENTS_NM: event_name})
+        dbc.del_one(EVENTS, filters={ID: ObjectId(event_id)})
         return OK
 
-def add_event(event_traits):
+def del_break(break_id):
+    """
+    Delete a break from the database.
+    """
+    if not break_exists(break_id):
+        return NOT_FOUND
+    else:
+        dbc.del_one(BREAKS, filters={ID: ObjectId(break_id)})
+        return OK
+
+def add_event(eventname, location, start_time, end_time, description, owner, attendees):
     """
     Add a events to the events database.
-    - event_traits is a collection of info for the event
-    - event_traits must include "name" for now
     """
-    events = get_events()
-    print(f"{event_traits['name']=}")
-    if event_exists(event_traits['name']):
-        return DUPLICATE
-    else:
-        dbc.insert_doc(EVENTS, {
-            EVENTS_NM: event_traits['name']
-        })
-        return OK
+    print(f"{eventname=}")
+    id = str(dbc.insert_doc(EVENTS, 
+        {
+            "eventName": eventname,
+            "location": location,
+            "start_time": start_time,
+            "end_time": end_time,
+            "description": description,
+            "owner": owner,
+            "attendees": attendees
+        }
+    ).inserted_id)
+    return {
+        "status": OK,
+        "id": id
+    }
+
+
+def add_break(breakname, start_time, end_time, owner):
+    """
+    Add a events to the events database.
+    """
+    print(f"{breakname=}")
+    id = str(dbc.insert_doc(BREAKS, 
+        {
+            "breakname": breakname,
+            "start_time": start_time,
+            "end_time": end_time,
+            "owner": owner,
+        }
+    ).inserted_id)
+    return {
+        "status": OK,
+        "id": id
+    }
 
 def get_users():
     """
@@ -87,7 +144,12 @@ def add_user(username):
     if user_exists(username):
         return DUPLICATE
     else:
-        dbc.insert_doc(USERS, {USER_NM: username})
+        dbc.insert_doc(USERS, {
+            USER_NM: username,
+            "password": "dfdgdfgdsf",
+            "google_key": "fdssdf2142323412",
+            "profile_pic_url": "https://i.insider.com/602ee9ced3ad27001837f2ac?width=750&format=jpeg&auto=webp"
+        })
         return OK
 
 def del_user(username):
@@ -108,47 +170,3 @@ def get_scheduling_options(user_schedule, common_events):
     Output: list of recommended event times
     """
     return
-
-'''
-UNFINISHED PROTOTYPES, PLEASE DON'T UNCOMMENT THE FOLLOWING
-
-def set_event_fields(event_traits):
-    """
-    Set fields of an existing event.
-    - event_traits is a collection of info for the event
-    - event_traits must include "name" for now
-    """
-    events = get_events()
-    print(f"{event_traits['name']=}")
-    if not(event_exists(event_traits['name'])):
-        return NOT_FOUND
-    else:
-        newvals = {"$set": {}}
-        for key in event_traits:
-            if key == "name":
-                filters = {"name": event_traits[key]}
-            else:
-                newvals["$set"][key] = event_traits[key]  
-        dbc.update_one(EVENTS, filters, newvals)
-        return OK
-
-def set_user_fields(user_traits):
-    """
-    Set fields of an existing user.
-    - user_traits is a collection of info for the user
-    - user_traits must include "name" for now
-    """
-    users = get_users()
-    print(f"{user_traits['name']=}")
-    if not(user_exists(user_traits['name'])):
-        return NOT_FOUND
-    else:
-        newvals = {"$set": {}}
-        for key in user_traits:
-            if key == "name":
-                filters = {"name": user_traits[key]}
-            else:
-                newvals["$set"][key] = user_traits[key]  
-        dbc.update_one(USERS, filters, newvals)
-        return OK
-'''

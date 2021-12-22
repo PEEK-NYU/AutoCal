@@ -17,10 +17,8 @@
 
 User
 * username (string)  //unique database key
-* email (string)
 * password (string)
 * google_key (string)
-* array of events (array of strings)
 * profile_pic_url (string)
 
 Event
@@ -33,7 +31,7 @@ Event
 * break (bool)
 
 **Create**
-1. Users can create an account with an email, password, and username (must be unique).
+1. Users can create an account with a password, and username (must be unique).
 2. Users can create a break during which no events will be scheduled. The user would specify a given time period for the break and name the break.
 3. Users can import events from their Google Calendar. These events passed in from Google Calendar have a name, start_time, end_time, and location.
 4. Users can add an event with an eventname (required), start_time (required), end_time (required), and location (optional) passed by the user.
@@ -46,14 +44,14 @@ Event
 5. Users can get a break.
 6. Users can get all breaks.
 7. Users can get both scheduled breaks and scheduled events.
+8. Get a list of users
 
 **Update**
 1. Users can change an event's properties.
 2. Users can add a suggested time or a custom time to an existing event.
 3. Users can change their password.
-4. Users can change their email.
-5. Users can update their account to add/modify their linked Google Calendar account.
-6. Users can update the breaks.
+4. Users can update their account to add/modify their linked Google Calendar account.
+5. Users can update the breaks.
 
 **Delete**
 1. Users can delete a given event.
@@ -63,26 +61,27 @@ Event
 ## Design:
 
 **Create**
-1. `/create_user` Fulfills requirement 1 of Create. Users can create an account by passing a email (required), password (required), profile_pic_url (optional) and username (required). Users will have all of the above data sent, stored in the database. Returns a success message + username if it works.
+1. `/create_user` Fulfills requirement 1 of Create. Users can create an account by passing a password (required), profile_pic_url (optional) and username (required). Users will have all of the above data sent, stored in the database. Returns a success message + username if it works.
 2. `/create_break` Fulfills requirement 2 of Create. Users can create a break time event during which no events will be scheduled. A username (required for owner field), eventname (required), start_time (required), and end_time (required) passed by the user. Events will have all of the above data sent in, stored in the database. Returns a success message + eventname if it works.
-3. `/import_events` Fulfills requirement 3 of Create. Users can import events from their Google Calendar. The user sends a request with start_time (required) and end_time (required) and their username(required). The API server uses the user's Google API key stored in the database to get the events from Google Calendar and add to the user calendar. These events passed in from Google Calendar have an eventname(required (required), end_time (required), owner (required) and location (optional). Returns a success message and the imported events if it works.
-4. `/create_event` Fulfills requirement 4 of Create. Users can add an event. These events have a username(required for owner field), eventname (required), start_time (optional), end_time (optional), and location (optional) passed by the user. Users will have all of the above data sent in, stored in the database.
+3. `/import_events/<eventname>` Fulfills requirement 3 of Create. Users can import events from their Google Calendar. The user sends a request with start_time (required) and end_time (required) and their username(required). The API server uses the user's Google API key stored in the database to get the events from Google Calendar and add to the user calendar. These events passed in from Google Calendar have an eventname(required (required), end_time (required), owner (required) and location (optional). Returns a success message and the imported events if it works.
+4. `/create_event/<eventname>` Fulfills requirement 4 of Create. Users can add an event. These events have a username(required for owner field), eventname (required), start_time (optional), end_time (optional), and location (optional) passed by the user. Users will have all of the above data sent in, stored in the database.
 
 **Read**
 1. `/get_events/<username>`. Fulfills requirement 1 of Read. Users can get all scheduled events. The users must pass in a username (required). It returns a list of the event_id (required), eventname (required), start_time (required), end_time (required), and location (optional) for the events.
 2. `/get_event/<event_id>` Fulfills requirement 2 of Read. Users can get a specific event. Users pass in an event_id (required). The result will have a eventname (required), start_time (optional), end_time (optional),and location (optional).
-3. `/get_times/<username>` Fulfills requirement 3 of Read. Users can get a list of suggested times given a duration. Users pass in a username (required) and duration(required). The result is an array of start_time (required) and end_time(required). These times can later be used with update_event to use the chosen suggested time.
-4. `/get_user/<username>` Fulfills requirement 4 of Read. Users can get their user info. Users pass in their username (required). Returns a username (required), email (required), profile_pic_url (optional) and an array of events. Does not return a password for security reasons.
+3. `/get_times/<username>` Fulfills requirement 3 of Read. Users can get a list of suggested times given a duration. Users pass in a username (required) and duration(required). The result is an list of start_time (required) and end_time(required). These times can later be used with update_event to use the chosen suggested time.
+4. `/get_user/<username>` Fulfills requirement 4 of Read. Users can get their user info. Users pass in their username (required). Returns a username (required), and rofile_pic_url (optional). Does not return a password for security reasons.
 5. `/get_break/<event_id>` Fulfills requirement 5 of Read. Users can get a specific break. Users pass in an event_id (required). The result will have a eventname (required), start_time (optional), and end_time (optional).
-6. `/get_breaks/<username>` Fulfills requirement 6 of Read. Users can get all breaks. The users must pass in a username (required). The result will have an array of breaks with each having event_id (required), eventname (required), start_time (optional), and end_time (optional).
-7. `/get_calendar/<username>`  Fulfills requirement 7 of Read. Users can get all breaks and events. The users must pass in a username (required). The result will have an array of events/breaks with each having event_id (required), eventname (required), location (optional), start_time (optional), end_time (optional), and break (required)
+6. `/get_breaks/<username>` Fulfills requirement 6 of Read. Users can get all breaks. The users must pass in a username (required). The result will have an list of breaks with each having event_id (required), eventname (required), start_time (optional), and end_time (optional).
+7. `/get_calendar/<username>`  Fulfills requirement 7 of Read. Users can get all breaks and events. The users must pass in a username (required). The result will have an list of events/breaks with each having event_id (required), eventname (required), location (optional), start_time (optional), end_time (optional), and break (required)
+8. `/get_users/` Fulfills requirement 8 of Read. Get a list of usernames (required) back.
+
 **Update**
 
 1. `/update_event/<event_id>` Fulfills requirement 1 and 2 of Update.  Users can change an event's properties. The event is specified with event_id (required). User can specify an eventname (optional), start_time (optional), end_time (optional), and location (optional) to change.
 2. `/update_password/<username>` Fulfills requirement 3 of Update. Users can change their password. Users pass in their existing_password (required) and new_password (required) and a username (required). Returns a message if successfully changed. Returns a success message + username if it works.
-3. `/update_email/<username>` Fulfills requirement 4 of Update. Users can change their email. Users pass in their new_email (required) and a username (required). Returns a message if successfully changed. Returns a success message + username if it works.
-6. `/update_google/<username>` Fulfills requirement 6 of Update. Users can add or update their linked Google Calendar account. Users pass in the google_key (required) and a username (required). Returns a message if successfully changed. Returns a success message + username if it works.
-7. `/update_break/<event_id>` Fulfills requirement 7 of Update. Users can update their break times. The break is specified with event_id (required). User can specify an eventname (optional), start_time (optional), end_time (optional), and location (optional) to change.
+6. `/update_google/<username>` Fulfills requirement 5 of Update. Users can add or update their linked Google Calendar account. Users pass in the google_key (required) and a username (required). Returns a message if successfully changed. Returns a success message + username if it works.
+7. `/update_break/<event_id>` Fulfills requirement 6 of Update. Users can update their break times. The break is specified with event_id (required). User can specify an eventname (optional), start_time (optional), end_time (optional), and location (optional) to change.
 
 **Delete**
 1. `/delete_event/<event_id>` Fulfills requirement 1 of Delete. Users can delete a given event using an event_id. Users pass in an event_id (required). Returns a success message + event_id if it works.
