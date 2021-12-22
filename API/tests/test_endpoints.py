@@ -55,7 +55,7 @@ class EndpointTestCase(TestCase):
         See if we can successfully list all users.
         Post-condition: nothing changes.
         """
-        ret = ep.ListUsers(Resource).get()
+        ret = ep.GetUsers(Resource).get()
         users = db.get_users()
         msg = "test_list_users: Error, returned users aren't equivalent to databse users"
         self.assertEqual(ret, users, msg)
@@ -67,9 +67,9 @@ class EndpointTestCase(TestCase):
         """
         cr = ep.CreateEvent(Resource)
         new_event = new_entity_name("event")
-        ret = cr.post(new_event)
+        ret = cr.post(new_event, "test_user")
         events = db.get_events()
-        self.assertIn(new_event, events)
+        self.assertIn(ret['id'], events)
 
 
     def test_delete_event(self):
@@ -77,11 +77,10 @@ class EndpointTestCase(TestCase):
         See if we can successfully delete a event.
         Post-condition: event no longer in DB.
         """
-        evntname = {"name": "delete_test_event"}
-        db.add_event(evntname)
-        ret = ep.DeleteEvent(Resource).post(evntname)
+        event = db.add_event("testEvent", "testLoc", 1640146943, 1640146943, "test descr", "Paul", ["Paul"])
+        ret = ep.DeleteEvent(Resource).post(event['id'])
         events = db.get_events()
-        self.assertFalse((evntname in events))      
+        self.assertFalse((event['id'] in events))      
         
     def test_list_events(self):
         """
@@ -94,7 +93,7 @@ class EndpointTestCase(TestCase):
         self.assertEqual(ret, events, msg)
 
 
-    def event_test1(self):
+    def test1_event(self):
         """
         Post-condition 1: return is a dictionary.
         """
@@ -102,7 +101,7 @@ class EndpointTestCase(TestCase):
         ret = lr.get()
         self.assertIsInstance(ret, dict)
 
-    def event_test2(self):
+    def test2_event(self):
         """
         Post-condition 2: keys to the dict are strings
         """
@@ -111,7 +110,7 @@ class EndpointTestCase(TestCase):
         for key in ret:
             self.assertIsInstance(key, str)
 
-    def event_test3(self):
+    def test3_event(self):
         """
         Post-condition 3: the values in the dict are themselves dicts
         """

@@ -80,7 +80,10 @@ class CreateEvent(Resource):
         #TODO Fix not found
         if ret == db.NOT_FOUND:
             raise (wz.NotFound("Event db not found."))
-        return f"{eventname} added. id: {ret['id']}"
+        return {
+            "eventname": eventname,
+            "id": ret['id']
+        }
 
 # Done
 @api.route('/events/delete/<event_id>')
@@ -198,7 +201,10 @@ class CreateBreak(Resource):
         #TODO Fix not found
         if ret == db.NOT_FOUND:
             raise (wz.NotFound("Event db not found."))
-        return f"{breakname} added. id: {ret['id']}"
+        return {
+            "breakname": breakname,
+            "id": ret['id']
+        }
 
 
 @api.route('/breaks/delete/<eventname>')
