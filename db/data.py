@@ -95,20 +95,23 @@ def add_event(eventname, location, start_time,
     Add a events to the events database.
     """
     print(f"{eventname=}")
-    id = str(dbc.insert_doc(EVENTS,
-                            {
-                                "eventName": eventname,
-                                "location": location,
-                                "start_time": start_time,
-                                "end_time": end_time,
-                                "description": description,
-                                "owner": owner,
-                                "attendees": attendees
-                            }).inserted_id)
-    return {
-        "status": OK,
-        "id": id
-    }
+    try:
+        id = str(dbc.insert_doc(EVENTS,
+                                {
+                                    "eventName": eventname,
+                                    "location": location,
+                                    "start_time": start_time,
+                                    "end_time": end_time,
+                                    "description": description,
+                                    "owner": owner,
+                                    "attendees": attendees
+                                }).inserted_id)
+        return {
+            "status": OK,
+            "id": id
+        }
+    except Exception:
+        return NOT_FOUND
 
 
 def add_break(breakname, start_time, end_time, owner):
@@ -116,17 +119,20 @@ def add_break(breakname, start_time, end_time, owner):
     Add a events to the events database.
     """
     print(f"{breakname=}")
-    id = str(dbc.insert_doc(BREAKS,
-                            {
-                                "breakname": breakname,
-                                "start_time": start_time,
-                                "end_time": end_time,
-                                "owner": owner,
-                            }).inserted_id)
-    return {
-        "status": OK,
-        "id": id
-    }
+    try:
+        id = str(dbc.insert_doc(BREAKS,
+                                {
+                                    "breakname": breakname,
+                                    "start_time": start_time,
+                                    "end_time": end_time,
+                                    "owner": owner,
+                                }).inserted_id)
+        return {
+            "status": OK,
+            "id": id
+        }
+    except Exception:
+        return NOT_FOUND
 
 
 def get_users():
@@ -153,13 +159,16 @@ def add_user(username):
     if user_exists(username):
         return DUPLICATE
     else:
-        dbc.insert_doc(USERS, {
-            USER_NM: username,
-            "password": "dfdgdfgdsf",
-            "google_key": "fdssdf2142323412",
-            "profile_pic_url": "test.com/image"
-        })
-        return OK
+        try:
+            dbc.insert_doc(USERS, {
+                USER_NM: username,
+                "password": "dfdgdfgdsf",
+                "google_key": "fdssdf2142323412",
+                "profile_pic_url": "test.com/image"
+            })
+            return OK
+        except Exception:
+            return NOT_FOUND
 
 
 def del_user(username):

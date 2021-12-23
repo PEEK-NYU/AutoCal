@@ -245,6 +245,6 @@ class DeleteBreak (Resource):
         """
         ret = db.del_break(break_id)
         if ret == db.NOT_FOUND:
-            raise (wz.NotFound(f"Break id{break_id} not found."))
+            raise (wz.NotFound(f"Break id {break_id} not found."))
         else:
             return f"{break_id} deleted."
