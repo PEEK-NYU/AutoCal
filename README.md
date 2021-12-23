@@ -24,6 +24,7 @@ User
 Event
 * event_id (string) // unique database key
 * eventname (string)
+* description (string)
 * location (string)
 * start_time (int)
 * end_time (int)
