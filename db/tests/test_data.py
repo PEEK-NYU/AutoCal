@@ -3,11 +3,19 @@ This file holds the tests for db.py.
 """
 
 from unittest import TestCase
-# import random
+import random
 
 import db.data as db
 
 FAKE_USER = "Fake user"
+
+
+HUGE_NUM = 10000000000000  # any big number will do!
+
+
+def new_entity_name(entity_type):
+    int_name = random.randint(0, HUGE_NUM)
+    return f"new {entity_type}" + str(int_name)
 
 
 class DBTestCase(TestCase):
@@ -23,13 +31,6 @@ class DBTestCase(TestCase):
         """
         fake_data = {FAKE_USER: {}}
         return True
-
-    def test_get_users(self):
-        """
-        Can we fetch user db?
-        """
-        users = db.get_users()
-        self.assertIsInstance(users, dict)
 
     def test_get_breaks(self):
         """
@@ -90,3 +91,55 @@ class DBTestCase(TestCase):
         db.del_break(breakItem['id'])
         breaks = db.get_breaks()
         self.assertFalse((breakItem['id'] in breaks))
+
+    def test_add_event(self):
+        """
+        See if we can successfully create a new event.
+        Post-condition: event is in DB.
+        """
+        new_event = new_entity_name("event")
+        ret = db.add_event(new_event,
+                           "testLoc",
+                           1640146943,
+                           1640146943,
+                           "test descr",
+                           "Paul",
+                           ["Paul"])
+        events = db.get_events()
+        self.assertIn(ret['id'], events)
+
+    def test_add_break(self):
+        """
+        See if we can successfully create a new breal.
+        Post-condition: breal is in DB.
+        """
+        new_break = new_entity_name("break")
+        breakItem = db.add_break(new_break, 1640146943, 1640146943, "Paul")
+        breaks = db.get_breaks()
+        self.assertIn(breakItem['id'], breaks)
+
+    def test_get_users(self):
+        """
+        Can we fetch user db?
+        """
+        users = db.get_users()
+        self.assertIsInstance(users, dict)
+
+    def test_add_user(self):
+        """
+        Can we add a user to the db?
+        """
+        new_user = new_entity_name("user")
+        db.add_user(new_user)
+        users = db.get_users()
+        self.assertIn(new_user, users)
+
+    def test_del_user(self):
+        """
+        Can we delete a user from the db?
+        """
+        new_user = new_entity_name("user")
+        db.add_user(new_user)
+        db.del_user(new_user)
+        users = db.get_users()
+        self.assertNotIn(new_user, users)

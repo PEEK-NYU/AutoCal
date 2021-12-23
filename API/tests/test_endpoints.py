@@ -137,7 +137,8 @@ class EndpointTestCase(TestCase):
         See if we can successfully delete a break.
         Post-condition: break no longer in DB.
         """
-        breakItem = db.add_break("testEvent", 1640146943, 1640146943, "Paul")
+        new_break = new_entity_name("Break")
+        breakItem = db.add_break(new_break, 1640146943, 1640146943, "Paul")
         ep.DeleteBreak(Resource).post(breakItem['id'])
         breaks = db.get_breaks()
         self.assertFalse((breakItem['id'] in breaks))

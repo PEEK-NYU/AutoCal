@@ -170,13 +170,3 @@ def del_user(username):
     else:
         dbc.del_one(USERS, filters={USER_NM: username})
         return OK
-
-
-# function templates/shells for integration with google cal
-def get_scheduling_options(user_schedule, common_events):
-    """
-    Input: the user's schedule for the requested time range
-    Input: list of other scheduled events of the same type/group
-    Output: list of recommended event times
-    """
-    return
