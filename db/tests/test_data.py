@@ -29,6 +29,9 @@ class DBTestCase(TestCase):
         """
         Can we fetch breaks db?
         """
+        # Note, I added a item beforehand in the DB because we want to make
+        # sure that the test has items (for that specific user) to check in the DB before running
+        # I did not do this for users since get_users does 
         db.add_break("testEvent",
                      1640146943,
                      1640146943,
@@ -40,6 +43,8 @@ class DBTestCase(TestCase):
         """
         Can we fetch events db?
         """
+        # Note, I added a item beforehand in the DB because we want to make
+        # sure that the test has items to check in the DB before running
         db.add_event("testEvent",
                      "testLoc",
                      1640146943,
@@ -54,6 +59,8 @@ class DBTestCase(TestCase):
         """
         Can we fetch if an event exists
         """
+        # Note, I added a item beforehand in the DB because we want to make
+        # sure that the test has items to check in the DB before running
         event = db.add_event("testEvent",
                              "testLoc",
                              1640146943,
@@ -115,7 +122,7 @@ class DBTestCase(TestCase):
     def test_add_break(self):
         """
         See if we can successfully create a new breal.
-        Post-condition: breal is in DB.
+        Post-condition: break is in DB.
         """
         new_break = new_entity_name("break")
         breakItem = db.add_break(new_break, 1640146943, 1640146943, "Paul")

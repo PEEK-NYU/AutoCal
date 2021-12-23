@@ -38,11 +38,11 @@ class AppTest(Resource):
     """
     The purpose of the HelloWorld class is to have a simple test to see if the
     app is working at all.
+    Returns a message if working
     """
     def get(self):
         """
         A trivial endpoint to see if the server is running.
-        It just answers with "hello world."
         """
         return {WORKING_MSG: WORKING_VAL}
 

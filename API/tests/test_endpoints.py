@@ -51,7 +51,7 @@ class EndpointTestCase(TestCase):
     def test_list_users(self):
         """
         See if we can successfully list all users.
-        Post-condition: nothing changes.
+        Post-condition: We list users
         """
         ret = ep.GetUsers(Resource).get()
         users = db.get_users()
@@ -95,8 +95,10 @@ class EndpointTestCase(TestCase):
     def test_list_events(self):
         """
         See if we can successfully list all events.
-        Post-condition: noting changes.
+        Post-condition: We list events
         """
+        # Note, I added a item beforehand in the DB because we want to make
+        # sure that the test has items to check in the DB before running
         db.add_event("testEvent",
                      "testLoc",
                      1640146943,
@@ -109,10 +111,12 @@ class EndpointTestCase(TestCase):
         msg = "test_list_events: Error, returned events aren't equivalent to database events"
         self.assertEqual(ret, events, msg)
 
-    def test1_event(self):
+    def test1_list_event(self):
         """
-        Post-condition 1: return is a dictionary.
+        Post-condition 1: return is a dictionary for events
         """
+        # Note, I added a item beforehand in the DB because we want to make
+        # sure that the test has items to check in the DB before running
         db.add_event("testEvent",
                      "testLoc",
                      1640146943,
@@ -123,10 +127,12 @@ class EndpointTestCase(TestCase):
         ret = ep.ListEvents(Resource).get("Paul")
         self.assertIsInstance(ret, dict)
 
-    def test2_event(self):
+    def test2_list_event(self):
         """
-        Post-condition 2: keys to the dict are strings
+        Post-condition 2: keys to the dict are strings for events
         """
+        # Note, I added a item beforehand in the DB because we want to make
+        # sure that the test has items to check in the DB before running
         db.add_event("testEvent",
                      "testLoc",
                      1640146943,
@@ -138,10 +144,12 @@ class EndpointTestCase(TestCase):
         for key in ret:
             self.assertIsInstance(key, str)
 
-    def test3_event(self):
+    def test3_list_event(self):
         """
-        Post-condition 3: the values in the dict are themselves dicts
+        Post-condition 3: the values in the dict are themselves dicts for events
         """
+        # Note, I added a item beforehand in the DB because we want to make
+        # sure that the test has items to check in the DB before running
         db.add_event("testEvent",
                      "testLoc",
                      1640146943,
@@ -177,9 +185,11 @@ class EndpointTestCase(TestCase):
         
     def test_list_breaks(self):
         """
-        See if we can successfully list all events.
-        Post-condition: noting changes.
+        See if we can successfully list all breaks.
+        Post-condition: we list breaks
         """
+        # Note, I added a item beforehand in the DB because we want to make
+        # sure that the test has items to check in the DB before running
         db.add_break("testEvent",
                      1640146943,
                      1640146943,
@@ -189,10 +199,12 @@ class EndpointTestCase(TestCase):
         msg = "test_list_breaks: Error, returned breaks aren't equivalent to database breaks"
         self.assertEqual(ret, events, msg)
 
-    def test1_break(self):
+    def test1_list_break(self):
         """
-        Post-condition 1: return is a dictionary.
+        Post-condition 1: return is a dictionary for breaks
         """
+        # Note, I added a item beforehand in the DB because we want to make
+        # sure that the test has items to check in the DB before running
         db.add_break("testEvent",
                      1640146943,
                      1640146943,
@@ -200,10 +212,12 @@ class EndpointTestCase(TestCase):
         ret = ep.ListBreaks(Resource).get("Paul")
         self.assertIsInstance(ret, dict)
 
-    def test2_break(self):
+    def test2_list_break(self):
         """
-        Post-condition 2: keys to the dict are strings
+        Post-condition 2: keys to the dict are strings for breaks
         """
+        # Note, I added a item beforehand in the DB because we want to make
+        # sure that the test has items to check in the DB before running
         db.add_break("testEvent",
                      1640146943,
                      1640146943,
@@ -212,10 +226,12 @@ class EndpointTestCase(TestCase):
         for key in ret:
             self.assertIsInstance(key, str)
 
-    def test3_break(self):
+    def test3_list_break(self):
         """
-        Post-condition 3: the values in the dict are themselves dicts
+        Post-condition 3: the values in the dict are themselves dicts for breaks
         """
+        # Note, I added a item beforehand in the DB because we want to make
+        # sure that the test has items to check in the DB before running
         db.add_break("testEvent",
                      1640146943,
                      1640146943,
