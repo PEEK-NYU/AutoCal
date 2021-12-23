@@ -221,7 +221,7 @@ class CreateBreak(Resource):
         }
 
 
-@api.route('/breaks/delete/<eventname>')
+@api.route('/breaks/delete/<event_id>')
 class DeleteBreak (Resource):
     """
     This class enables deleting a break.
@@ -232,12 +232,12 @@ class DeleteBreak (Resource):
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
     @api.response(HTTPStatus.FORBIDDEN,
                   'Only the owner of a event can delete it.')
-    def post(self, eventname):
+    def post(self, event_id):
         """
         This method deletes a break from the break db.
         """
-        ret = db.del_break(eventname)
+        ret = db.del_break(event_id)
         if ret == db.NOT_FOUND:
-            raise (wz.NotFound(f"Break {eventname} not found."))
+            raise (wz.NotFound(f"Break id{event_id} not found."))
         else:
-            return f"{eventname} deleted."
+            return f"{event_id} deleted."
