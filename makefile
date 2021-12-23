@@ -7,6 +7,7 @@ github: FORCE
 	git push origin main
 
 dev_env: FORCE
+	- ./setup.sh PEEK_DIR
 	pip3 install -r $(REQ_DIR)/requirements-dev.txt
 
 all_tests: FORCE

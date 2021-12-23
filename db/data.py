@@ -3,7 +3,6 @@ This file will manage interactions with our data store.
 At first, it will just contain stubs that return fake data.
 Gradually, we will fill in actual calls to our datastore.
 """
-import os
 
 from bson.objectid import ObjectId, InvalidId
 
@@ -28,17 +27,20 @@ if client is None:
     print("Failed to connect to MongoDB.")
     exit(1)
 
+
 def get_breaks():
     """
     A function to return a dictionary of all breaks.
     """
     return dbc.fetch_all(BREAKS, ID)
 
+
 def get_events():
     """
     A function to return a dictionary of all events.
     """
     return dbc.fetch_all(EVENTS, ID)
+
 
 def event_exists(event_id):
     """
@@ -51,6 +53,7 @@ def event_exists(event_id):
     except (InvalidId, TypeError):
         return False
 
+
 def break_exists(break_id):
     """
     Return True if event exists.
@@ -62,6 +65,7 @@ def break_exists(break_id):
     except (InvalidId, TypeError):
         return False
 
+
 def del_event(event_id):
     """
     Delete a event from the database.
@@ -71,6 +75,7 @@ def del_event(event_id):
     else:
         dbc.del_one(EVENTS, filters={ID: ObjectId(event_id)})
         return OK
+
 
 def del_break(break_id):
     """
@@ -82,22 +87,23 @@ def del_break(break_id):
         dbc.del_one(BREAKS, filters={ID: ObjectId(break_id)})
         return OK
 
-def add_event(eventname, location, start_time, end_time, description, owner, attendees):
+
+def add_event(eventname, location, start_time,
+              end_time, description, owner, attendees):
     """
     Add a events to the events database.
     """
     print(f"{eventname=}")
-    id = str(dbc.insert_doc(EVENTS, 
-        {
-            "eventName": eventname,
-            "location": location,
-            "start_time": start_time,
-            "end_time": end_time,
-            "description": description,
-            "owner": owner,
-            "attendees": attendees
-        }
-    ).inserted_id)
+    id = str(dbc.insert_doc(EVENTS,
+                            {
+                                "eventName": eventname,
+                                "location": location,
+                                "start_time": start_time,
+                                "end_time": end_time,
+                                "description": description,
+                                "owner": owner,
+                                "attendees": attendees
+                            }).inserted_id)
     return {
         "status": OK,
         "id": id
@@ -109,24 +115,25 @@ def add_break(breakname, start_time, end_time, owner):
     Add a events to the events database.
     """
     print(f"{breakname=}")
-    id = str(dbc.insert_doc(BREAKS, 
-        {
-            "breakname": breakname,
-            "start_time": start_time,
-            "end_time": end_time,
-            "owner": owner,
-        }
-    ).inserted_id)
+    id = str(dbc.insert_doc(BREAKS,
+                            {
+                                "breakname": breakname,
+                                "start_time": start_time,
+                                "end_time": end_time,
+                                "owner": owner,
+                            }).inserted_id)
     return {
         "status": OK,
         "id": id
     }
+
 
 def get_users():
     """
     A function to return a dictionary of all users.
     """
     return dbc.fetch_all(USERS, USER_NM)
+
 
 def user_exists(username):
     """
@@ -136,6 +143,7 @@ def user_exists(username):
     rec = dbc.fetch_one(USERS, filters={USER_NM: username})
     print(f"{rec=}")
     return rec is not None
+
 
 def add_user(username):
     """
@@ -148,9 +156,10 @@ def add_user(username):
             USER_NM: username,
             "password": "dfdgdfgdsf",
             "google_key": "fdssdf2142323412",
-            "profile_pic_url": "https://i.insider.com/602ee9ced3ad27001837f2ac?width=750&format=jpeg&auto=webp"
+            "profile_pic_url": "test.com/image"
         })
         return OK
+
 
 def del_user(username):
     """
@@ -161,6 +170,7 @@ def del_user(username):
     else:
         dbc.del_one(USERS, filters={USER_NM: username})
         return OK
+
 
 # function templates/shells for integration with google cal
 def get_scheduling_options(user_schedule, common_events):

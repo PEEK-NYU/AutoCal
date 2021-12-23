@@ -13,7 +13,8 @@ app = Flask(__name__)
 api = Api(app)
 
 WORKING_MSG = "I'm working!"
-WORKING_VAL = "\(^-^)/"
+WORKING_VAL = "\\(^-^)//"
+
 
 # Done
 @api.route('/endpoints')
@@ -30,6 +31,7 @@ class Endpoints(Resource):
         endpoints = sorted(rule.rule for rule in api.app.url_map.iter_rules())
         return {"Available endpoints": endpoints}
 
+
 # Done
 @api.route('/test')
 class AppTest(Resource):
@@ -43,6 +45,7 @@ class AppTest(Resource):
         It just answers with "hello world."
         """
         return {WORKING_MSG: WORKING_VAL}
+
 
 # Done
 @api.route('/list_events')
@@ -64,7 +67,7 @@ class ListEvents(Resource):
 
 
 # Done
-@api.route('/create_event/<username>/<eventname>') 
+@api.route('/create_event/<username>/<eventname>')
 class CreateEvent(Resource):
     """
     This class supports adding an event.
@@ -76,14 +79,21 @@ class CreateEvent(Resource):
         """
         This method adds an event
         """
-        ret = db.add_event(eventname, "370 Jay", 1640146943, 1640147053, "This is a test event", username, [username])
-        #TODO Fix not found
+        ret = db.add_event(eventname,
+                           "370 Jay",
+                           1640146943,
+                           1640147053,
+                           "This is a test event",
+                           username,
+                           [username])
+        # TODO Fix not found
         if ret == db.NOT_FOUND:
             raise (wz.NotFound("Event db not found."))
         return {
             "eventname": eventname,
             "id": ret['id']
         }
+
 
 # Done
 @api.route('/events/delete/<event_id>')
@@ -126,6 +136,7 @@ class GetUsers(Resource):
         else:
             return users
 
+
 # Done
 @api.route('/create_user/<username>')
 class CreateUser(Resource):
@@ -145,6 +156,7 @@ class CreateUser(Resource):
         elif ret == db.DUPLICATE:
             raise (wz.NotAcceptable("User name already exists."))
         return f"{username} added."
+
 
 # Done
 @api.route('/users/delete/<username>')
@@ -167,6 +179,7 @@ class DeleteUser(Resource):
         else:
             return f"{username} deleted."
 
+
 @api.route('/list_breaks')
 class ListBreaks(Resource):
     """
@@ -184,8 +197,9 @@ class ListBreaks(Resource):
         else:
             return events
 
+
 # Done
-@api.route('/create_break/<username>/<breakname>') 
+@api.route('/create_break/<username>/<breakname>')
 class CreateBreak(Resource):
     """
     This class supports adding a break.
@@ -198,7 +212,7 @@ class CreateBreak(Resource):
         This method adds a break
         """
         ret = db.add_break(breakname, 1640146943, 1640147053, username)
-        #TODO Fix not found
+        # TODO Fix not found
         if ret == db.NOT_FOUND:
             raise (wz.NotFound("Event db not found."))
         return {

@@ -2,13 +2,12 @@
 This file holds the tests for db.py.
 """
 
-from unittest import TestCase, skip
+from unittest import TestCase
 # import random
 
 import db.data as db
 
 FAKE_USER = "Fake user"
-
 
 
 class DBTestCase(TestCase):

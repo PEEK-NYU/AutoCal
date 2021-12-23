@@ -1,5 +1,5 @@
-from unittest import TestCase, skip
-from flask_restx import Resource, Api
+from unittest import TestCase
+from flask_restx import Resource
 import random
 
 import API.endpoints as ep
@@ -33,23 +33,21 @@ class EndpointTestCase(TestCase):
         """
         cu = ep.CreateUser(Resource)
         new_user = new_entity_name("user")
-        ret = cu.post(new_user)
+        cu.post(new_user)
         users = db.get_users()
         self.assertIn(new_user, users)
-        
-       
+
     def test_delete_user(self):
         """
         See if we can successfully delete a user.
         Post-condition: user no longer in DB.
         """
         usrname = "delete_test_user"
-        db.add_user(usrname);
-        ret = ep.DeleteUser(Resource).post(usrname)
+        db.add_user(usrname)
+        ep.DeleteUser(Resource).post(usrname)
         users = db.get_users()
         self.assertFalse((usrname in users))
- 
-        
+
     def test_list_users(self):
         """
         See if we can successfully list all users.
@@ -71,17 +69,22 @@ class EndpointTestCase(TestCase):
         events = db.get_events()
         self.assertIn(ret['id'], events)
 
-
     def test_delete_event(self):
         """
         See if we can successfully delete a event.
         Post-condition: event no longer in DB.
         """
-        event = db.add_event("testEvent", "testLoc", 1640146943, 1640146943, "test descr", "Paul", ["Paul"])
-        ret = ep.DeleteEvent(Resource).post(event['id'])
+        event = db.add_event("testEvent",
+                             "testLoc",
+                             1640146943,
+                             1640146943,
+                             "test descr",
+                             "Paul",
+                             ["Paul"])
+        ep.DeleteEvent(Resource).post(event['id'])
         events = db.get_events()
-        self.assertFalse((event['id'] in events))      
-        
+        self.assertFalse((event['id'] in events))
+
     def test_list_events(self):
         """
         See if we can successfully list all events.
@@ -91,7 +94,6 @@ class EndpointTestCase(TestCase):
         events = db.get_events()
         msg = "test_list_events: Error, returned events aren't equivalent to databse events"
         self.assertEqual(ret, events, msg)
-
 
     def test1_event(self):
         """
@@ -120,16 +122,15 @@ class EndpointTestCase(TestCase):
             self.assertIsInstance(val, dict)
 
     def test_create_break(self):
-            """
-            See if we can successfully create a new break.
-            Post-condition: break is in DB.
-            """
-            cr = ep.CreateBreak(Resource)
-            new_break = new_entity_name("Break")
-            ret = cr.post("test_user", new_break)
-            events = db.get_breaks()
-            self.assertIn(ret['id'], events)
-
+        """
+        See if we can successfully create a new break.
+        Post-condition: break is in DB.
+        """
+        cr = ep.CreateBreak(Resource)
+        new_break = new_entity_name("Break")
+        ret = cr.post("test_user", new_break)
+        events = db.get_breaks()
+        self.assertIn(ret['id'], events)
 
     def test_delete_break(self):
         """
@@ -137,9 +138,9 @@ class EndpointTestCase(TestCase):
         Post-condition: break no longer in DB.
         """
         breakItem = db.add_break("testEvent", 1640146943, 1640146943, "Paul")
-        ret = ep.DeleteBreak(Resource).post(breakItem['id'])
+        ep.DeleteBreak(Resource).post(breakItem['id'])
         breaks = db.get_breaks()
-        self.assertFalse((breakItem['id'] in breaks))      
+        self.assertFalse((breakItem['id'] in breaks))
         
     def test_list_breaks(self):
         """
@@ -150,7 +151,6 @@ class EndpointTestCase(TestCase):
         events = db.get_breaks()
         msg = "test_list_breaks: Error, returned breaks aren't equivalent to database breaks"
         self.assertEqual(ret, events, msg)
-
 
     def test1_break(self):
         """
