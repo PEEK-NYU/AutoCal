@@ -129,6 +129,11 @@ class DBTestCase(TestCase):
         users = db.get_users()
         self.assertIsInstance(users, dict)
 
+    def test_user_exists(self):
+        new_user = new_entity_name("user")
+        db.add_user(new_user)
+        self.assertTrue(db.user_exists(new_user))
+
     def test_add_user(self):
         """
         Can we add a user to the db?
