@@ -5,7 +5,7 @@ Gradually, we will fill in actual calls to our datastore.
 """
 
 from bson.objectid import ObjectId, InvalidId
-from flask.scaffold import F
+
 
 import db.db_connect as dbc
 
