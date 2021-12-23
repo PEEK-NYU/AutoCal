@@ -67,7 +67,7 @@ class EndpointTestCase(TestCase):
         """
         cr = ep.CreateEvent(Resource)
         new_event = new_entity_name("event")
-        ret = cr.post(new_event, "test_user")
+        ret = cr.post("test_user", new_event)
         events = db.get_events()
         self.assertIn(ret['id'], events)
 
@@ -115,6 +115,65 @@ class EndpointTestCase(TestCase):
         Post-condition 3: the values in the dict are themselves dicts
         """
         lr = ep.ListEvents(Resource)
+        ret = lr.get()
+        for val in ret.values():
+            self.assertIsInstance(val, dict)
+
+    def test_create_break(self):
+            """
+            See if we can successfully create a new break.
+            Post-condition: break is in DB.
+            """
+            cr = ep.CreateBreak(Resource)
+            new_break = new_entity_name("Break")
+            ret = cr.post("test_user", new_break)
+            events = db.get_breaks()
+            self.assertIn(ret['id'], events)
+
+
+    def test_delete_break(self):
+        """
+        See if we can successfully delete a break.
+        Post-condition: break no longer in DB.
+        """
+        breakItem = db.add_break("testEvent", 1640146943, 1640146943, "Paul")
+        ret = ep.DeleteBreak(Resource).post(breakItem['id'])
+        breaks = db.get_breaks()
+        self.assertFalse((breakItem['id'] in breaks))      
+        
+    def test_list_breaks(self):
+        """
+        See if we can successfully list all events.
+        Post-condition: noting changes.
+        """
+        ret = ep.ListBreaks(Resource).get()
+        events = db.get_breaks()
+        msg = "test_list_breaks: Error, returned breaks aren't equivalent to database breaks"
+        self.assertEqual(ret, events, msg)
+
+
+    def test1_break(self):
+        """
+        Post-condition 1: return is a dictionary.
+        """
+        lr = ep.ListBreaks(Resource)
+        ret = lr.get()
+        self.assertIsInstance(ret, dict)
+
+    def test2_break(self):
+        """
+        Post-condition 2: keys to the dict are strings
+        """
+        lr = ep.ListBreaks(Resource)
+        ret = lr.get()
+        for key in ret:
+            self.assertIsInstance(key, str)
+
+    def test3_break(self):
+        """
+        Post-condition 3: the values in the dict are themselves dicts
+        """
+        lr = ep.ListBreaks(Resource)
         ret = lr.get()
         for val in ret.values():
             self.assertIsInstance(val, dict)
