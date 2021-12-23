@@ -28,7 +28,6 @@ Event
 * start_time (int)
 * end_time (int)
 * owner (username: string)
-* break (bool)
 
 **Create**
 1. Users can create an account with a password, and username (must be unique).
