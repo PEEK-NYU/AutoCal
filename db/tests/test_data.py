@@ -25,25 +25,29 @@ class DBTestCase(TestCase):
     def tearDown(self):
         pass
 
-    def test_write_collection(self):
-        """
-        Can we write the user db?
-        """
-        fake_data = {FAKE_USER: {}}
-        return True
-
     def test_get_breaks(self):
         """
         Can we fetch breaks db?
         """
-        breaks = db.get_breaks()
+        db.add_break("testEvent",
+                     1640146943,
+                     1640146943,
+                     "Paul")
+        breaks = db.get_breaks("Paul")
         self.assertIsInstance(breaks, dict)
 
     def test_get_events(self):
         """
         Can we fetch events db?
         """
-        events = db.get_events()
+        db.add_event("testEvent",
+                     "testLoc",
+                     1640146943,
+                     1640146943,
+                     "test descr",
+                     "Paul",
+                     ["Paul"])
+        events = db.get_events("Paul")
         self.assertIsInstance(events, dict)
 
     def test_event_exist(self):
@@ -80,7 +84,7 @@ class DBTestCase(TestCase):
                              "Paul",
                              ["Paul"])
         db.del_event(event['id'])
-        events = db.get_events()
+        events = db.get_events("Paul")
         self.assertFalse((event['id'] in events))
 
     def test_del_break(self):
@@ -89,7 +93,7 @@ class DBTestCase(TestCase):
         """
         breakItem = db.add_break("testEvent", 1640146943, 1640146943, "Paul")
         db.del_break(breakItem['id'])
-        breaks = db.get_breaks()
+        breaks = db.get_breaks("Paul")
         self.assertFalse((breakItem['id'] in breaks))
 
     def test_add_event(self):
@@ -105,7 +109,7 @@ class DBTestCase(TestCase):
                            "test descr",
                            "Paul",
                            ["Paul"])
-        events = db.get_events()
+        events = db.get_events("Paul")
         self.assertIn(ret['id'], events)
 
     def test_add_break(self):
@@ -115,7 +119,7 @@ class DBTestCase(TestCase):
         """
         new_break = new_entity_name("break")
         breakItem = db.add_break(new_break, 1640146943, 1640146943, "Paul")
-        breaks = db.get_breaks()
+        breaks = db.get_breaks("Paul")
         self.assertIn(breakItem['id'], breaks)
 
     def test_get_users(self):

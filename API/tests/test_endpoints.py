@@ -55,8 +55,15 @@ class EndpointTestCase(TestCase):
         """
         ret = ep.GetUsers(Resource).get()
         users = db.get_users()
-        msg = "test_list_users: Error, returned users aren't equivalent to databse users"
-        self.assertEqual(ret, users, msg)
+        res = []
+        for user in users:
+            item = {
+                "userName": users[user]['userName'],
+                "profile_pic_url": users[user]['profile_pic_url']
+            }
+            res.append(item)
+        msg = "test_list_users: Error, returned users aren't equivalent to database users"
+        self.assertEqual(ret, res, msg)
 
     def test_create_event(self):
         """
@@ -66,7 +73,7 @@ class EndpointTestCase(TestCase):
         cr = ep.CreateEvent(Resource)
         new_event = new_entity_name("event")
         ret = cr.post("test_user", new_event)
-        events = db.get_events()
+        events = db.get_events("test_user")
         self.assertIn(ret['id'], events)
 
     def test_delete_event(self):
@@ -82,7 +89,7 @@ class EndpointTestCase(TestCase):
                              "Paul",
                              ["Paul"])
         ep.DeleteEvent(Resource).post(event['id'])
-        events = db.get_events()
+        events = db.get_events("Paul")
         self.assertFalse((event['id'] in events))
 
     def test_list_events(self):
@@ -90,25 +97,44 @@ class EndpointTestCase(TestCase):
         See if we can successfully list all events.
         Post-condition: noting changes.
         """
-        ret = ep.ListEvents(Resource).get()
-        events = db.get_events()
-        msg = "test_list_events: Error, returned events aren't equivalent to databse events"
+        db.add_event("testEvent",
+                     "testLoc",
+                     1640146943,
+                     1640146943,
+                     "test descr",
+                     "Paul",
+                     ["Paul"])
+        ret = ep.ListEvents(Resource).get("Paul")
+        events = db.get_events("Paul")
+        msg = "test_list_events: Error, returned events aren't equivalent to database events"
         self.assertEqual(ret, events, msg)
 
     def test1_event(self):
         """
         Post-condition 1: return is a dictionary.
         """
-        lr = ep.ListEvents(Resource)
-        ret = lr.get()
+        db.add_event("testEvent",
+                     "testLoc",
+                     1640146943,
+                     1640146943,
+                     "test descr",
+                     "Paul",
+                     ["Paul"])
+        ret = ep.ListEvents(Resource).get("Paul")
         self.assertIsInstance(ret, dict)
 
     def test2_event(self):
         """
         Post-condition 2: keys to the dict are strings
         """
-        lr = ep.ListEvents(Resource)
-        ret = lr.get()
+        db.add_event("testEvent",
+                     "testLoc",
+                     1640146943,
+                     1640146943,
+                     "test descr",
+                     "Paul",
+                     ["Paul"])
+        ret = ep.ListEvents(Resource).get("Paul")
         for key in ret:
             self.assertIsInstance(key, str)
 
@@ -116,8 +142,14 @@ class EndpointTestCase(TestCase):
         """
         Post-condition 3: the values in the dict are themselves dicts
         """
-        lr = ep.ListEvents(Resource)
-        ret = lr.get()
+        db.add_event("testEvent",
+                     "testLoc",
+                     1640146943,
+                     1640146943,
+                     "test descr",
+                     "Paul",
+                     ["Paul"])
+        ret = ep.ListEvents(Resource).get("Paul")
         for val in ret.values():
             self.assertIsInstance(val, dict)
 
@@ -129,7 +161,7 @@ class EndpointTestCase(TestCase):
         cr = ep.CreateBreak(Resource)
         new_break = new_entity_name("Break")
         ret = cr.post("test_user", new_break)
-        events = db.get_breaks()
+        events = db.get_breaks("test_user")
         self.assertIn(ret['id'], events)
 
     def test_delete_break(self):
@@ -140,7 +172,7 @@ class EndpointTestCase(TestCase):
         new_break = new_entity_name("Break")
         breakItem = db.add_break(new_break, 1640146943, 1640146943, "Paul")
         ep.DeleteBreak(Resource).post(breakItem['id'])
-        breaks = db.get_breaks()
+        breaks = db.get_breaks("Paul")
         self.assertFalse((breakItem['id'] in breaks))
         
     def test_list_breaks(self):
@@ -148,8 +180,12 @@ class EndpointTestCase(TestCase):
         See if we can successfully list all events.
         Post-condition: noting changes.
         """
-        ret = ep.ListBreaks(Resource).get()
-        events = db.get_breaks()
+        db.add_break("testEvent",
+                     1640146943,
+                     1640146943,
+                     "Paul")
+        ret = ep.ListBreaks(Resource).get("Paul")
+        events = db.get_breaks("Paul")
         msg = "test_list_breaks: Error, returned breaks aren't equivalent to database breaks"
         self.assertEqual(ret, events, msg)
 
@@ -157,16 +193,22 @@ class EndpointTestCase(TestCase):
         """
         Post-condition 1: return is a dictionary.
         """
-        lr = ep.ListBreaks(Resource)
-        ret = lr.get()
+        db.add_break("testEvent",
+                     1640146943,
+                     1640146943,
+                     "Paul")
+        ret = ep.ListBreaks(Resource).get("Paul")
         self.assertIsInstance(ret, dict)
 
     def test2_break(self):
         """
         Post-condition 2: keys to the dict are strings
         """
-        lr = ep.ListBreaks(Resource)
-        ret = lr.get()
+        db.add_break("testEvent",
+                     1640146943,
+                     1640146943,
+                     "Paul")
+        ret = ep.ListBreaks(Resource).get("Paul")
         for key in ret:
             self.assertIsInstance(key, str)
 
@@ -174,7 +216,10 @@ class EndpointTestCase(TestCase):
         """
         Post-condition 3: the values in the dict are themselves dicts
         """
-        lr = ep.ListBreaks(Resource)
-        ret = lr.get()
+        db.add_break("testEvent",
+                     1640146943,
+                     1640146943,
+                     "Paul")
+        ret = ep.ListBreaks(Resource).get("Paul")
         for val in ret.values():
             self.assertIsInstance(val, dict)
