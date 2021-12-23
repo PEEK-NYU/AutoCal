@@ -5,6 +5,7 @@ Gradually, we will fill in actual calls to our datastore.
 """
 
 from bson.objectid import ObjectId, InvalidId
+from flask.scaffold import F
 
 import db.db_connect as dbc
 
@@ -28,18 +29,18 @@ if client is None:
     exit(1)
 
 
-def get_breaks():
+def get_breaks(username):
     """
     A function to return a dictionary of all breaks.
     """
-    return dbc.fetch_all(BREAKS, ID)
+    return dbc.fetch_all(BREAKS, ID, {"owner": username})
 
 
-def get_events():
+def get_events(username):
     """
     A function to return a dictionary of all events.
     """
-    return dbc.fetch_all(EVENTS, ID)
+    return dbc.fetch_all(EVENTS, ID, {"owner": username})
 
 
 def event_exists(event_id):

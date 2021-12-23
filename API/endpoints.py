@@ -48,18 +48,18 @@ class AppTest(Resource):
 
 
 # Done
-@api.route('/list_events')
+@api.route('/events/list/<username>')
 class ListEvents(Resource):
     """
     This endpoint returns a list of all events.
     """
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
-    def get(self):
+    def get(self, username):
         """
         Returns a list of all events.
         """
-        events = db.get_events()
+        events = db.get_events(username)
         if events is None:
             raise (wz.NotFound("Event db not found."))
         else:
@@ -67,7 +67,7 @@ class ListEvents(Resource):
 
 
 # Done
-@api.route('/create_event/<username>/<eventname>')
+@api.route('/events/create/<username>/<eventname>')
 class CreateEvent(Resource):
     """
     This class supports adding an event.
@@ -119,7 +119,7 @@ class DeleteEvent(Resource):
 
 
 # Done
-@api.route('/get_users')
+@api.route('/users/list')
 class GetUsers(Resource):
     """
     This endpoint returns a list of all users.
@@ -134,11 +134,18 @@ class GetUsers(Resource):
         if users is None:
             raise (wz.NotFound("User db not found."))
         else:
-            return users
+            res = []
+            for user in users:
+                item = {
+                    "userName": users[user]['userName'],
+                    "profile_pic_url": users[user]['profile_pic_url']
+                }
+                res.append(item)
+            return res
 
 
 # Done
-@api.route('/create_user/<username>')
+@api.route('/users/create/<username>')
 class CreateUser(Resource):
     """
     This class supports adding a user to the app
@@ -180,18 +187,18 @@ class DeleteUser(Resource):
             return f"{username} deleted."
 
 
-@api.route('/list_breaks')
+@api.route('/breaks/list/<username>')
 class ListBreaks(Resource):
     """
     This endpoint returns a list of all breaks.
     """
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
-    def get(self):
+    def get(self, username):
         """
         Returns a list of all breaks.
         """
-        events = db.get_breaks()
+        events = db.get_breaks(username)
         if events is None:
             raise (wz.NotFound("Event db not found."))
         else:
@@ -199,7 +206,7 @@ class ListBreaks(Resource):
 
 
 # Done
-@api.route('/create_break/<username>/<breakname>')
+@api.route('/breaks/create/<username>/<breakname>')
 class CreateBreak(Resource):
     """
     This class supports adding a break.
@@ -221,7 +228,7 @@ class CreateBreak(Resource):
         }
 
 
-@api.route('/breaks/delete/<event_id>')
+@api.route('/breaks/delete/<break_id>')
 class DeleteBreak (Resource):
     """
     This class enables deleting a break.
@@ -232,12 +239,12 @@ class DeleteBreak (Resource):
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
     @api.response(HTTPStatus.FORBIDDEN,
                   'Only the owner of a event can delete it.')
-    def post(self, event_id):
+    def post(self, break_id):
         """
         This method deletes a break from the break db.
         """
-        ret = db.del_break(event_id)
+        ret = db.del_break(break_id)
         if ret == db.NOT_FOUND:
-            raise (wz.NotFound(f"Break id{event_id} not found."))
+            raise (wz.NotFound(f"Break id{break_id} not found."))
         else:
-            return f"{event_id} deleted."
+            return f"{break_id} deleted."

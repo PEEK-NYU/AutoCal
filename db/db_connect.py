@@ -59,9 +59,9 @@ def del_one(collect_nm, filters={}):
     return client[db_nm][collect_nm].delete_one(filters)
 
 
-def fetch_all(collect_nm, key_nm):
+def fetch_all(collect_nm, key_nm, filters={}):
     all_docs = {}
-    for doc in client[db_nm][collect_nm].find():
+    for doc in client[db_nm][collect_nm].find(filters):
         all_docs[str(doc[key_nm])] = json.loads(bsutil.dumps(doc))
     return all_docs
 
