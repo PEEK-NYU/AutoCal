@@ -9,15 +9,15 @@ import bson.json_util as bsutil
 
 
 # all of these will eventually be put in the env:
-user_nm = "peekUser"
-cloud_svc = "serverlessinstance0.mvrqy.mongodb.net"
+user_nm = "gcallah"
+cloud_svc = "serverlessinstance0.irvgp.mongodb.net"
 passwd = os.environ.get("MONGO_PASSWD", '')
 cloud_mdb = "mongodb+srv"
 db_params = "retryWrites=true&w=majority"
 
-db_nm = 'peekDB'
-if int(os.environ.get("TEST_MODE", '')) == 1:
-    db_nm = "test_peekDB"
+db_nm = 'chatDB'
+if os.environ.get("TEST_MODE", ''):
+    db_nm = "test_chatDB"
 
 REMOTE = "0"
 LOCAL = "1"
@@ -37,11 +37,10 @@ def get_client():
         client = pm.MongoClient()
     else:
         print("Connecting to Mongo remotely.")
-        client = pm.MongoClient(f"mongodb+srv://{user_nm}:{passwd}@"
+        client = pm.MongoClient(f"mongodb+srv://gcallah:{passwd}@"
                                 + f"{cloud_svc}/{db_nm}?"
                                 + "retryWrites=true&w=majority",
-                                server_api=ServerApi('1'), tls=True,
-                                tlsAllowInvalidCertificates=True)
+                                server_api=ServerApi('1'))
     return client
 
 
@@ -59,12 +58,22 @@ def del_one(collect_nm, filters={}):
     return client[db_nm][collect_nm].delete_one(filters)
 
 
-def fetch_all(collect_nm, key_nm, filters={}):
-    all_docs = {}
-    for doc in client[db_nm][collect_nm].find(filters):
-        all_docs[str(doc[key_nm])] = json.loads(bsutil.dumps(doc))
+def fetch_all(collect_nm, key_nm):
+    all_docs = []
+    for doc in client[db_nm][collect_nm].find():
+        all_docs.append(json.loads(bsutil.dumps(doc)))
     return all_docs
 
 
+def fetch_all_as_dict(collect_nm, key_nm):
+    all_list = fetch_all(collect_nm, key_nm)
+    print(f'{all_list=}')
+    all_dict = {}
+    for doc in all_list:
+        print(f'{doc=}')
+        all_dict[doc[key_nm]] = doc[key_nm]
+    return all_dict
+
+
 def insert_doc(collect_nm, doc):
-    return client[db_nm][collect_nm].insert_one(doc)
+    client[db_nm][collect_nm].insert_one(doc)

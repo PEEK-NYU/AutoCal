@@ -1,18 +1,3 @@
 {
-    "testuser1": {
-        "name": "testuser1",
-        "email": "",
-        "descr": "",
-        "password": "",
-        "google_key": "",
-        "events": []
-    },
-    "testuser2": {
-        "name": "testuser2",
-        "email": "",
-        "descr": "",
-        "password": "",
-        "google_key": "",
-        "events": []
-    }
+    "Fake user": {}
 }
