@@ -9,7 +9,8 @@
 
 ## Project Idea:
 * A website that aids users in scheduling events. Website pulls data from Google Calendar and suggests the best time for an event.
-* Story: User queries software for the best time(s) to study for an exam next week => Website loads user's google calendar data and returns some suggested time slots compatible with the user's schedule => User selects one and the server automatically adds event to Google Calendar using Google's Calendar API. Users can also add breaks for when they want no events added for that time period.
+* Story: User wants to schedule a study time. User imports an .ics file into software, types in some quick event information if wanted, and presses a button. software then outputs an .ics file with the new event, which the user imports into their calendar software of choice.
+* Advanced Story: User queries software for the best time(s) to study for an exam next week => Website loads user's google calendar data and returns some suggested time slots compatible with the user's schedule => User selects one and the server automatically adds event to Google Calendar using Google's Calendar API. Users can also add breaks for when they want no events added for that time period.
 * Over time, the system learns the user's prefered time slot for various events.
 * Users can log in with their Google account for ease of use 
  
@@ -23,12 +24,16 @@ User
 * google_key (string)
 * profile_pic_url (string)
 
+<a href="https://icalendar.readthedocs.io/en/latest/usage.html#components"> Calendar </a>
+* cname (string)
+
 Event
 * _id (string) // unique database key
-* eventname (string)
+* eventname (string)  // <a href="https://fileinfo.com/extension/ics"> .ics </a> specific <a href="https://icalendar.readthedocs.io/en/latest/"> structures </a>
 * location (string)
-* start_time (int)
-* end_time (int)
+* description (string)
+* start_time (datetime)
+* end_time (datetimne)
 * description (string)
 * owner (username: string)
 * attendees (array of username strings)
