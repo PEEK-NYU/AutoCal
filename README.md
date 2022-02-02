@@ -8,42 +8,34 @@
 ### **Note: For some of the event/break tests we included code to insert sample data at the beginning of the test. This is because the list functions for event/break look for a username that we specify in the test. So we created sample data for that specific username to ensure the test would work without having figure out the username yourself and add in data manually.**
 
 ## Project Idea:
-* A website that aids users in scheduling events. Website pulls data from Google Calendar and suggests the best time for an event.
-* Story: User wants to schedule a study time. User imports an .ics file into software, types in some quick event information if wanted, and presses a button. software then outputs an .ics file with the new event, which the user imports into their calendar software of choice.
-* Advanced Story: User queries software for the best time(s) to study for an exam next week => Website loads user's google calendar data and returns some suggested time slots compatible with the user's schedule => User selects one and the server automatically adds event to Google Calendar using Google's Calendar API. Users can also add breaks for when they want no events added for that time period.
-* Over time, the system learns the user's prefered time slot for various events.
-* Users can log in with their Google account for ease of use 
- 
+* A website that aids users in scheduling events. Website uses existing calendar data and suggests the best time for an event.
+* Story: User wants to schedule a study time. User imports an .ics file into software, types in some quick event information if wanted, and presses a button. The software then outputs an .ics file with the new event, which the user imports into their calendar software of choice.
+* Advanced Features:
+* * Automation of .ics import/export via google calendar login credentials
+* * Software has suggested time-slots and learns the user's habits based on software use
+* * Software categorizes events by type (study time, break time, etc.)
+* * User can customize software's suggestions by event type
+
 ## Requirements:
 **Database** 
 (note: for simplicity, all ints are positive where 0 represents an uninitialized value.)
 
-User
-* username (string)  //unique database key
+User Table
+* _user_id (string) //unique database key
+* username (string)  
 * password (string)
-* google_key (string)
-* profile_pic_url (string)
 
-<a href="https://icalendar.readthedocs.io/en/latest/usage.html#components"> Calendar </a>
-* cname (string)
-
-Event
-* _id (string) // unique database key
+Event Table
+* _event_id (string) // unique database key
 * eventname (string)  // <a href="https://fileinfo.com/extension/ics"> .ics </a> specific <a href="https://icalendar.readthedocs.io/en/latest/"> structures </a>
 * location (string)
-* description (string)
 * start_time (datetime)
-* end_time (datetimne)
+* end_time (datetime)
 * description (string)
-* owner (username: string)
-* attendees (array of username strings)
 
-Break
-* _id (string) // unique database key
-* breakname (string)
-* start_time (int)
-* end_time (int)
-* owner (username: string)
+Connection Table
+* _event_id (string) // unique database key
+* _user_id (string) // unique database key
 
 **Create**
 1. Users can create an account with a username, password, google_key, and profile pic (username must be unique).
