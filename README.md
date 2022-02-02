@@ -3,9 +3,7 @@
 ![](https://app.travis-ci.com/PEEK-NYU/PEEK.svg?branch=main)
 
 #### HEROKU:  https://peek-nyu.herokuapp.com/
-#### TRAVIS:  https://app.travis-ci.com/github/PEEK-NYU/PEEK
-
-### **Note: For some of the event/break tests we included code to insert sample data at the beginning of the test. This is because the list functions for event/break look for a username that we specify in the test. So we created sample data for that specific username to ensure the test would work without having figure out the username yourself and add in data manually.**
+#### GITHUB ACTIONS: (tbd)
 
 ## Project Idea:
 * A website that aids users in scheduling events. Website uses existing calendar data and suggests the best time for an event.
