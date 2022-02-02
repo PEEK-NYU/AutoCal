@@ -1,5 +1,5 @@
 # PEEK ~ (Paul, Ethan, Elizabeth, Kora)
-#### This is the main repository of our Software Engineering project as part of CS-UY 4513 section C.
+#### This is the main repository of our Design/Software Engineering project as part of CS-UY 4513 and CS-UY 4523.
 ![](https://app.travis-ci.com/PEEK-NYU/PEEK.svg?branch=main)
 
 #### HEROKU:  https://peek-nyu.herokuapp.com/
