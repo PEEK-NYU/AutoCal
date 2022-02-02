@@ -27,7 +27,7 @@ User Table
 
 Event Table
 * _event_id (string) // unique database key
-* eventname (string)  // <a href="https://fileinfo.com/extension/ics"> .ics </a> specific <a href="https://icalendar.readthedocs.io/en/latest/"> structures </a>
+* eventname (string)  // imported information via <a href="https://fileinfo.com/extension/ics"> .ics </a> specific <a href="https://icalendar.readthedocs.io/en/latest/"> structures </a>
 * location (string)
 * start_time (datetime)
 * end_time (datetime)
