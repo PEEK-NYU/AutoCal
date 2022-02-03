@@ -14,6 +14,7 @@
   * Software has suggested time-slots and learns the user's habits based on software use
   * Software categorizes events by type (study time, break time, etc.)
   * User can customize software's suggestions by event type
+  * Extra Data: user profile images, complex event data (particpants), recurring events
 
 ## Requirements:
 **Database** 
