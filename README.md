@@ -8,7 +8,7 @@
 ## Project Idea:
 * A website that aids users in scheduling events. Website uses existing calendar data and suggests the best time for an event.
 * Story: User wants to schedule a study time. User imports an .ics file into software, types in some quick event information if wanted, and presses a button. The software then outputs an .ics file with the new event, which the user imports into their calendar software of choice.
-  * user can also login to access their previously stored .ics information
+  * user can also login to access their previously stored calendar information
 * Advanced Features:
   * Automation of .ics import/export via google calendar login credentials
   * Software has suggested time-slots and learns the user's habits based on software use
