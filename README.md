@@ -2,6 +2,8 @@
 #### This is the main repository of our Design/Software Engineering project as part of CS-UY 4513 and CS-UY 4523.
 ![](https://app.travis-ci.com/PEEK-NYU/PEEK.svg?branch=main)
 
+![peekdemo](https://github.com/PEEK-NYU/PEEK/blob/overhauled/images/peekcalendar%20page%201.png)
+
 #### HEROKU:  https://peek-nyu.herokuapp.com/
 #### GITHUB ACTIONS: (tbd)
 
