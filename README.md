@@ -28,12 +28,14 @@
     * log-out button
     * list of current calendar information (edit links/ui for each event shown that navigate to event edit page)
     * account info button (navigates to account page)
-    * some calendar navigation tools (tbd)
+    * some calendar navigation tools *(tbd)*
 * Login Page
   * text boxes for username and password input
   * login button to submit text box info (takes you back to home page on success)
+  * shows other account info *(tbd)*
 * Account page
   * text boxes for username, new password, and existing password
+  * shows other editable account info *(tbd)*
   * submit button to change
 * Event Search Page
   * search bar for keyword lookup with search button
