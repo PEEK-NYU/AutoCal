@@ -7,6 +7,7 @@
 #### HEROKU:  https://peek-nyu.herokuapp.com/
 #### GITHUB ACTIONS: (tbd)
 
+
 ## Project Idea:
 * A website that aids users in scheduling events. Website uses existing calendar data and suggests the best time for an event.
 * Story: User wants to schedule a study time. User imports an .ics file into software, types in some quick event information if wanted, and presses a button. The software then outputs an .ics file with the new event, which the user imports into their calendar software of choice.
@@ -17,6 +18,31 @@
   * Software categorizes events by type (study time, break time, etc.)
   * User can customize software's suggestions by event type
   * Extra Data: user profile images, complex event data (particpants), recurring events
+
+
+## UI Overview
+* Homepage
+  * if not logged-in
+    * log-in button (navigates to login page)
+  * if is logged-in
+    * log-out button
+    * list of current calendar information (edit links/ui for each event shown that navigate to event edit page)
+    * account info button (navigates to account page)
+    * some calendar navigation tools (tbd)
+* Login Page
+  * text boxes for username and password input
+  * login button to submit text box info (takes you back to home page on success)
+* Account page
+  * text boxes for username, new password, and existing password
+  * submit button to change
+* Event Search Page
+  * search bar for keyword lookup with search button
+  * similar calendar info layout as homepage
+* Event Edit Page
+  * shows labeled text boxes for all event info
+     * current info stored in database is in default fields
+  * submit button for event info
+
 
 ## Requirements:
 **Database** 
@@ -98,7 +124,6 @@ Connection Table  // used to refrence which events are owned (viewable/editable)
 
 > Important: all items passed into REST not in the URL are in the body of the request
 
- 
 ## Organization Founders:
 #### Kora Hughes
 #### Elizabeth Akindeko
