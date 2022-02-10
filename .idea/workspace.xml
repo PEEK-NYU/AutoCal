@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="605399da-59a8-4229-98b8-e08ef820709b" name="Changes" comment="" />
+    <list default="true" id="605399da-59a8-4229-98b8-e08ef820709b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/db/event_data.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/test_dbs/connect.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/test_dbs/events.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/user_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/rooms.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/test_dbs/rooms.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/test_dbs/users.json" beforeDir="false" afterPath="$PROJECT_DIR$/db/test_dbs/users.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/users.json" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -41,16 +51,5 @@
       <updated>1637251472158</updated>
     </task>
     <servers />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/db/data.py</url>
-          <line>52</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

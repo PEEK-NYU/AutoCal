@@ -1,3 +1,6 @@
 {
-    "Fake user": {}
+  "user_id_1": {
+    "username": "Fake User",
+    "password": "123"
+  }
 }
