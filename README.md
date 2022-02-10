@@ -45,6 +45,8 @@
      * current info stored in database is in default fields
   * submit button for event info
 
+![peekdemoimport](https://github.com/PEEK-NYU/PEEK/blob/overhauled/images/peekcalendar.com_events_import__calendar_.png)
+
 
 ## Backend Overview:
 **Database** 
