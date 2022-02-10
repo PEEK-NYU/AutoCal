@@ -2,7 +2,7 @@
 #### This is the main repository of our Design/Software Engineering project as part of CS-UY 4513 and CS-UY 4523.
 ![](https://app.travis-ci.com/PEEK-NYU/PEEK.svg?branch=overhauled)
 
-![peekdemo](https://github.com/PEEK-NYU/PEEK/blob/overhauled/images/peekcalendar%20page%201.png)
+![peekdemo](https://github.com/PEEK-NYU/PEEK/blob/overhauled/images/autocalendar.com.png)
 
 #### HEROKU:  https://peek-nyu.herokuapp.com/
 #### GITHUB ACTIONS: (tbd)
@@ -46,7 +46,7 @@
   * submit button for event info
 
 
-![peekdemoimport](https://github.com/PEEK-NYU/PEEK/blob/overhauled/images/peekcalendar.com_events_import__calendar_.png)
+![peekdemoimport](https://github.com/PEEK-NYU/PEEK/blob/overhauled/images/autocalendar.com_events_import__calendar_.png)
 
 
 ## Backend Overview:
