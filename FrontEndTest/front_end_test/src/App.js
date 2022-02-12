@@ -26,14 +26,20 @@ export default function App(){
 
 //==========================================================
 
+  const [rooms, setRooms] = useState(undefined);
 
+  //npm install axios
   //invoked when element gets rendered, like init
   //the '' should be the url for the endpoint
   useEffect(()=>{
     axios.get('')
       .then((res)=>{
-        console.log(res);
-      }) //will only be executed when the above statement returns, in this case the data from the server
+        console.log(res); //res is the object returned by server, data is a key of the res object
+        if (res.data){
+          setRooms(res.data);
+        }
+
+      }); //will only be executed when the above statement returns, in this case the data from the server
   }, []) //[] is the dependency array, MUST pass it, now the funciton only gets called when mounts or rerenders
   
   
@@ -54,6 +60,15 @@ export default function App(){
     {/*An React Component, Defined Elsewhere, see import*/}
       <div>
         <Room roomName={"Room A"} numUsers={3}/>
+      </div>
+
+      <div>
+        {/*Conditionally rendered, only renders when rooms!=undefined*/}
+        {rooms &&
+          <div>
+            {rooms[0].roomName}
+          </div>
+        }
       </div>
       
 
