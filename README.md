@@ -24,11 +24,17 @@
 * Homepage
   * if not logged-in
     * log-in button (navigates to login page)
+    * template / blank calendar
   * if is logged-in
     * log-out button
     * list of current calendar information (edit links/ui for each event shown that navigate to event edit page)
     * account info button (navigates to account page)
+    * import button (navigates to import page)
     * some calendar navigation tools *(tbd)*
+* Import Page
+  * import UI to load .ics file
+  * some kind of selection UI to select the range of dates the user might want to import (tbd)
+    * says success/fail depending on uploaded file
 * Login Page
   * text boxes for username and password input
   * login button to submit text box info (takes you back to home page on success)
