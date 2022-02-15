@@ -61,7 +61,7 @@ def generate_uid():
     """
     curr_users = get_all_users()
     # https://stackoverflow.com/questions/2257441/random-string-generation-with-upper-case-letters-and-digits/2257449
-    new_uid = ''.join(random.choices(string.ascii_uppercase + string.digits, k=N))
+    new_uid = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
     if new_uid in curr_users.keys():
         return generate_uid()  # recursively make sure no repeat uid's
     return new_uid
