@@ -1,9 +1,12 @@
 {
-  "event_id_1": {
-    "eventname": "study session 1",
-    "start_time": "datetime?",
-    "end_time": "datetime?",
-    "location": "home",
-    "description": "do design project homework..."
+  "events":
+  {
+    "event_id_1": {
+      "eventname": "study session 1",
+      "start_time": "datetime?",
+      "end_time": "datetime?",
+      "location": "home",
+      "description": "do design project homework..."
+    }
   }
 }

@@ -18,6 +18,7 @@ import random
 import string
 
 DEMO_HOME = os.environ["DEMO_HOME"]
+GET_USERS = "users"
 USERS = "_user_id"
 UNAME = "username"
 PW = "password"
@@ -37,7 +38,7 @@ def get_all_users():  # Note: name change
     A function to return a hashmap of all users.
     """
     # TODO: double-check
-    return dict(dbc.fetch_all())
+    return dict(dbc.fetch_all(GET_USERS))
 
 def get_user(uid):
     """
