@@ -19,6 +19,8 @@ import string
 
 DEMO_HOME = os.environ["DEMO_HOME"]
 USERS = "_user_id"
+UNAME = "username"
+PW = "password"
 
 OK = 0
 NOT_FOUND = 1
@@ -35,7 +37,7 @@ def get_all_users():  # Note: name change
     A function to return a hashmap of all users.
     """
     # TODO: double-check
-    return dict(dbc.fetch_all(USERS))
+    return dict(dbc.fetch_all())
 
 def get_user(uid):
     """
@@ -51,7 +53,7 @@ def find_user(keyword):
     curr_users = get_all_users()
     user_list = {}
     for key, value in curr_users.items():
-        if keyword in value["username"]:
+        if keyword in value[UNAME]:
             user_list[key] = value
     return user_list
 
@@ -72,7 +74,7 @@ def add_user(username, password):
     """
     new_user = {}
     new_uid = generate_uid()
-    new_user[new_uid] = {"username": username, "password": password}
+    new_user[new_uid] = {UNAME: username, PW: password}
     dbc.insert_doc(USERS, new_user)
 
 def del_user(uid):
