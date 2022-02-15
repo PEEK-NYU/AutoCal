@@ -79,5 +79,7 @@ def add_user(username, password):
     dbc.insert_doc(GET_USERS, new_user)
 
 def del_user(uid):
-    curr_users = get_all_users()
-    del curr_users[uid]  # use curr_users.pop(uid) for silent
+    # curr_users = get_all_users()
+    assert get_user(uid) is not None  # TODO: double-check
+    dbc.del_one(GET_USERS, filters={USERS: uid})
+    return OK
