@@ -76,7 +76,7 @@ def add_user(username, password):
     new_user = {}
     new_uid = generate_uid()
     new_user[new_uid] = {UNAME: username, PW: password}
-    dbc.insert_doc(USERS, new_user)
+    dbc.insert_doc(GET_USERS, new_user)
 
 def del_user(uid):
     curr_users = get_all_users()
