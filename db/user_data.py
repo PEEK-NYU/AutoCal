@@ -23,6 +23,7 @@ USERS = "_user_id"
 UNAME = "username"
 PW = "password"
 
+# def of return vars: global ref in other _data.py files
 OK = 0
 NOT_FOUND = 1
 DUPLICATE = 2
@@ -42,7 +43,7 @@ def get_all_users():  # Note: name change
 
 def get_user(uid):
     """
-    A function to get a user given its user id
+    A function to get all a user's info given its user id
     """
     curr_users = get_all_users()
     return curr_users[uid]
@@ -77,6 +78,7 @@ def add_user(username, password):
     new_uid = generate_uid()
     new_user[new_uid] = {UNAME: username, PW: password}
     dbc.insert_doc(GET_USERS, new_user)
+    return OK
 
 def del_user(uid):
     # curr_users = get_all_users()

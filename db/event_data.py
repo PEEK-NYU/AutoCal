@@ -20,6 +20,9 @@ import db.db_connect as dbc
 import random
 import string
 
+from connect_data import *
+from user_data import OK, NOT_FOUND, DUPLICATE
+
 DEMO_HOME = os.environ["DEMO_HOME"]
 GET_EVENTS = "events"
 EVENTS = "_event_id"
@@ -28,10 +31,6 @@ STIME = "start_time"
 ETIME =  "end_time"
 LOC = "location"
 DESC = "description"
-
-OK = 0
-NOT_FOUND = 1
-DUPLICATE = 2
 
 client = dbc.get_client()
 if client is None:
@@ -52,6 +51,25 @@ def generate_eid():
     # https://stackoverflow.com/questions/2257441/random-string-generation-with-upper-case-letters-and-digits/2257449
     new_uid = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
     if new_uid in curr_users.keys():
-        return generate_uid()  # recursively make sure no repeat uid's
+        return generate_uid()  # recursively make sure no repeat eid's
     return new_uid
 
+def get_event(uid):
+    """
+    A function that returns a
+    """
+    curr_events = get_all_events()
+    connected_events = {}
+    for eid, event_info in curr_events.items():
+        if is_connected(eid, uid):  # connection_data.py
+            connected_events[eid] = uid
+    # if len(connected_events) == 0: return NOT_FOUND
+    return connected_events
+
+def create_event(uid, event_name, start_time, end_time, location = "", description = ""):
+    event_info = {ENAME: event_name, STIME: start_time, ETIME: end_time,
+                  LOC: location, DESC: description}
+    new_eid = generate_eid()
+    dbc.insert_doc(EVENTS, {new_eid: event_info})
+    new_connection(new_eid, uid)  # connect new event to current user
+    return OK
