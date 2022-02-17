@@ -39,10 +39,30 @@ def is_connected(eid, uid):
     A function to check if an event is connected to a user
     """
     curr_connections = get_all_connections()
-    return curr_connections[eid] == uid
+    if curr_connections[eid] == uid:
+        return OK
+    else:
+        return NOT_FOUND
 
 def create_connection(eid, uid):
     """
     A function that creates a new connection
     """
     dbc.insert_doc(GET_CONNECTS, {eid: uid})
+
+def del_connection(eid, uid):
+    """
+    A function that deletes a given event-user connection by id
+    """
+    dbc.del_one(GET_CONNECTS, filters={eid: uid})
+    # return OK
+
+def del_events_by_user(del_uid):
+    """
+    A function that deletes all events under a user's ownership
+    """
+    curr_connections = get_all_connections()
+    for eid, uid in curr_connections:
+        if uid == del_uid:
+            del_connection(eid,uid)
+    # return OK

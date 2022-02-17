@@ -54,15 +54,16 @@ def find_user(keyword):
     """
     curr_users = get_all_users()
     user_list = {}
-    for key, value in curr_users.items():
-        if keyword in value[UNAME]:
-            user_list[key] = value
+    for uid, user_info in curr_users.items():
+        if keyword in user_info[UNAME]:
+            user_list[uid] = user_info
     return user_list
 
 def generate_uid():
     """
     A function that generates a random _user_id key
     """
+    # TODO: replace with more reliable method
     curr_users = get_all_users()
     # https://stackoverflow.com/questions/2257441/random-string-generation-with-upper-case-letters-and-digits/2257449
     new_uid = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
@@ -80,8 +81,20 @@ def add_user(username, password):
     dbc.insert_doc(GET_USERS, new_user)
     return OK
 
+def user_exists(uid):
+    """
+    A function that checks if a user exists
+    """
+    curr_users = get_all_users()
+    if uid in curr_users.keys():
+        return OK
+    return NOT_FOUND
+
 def del_user(uid):
+    """ deletes a user and all related events """
     # curr_users = get_all_users()
-    assert get_user(uid) is not None  # TODO: double-check
+    if user_exists(uid) is NOT_FOUND:
+        return NOT_FOUND
     dbc.del_one(GET_USERS, filters={USERS: uid})
+    del_event_by_user(uid)
     return OK

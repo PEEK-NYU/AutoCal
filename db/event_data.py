@@ -47,6 +47,7 @@ def generate_eid():
     """
     A function that generates a random _user_id key
     """
+    # TODO: replace with more reliable method
     curr_users = get_all_users()
     # https://stackoverflow.com/questions/2257441/random-string-generation-with-upper-case-letters-and-digits/2257449
     new_uid = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
@@ -54,9 +55,9 @@ def generate_eid():
         return generate_uid()  # recursively make sure no repeat eid's
     return new_uid
 
-def get_event(uid):
+def get_user_events(uid):
     """
-    A function that returns a
+    A function that returns a hashmap of events connected to a given uid
     """
     curr_events = get_all_events()
     connected_events = {}
@@ -66,10 +67,50 @@ def get_event(uid):
     # if len(connected_events) == 0: return NOT_FOUND
     return connected_events
 
+def find_event(uid, keyword):
+    """
+    A function to return a list of events under a uid with an eventname keyword
+    """
+    curr_events = get_user_events(uid)
+    event_list = {}
+    for eid, event_info in curr_events.items():
+        if keyword in event_info[ENAME]:
+            event_list[eid] = event_info
+    return event_list
+
+def get_event(eid):
+    """
+    A function that returns all event information for a given event (eid)
+    """
+    curr_events = get_all_events()
+    return curr_events[eid]
+
 def create_event(uid, event_name, start_time, end_time, location = "", description = ""):
+    """
+    A function that creates an event
+    """
     event_info = {ENAME: event_name, STIME: start_time, ETIME: end_time,
                   LOC: location, DESC: description}
     new_eid = generate_eid()
     dbc.insert_doc(EVENTS, {new_eid: event_info})
-    new_connection(new_eid, uid)  # connect new event to current user
+    create_connection(new_eid, uid)  # connect new event to current user
     return OK
+
+def event_exists(eid):
+    """
+    A function that checks if an event exists
+    """
+    curr_events = get_all_events()
+    if eid in curr_events.keys():
+        return OK
+    return NOT_FOUND
+
+def del_event(eid, uid):
+    """
+    A function that deletes an event (and relating connection)
+    """
+    if event_exists(eid) is NOT_FOUND:
+        return NOT_FOUND  # check for event
+    assert is_connected(eid, uid) is OK  # check user connected to event
+    dbc.del_one(GET_EVENTS, filters={EVENTS: eid})
+    return del_connection(eid, uid)
