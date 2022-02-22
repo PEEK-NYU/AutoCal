@@ -8,7 +8,7 @@ import os
 
 import db.db_connect as dbc
 
-DEMO_HOME = os.environ["DEMO_HOME"]
+#DEMO_HOME = os.environ["DEMO_HOME"]
 
 ROOMS = "rooms"
 USERS = "users"
