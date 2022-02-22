@@ -1,0 +1,43 @@
+# This is a basic workflow to help you get started with Actions
+
+name: AutoCal CI/CD
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the overhauled branch
+  push:
+    branches: [ overhauled ]
+  pull_request:
+    branches: [ overhauled ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+env:
+  AUTOCAL_HOME: /home/runner/work/AutoCal/Autocal
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    environment: heroku-deploy
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # Runs a single command using the runners shell
+      - name: Install Python packages.
+        run: pip install -r requirements-dev.txt
+
+      # Runs a set of commands using the runners shell
+      - name: Run Python unittests
+        run: make all_tests
+        
+         # Deploy to Heroku
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+            heroku_api_key: 35db1e0d-8e71-4431-bafe-272d4232f69f
+            heroku_app_name: "peek-nyu"
+            heroku_email: "	ea2327@nyu.edu"
