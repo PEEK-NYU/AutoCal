@@ -11,12 +11,16 @@ import werkzeug.exceptions as wz
 
 import db.data as db
 
+import db.user_data as udata
+import db.event_data as edata
+import db.connect_data as cdata
+
 app = Flask(__name__)
 CORS(app)
 api = Api(app)
 
-HELLO = 'Hola'
-WORLD = 'mundo'
+test_key = 'Test'
+test_value = 'is working!'
 
 
 @api.route('/hello')
@@ -30,46 +34,61 @@ class HelloWorld(Resource):
         A trivial endpoint to see if the server is running.
         It just answers with "hello world."
         """
-        return {HELLO: WORLD}
+        return {test_key: test_value}
 
 
-@api.route('/rooms/list')
-class ListRooms(Resource):
+@api.route('/admin/events/get')
+class ListAllEvents(Resource):
     """
-    This endpoint returns a list of all rooms.
+    *Admin* This endpoint returns a list of all events.
     """
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
     def get(self):
         """
-        Returns a list of all chat rooms.
+        Returns a list of all events.
         """
-        rooms = db.get_rooms()
-        if rooms is None:
-            raise (wz.NotFound("Chat room db not found."))
+        events = edata.get_all_events()
+        if events is None:
+            raise (wz.NotFound("Event db not found."))
         else:
-            return rooms
+            return events
 
-
-@api.route('/rooms/create/<roomname>')
-class CreateRoom(Resource):
+@api.route('/events/get/<_user_id>')
+class ListEvents(Resource):
     """
-    This class supports adding a chat room.
+    This endpoint returns a list of all events associated with a given user ID.
+    """
+    @api.response(HTTPStatus.OK, 'Success')
+    @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
+    def get(self, uid):
+        """
+        Returns a list of all events associated with a given user ID..
+        """
+        events = edata.get_user_events(uid)
+        if events is None:
+            raise (wz.NotFound("Event db not found."))
+        else:
+            return events
+
+
+@api.route('/events/create')
+class CreateEvent(Resource):
+    """
+    This class supports creating an event
     """
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
     @api.response(HTTPStatus.NOT_ACCEPTABLE, 'A duplicate key')
-    def post(self, roomname):
+    def post(self, uid, event_name, start_time, end_time, location = "", description = ""):
         """
-        This method adds a room to the room db.
+        This method adds an event to the event db.
         """
-        ret = db.add_room(roomname)
-        if ret == db.NOT_FOUND:
-            raise (wz.NotFound("Chat room db not found."))
-        elif ret == db.DUPLICATE:
-            raise (wz.NotAcceptable(f"Chat room {roomname} already exists."))
+        ret = edata.create_event(uid, event_name, start_time, end_time, location, description)
+        if ret == edata.NOT_FOUND:
+            raise (wz.NotFound("Event db not found."))
         else:
-            return f"{roomname} added."
+            return f"{event_name} added."
 
 
 @api.route('/rooms/delete/<roomname>')
