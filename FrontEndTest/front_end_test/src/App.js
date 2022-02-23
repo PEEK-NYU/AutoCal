@@ -46,7 +46,7 @@ export default function App(){
 
   //npm install axios
   //invoked when element gets rendered, like init
-  //the '' should be the url for the endpoint
+  //TODO: the '' should be the url for the endpoint
   useEffect(()=>{
     axios.get(``)                 //a get request
       .then((res)=>{              //only executes after receiving returned data from server
@@ -137,7 +137,7 @@ export default function App(){
         ))}
 
 {/*===============================================================================*/}
-    {/*Part 3 related*/}
+    {/*Part 3 related :: TODO add more buttons that invoke certain fields */}
         <input 
           value={newRoomName}
           onChange={(event)=>setNewRoomName(event.target.value)}
