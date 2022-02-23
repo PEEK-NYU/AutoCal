@@ -18,7 +18,7 @@ import string
 from event_data import EVENTS
 from user_data import USERS, OK, NOT_FOUND, DUPLICATE
 
-DEMO_HOME = os.environ["DEMO_HOME"]
+DEMO_HOME = os.environ["PEEK_HOME"]
 GET_CONNECTS = "events"
 # EVENTS
 # USERS
