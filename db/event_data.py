@@ -48,12 +48,12 @@ def generate_eid():
     A function that generates a random _user_id key
     """
     # TODO: replace with more reliable method
-    curr_users = get_all_users()
+    curr_events = get_all_events()
     # https://stackoverflow.com/questions/2257441/random-string-generation-with-upper-case-letters-and-digits/2257449
-    new_uid = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
-    if new_uid in curr_users.keys():
-        return generate_uid()  # recursively make sure no repeat eid's
-    return new_uid
+    new_eid = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
+    if new_eid in curr_events.keys():
+        return generate_eid()  # recursively make sure no repeat eid's
+    return generate_eid
 
 def get_user_events(uid):
     """
