@@ -91,29 +91,29 @@ class CreateEvent(Resource):
             return f"{event_name} added."
 
 
-@api.route('/rooms/delete/<roomname>')
-class DeleteRoom(Resource):
+@api.route('/events/delete/<_event_id>')
+class DeleteEvent(Resource):
     """
-    This class enables deleting a chat room.
+    This class enables deleting an event
     While 'Forbidden` is a possible return value, we have not yet implemented
     a user privileges section, so it isn't used yet.
     """
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
     @api.response(HTTPStatus.FORBIDDEN,
-                  'Only the owner of a room can delete it.')
-    def post(self, roomname):
+                  'Only the owner of a event can delete it.')
+    def post(self, eid, uid):
         """
-        This method deletes a room from the room db.
+        This method deletes an event from the event db.
         """
-        ret = db.del_room(roomname)
+        ret = edata.del_event(eid, uid)
         if ret == db.NOT_FOUND:
-            raise (wz.NotFound(f"Chat room {roomname} not found."))
+            raise (wz.NotFound(f"Event {eid} not found."))
         else:
-            return f"{roomname} deleted."
+            return f"{eid} deleted."
 
 
-@api.route('/endpoints')
+@api.route('/endpoints')  # TODO: understand why this is needed
 class Endpoints(Resource):
     """
     This class will serve as live, fetchable documentation of what endpoints
