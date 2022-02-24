@@ -4,10 +4,10 @@ prod: all_tests github
 
 github: FORCE
 	- git commit -a
-	git push origin master
+	git push origin overhauled
 
 dev_env: FORCE
-	- ./setup.sh DEMO_HOME
+	- ./setup.sh PEEK_HOME
 	pip install -r $(REQ_DIR)/requirements-dev.txt
 
 all_tests: FORCE

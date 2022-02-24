@@ -85,7 +85,7 @@ class GetEvent(Resource):
         Returns an event given an event ID.
         """
         event = edata.get_event(eid)
-        if not event_exists(eid):
+        if not edata.event_exists(eid):
             raise (wz.NotFound("Event db not found."))
         else:
             return event
@@ -99,11 +99,13 @@ class CreateEvent(Resource):
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
     @api.response(HTTPStatus.NOT_ACCEPTABLE, 'A duplicate key')
-    def post(self, uid, event_name, start_time, end_time, location = "", description = ""):
+    def post(self, uid, event_name, start_time,
+             end_time, location="", description=""):
         """
         This method adds an event to the event db.
         """
-        ret = edata.create_event(uid, event_name, start_time, end_time, location, description)
+        ret = edata.create_event(uid, event_name,
+                                 start_time, end_time, location, description)
         if ret == udata.NOT_FOUND:
             raise (wz.NotFound("Event db not found."))
         else:
@@ -166,13 +168,13 @@ class ListAllUsers(Resource):
 
 
 @api.route('/users/get/<_user_id>')
-class GetUser(Reasource):
+class GetUser(Resource):
     """
     This endpoint returns all information related to a user id.
     """
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
-    def get(self):
+    def get(self, uid):
         """
         Returns all information related to a user id.
         """
@@ -219,6 +221,6 @@ class DeleteUser(Resource):
         """
         ret = udata.del_user(uid)
         if ret == udata.NOT_FOUND:
-            raise (wz.NotFound(f"User {username} not found."))
+            raise (wz.NotFound(f"User {uid} not found."))
         else:
-            return f"{username} deleted."
+            return f"{uid} deleted."

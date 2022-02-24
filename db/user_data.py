@@ -13,6 +13,7 @@ Sample of User Architecture for Refrence:
 import os
 
 import db.db_connect as dbc
+import db.event_data.py as edata
 
 import random
 import string
@@ -41,12 +42,14 @@ def get_all_users():  # Note: name change
     # TODO: double-check
     return dict(dbc.fetch_all(GET_USERS))
 
+
 def get_user(uid):
     """
     A function to get all a user's info given its user id
     """
     curr_users = get_all_users()
     return curr_users[uid]
+
 
 def find_user(keyword):
     """
@@ -59,17 +62,21 @@ def find_user(keyword):
             user_list[uid] = user_info
     return user_list
 
+
 def generate_uid():
     """
     A function that generates a random _user_id key
+    https://stackoverflow.com/questions/2257441/
+    random-string-generation-with-upper-case-letters-and-digits/2257449
     """
     # TODO: replace with more reliable method
     curr_users = get_all_users()
-    # https://stackoverflow.com/questions/2257441/random-string-generation-with-upper-case-letters-and-digits/2257449
-    new_uid = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
+    new_uid = ''.join(random.choices(
+        string.ascii_uppercase + string.digits, k=10))
     if new_uid in curr_users.keys():
         return generate_uid()  # recursively make sure no repeat uid's
     return new_uid
+
 
 def add_user(username, password):
     """
@@ -81,6 +88,7 @@ def add_user(username, password):
     dbc.insert_doc(GET_USERS, new_user)
     return OK
 
+
 def user_exists(uid):
     """
     A function that checks if a user exists
@@ -90,11 +98,12 @@ def user_exists(uid):
         return OK
     return NOT_FOUND
 
+
 def del_user(uid):
     """ deletes a user and all related events """
     # curr_users = get_all_users()
     if user_exists(uid) is NOT_FOUND:
         return NOT_FOUND
     dbc.del_one(GET_USERS, filters={USERS: uid})
-    del_event_by_user(uid)
+    edata.del_event_by_user(uid)
     return OK

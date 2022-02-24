@@ -20,7 +20,7 @@ import db.db_connect as dbc
 import random
 import string
 
-from connect_data import *
+import db.connect_data.py as cdata
 from user_data import OK, NOT_FOUND, DUPLICATE
 
 DEMO_HOME = os.environ["DEMO_HOME"]
@@ -28,7 +28,7 @@ GET_EVENTS = "events"
 EVENTS = "_event_id"
 ENAME = "eventname"
 STIME = "start_time"
-ETIME =  "end_time"
+ETIME = "end_time"
 LOC = "location"
 DESC = "description"
 
@@ -37,11 +37,13 @@ if client is None:
     print("Failed to connect to MongoDB.")
     exit(1)
 
+
 def get_all_events():
     """
     A function to return a hashmap of all events.
     """
     return dbc.fetch_all(GET_EVENTS)
+
 
 def generate_eid():
     """
@@ -49,11 +51,12 @@ def generate_eid():
     """
     # TODO: replace with more reliable method
     curr_events = get_all_events()
-    # https://stackoverflow.com/questions/2257441/random-string-generation-with-upper-case-letters-and-digits/2257449
-    new_eid = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
+    new_eid = ''.join(random.choices(
+        string.ascii_uppercase + string.digits, k=10))
     if new_eid in curr_events.keys():
         return generate_eid()  # recursively make sure no repeat eid's
     return generate_eid
+
 
 def get_user_events(uid):
     """
@@ -62,10 +65,11 @@ def get_user_events(uid):
     curr_events = get_all_events()
     connected_events = {}
     for eid, event_info in curr_events.items():
-        if is_connected(eid, uid):  # connection_data.py
+        if cdata.is_connected(eid, uid):  # connection_data.py
             connected_events[eid] = uid
     # if len(connected_events) == 0: return NOT_FOUND
     return connected_events
+
 
 def find_event(uid, keyword):
     """
@@ -78,6 +82,7 @@ def find_event(uid, keyword):
             event_list[eid] = event_info
     return event_list
 
+
 def get_event(eid):
     """
     A function that returns all event information for a given event (eid)
@@ -85,7 +90,9 @@ def get_event(eid):
     curr_events = get_all_events()
     return curr_events[eid]
 
-def create_event(uid, event_name, start_time, end_time, location = "", description = ""):
+
+def create_event(uid, event_name, start_time, end_time,
+                 location="", description=""):
     """
     A function that creates an event
     """
@@ -93,8 +100,9 @@ def create_event(uid, event_name, start_time, end_time, location = "", descripti
                   LOC: location, DESC: description}
     new_eid = generate_eid()
     dbc.insert_doc(EVENTS, {new_eid: event_info})
-    create_connection(new_eid, uid)  # connect new event to current user
+    cdata.create_connection(new_eid, uid)  # connect new event to current user
     return OK
+
 
 def event_exists(eid):
     """
@@ -105,12 +113,13 @@ def event_exists(eid):
         return OK
     return NOT_FOUND
 
+
 def del_event(eid, uid):
     """
     A function that deletes an event (and relating connection)
     """
     if event_exists(eid) is NOT_FOUND:
         return NOT_FOUND  # check for event
-    assert is_connected(eid, uid) is OK  # check user connected to event
+    assert cdata.is_connected(eid, uid) is OK  # check user connected to event
     dbc.del_one(GET_EVENTS, filters={EVENTS: eid})
-    return del_connection(eid, uid)
+    return cdata.del_connection(eid, uid)
