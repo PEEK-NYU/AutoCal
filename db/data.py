@@ -22,6 +22,7 @@ OK = 0
 NOT_FOUND = 1
 DUPLICATE = 2
 
+# TODO: delete when db runs without
 
 client = dbc.get_client()
 if client is None:

@@ -7,7 +7,13 @@ from unittest import TestCase, skip
 
 import db.data as db
 
-FAKE_USER = "Fake user"
+import db.user_data as udata
+import db.event_data as edata
+import db.connect_data as cdata
+
+FAKE_USER = "fake uid"
+FAKE_USERNAME = "fake name"
+FAKE_PW = "fake password"
 
 
 class DBTestCase(TestCase):
@@ -21,19 +27,20 @@ class DBTestCase(TestCase):
         """
         Can we write the user db?
         """
-        fake_data = {FAKE_USER: {}}
+        fake_data = {FAKE_USER: {udata.UNAME: FAKE_USERNAME,
+                                 udata.PW: FAKE_PW}}
         return True
 
     def test_get_users(self):
         """
         Can we fetch user db?
         """
-        users = db.get_users()
-        self.assertIsInstance(users, list)
+        users = udata.get_all_users()
+        self.assertIsInstance(users, dict)
 
-    def test_get_rooms(self):
+    def test_get_eventss(self):
         """
-        Can we fetch user db?
+        Can we fetch event db?
         """
-        rooms = db.get_rooms()
-        self.assertIsInstance(rooms, list)
+        rooms = edata.get_all_events()
+        self.assertIsInstance(rooms, dict)

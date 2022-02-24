@@ -9,6 +9,10 @@ import random
 import API.endpoints as ep
 import db.data as db
 
+import db.user_data as udata
+import db.event_data as edata
+import db.connect_data as cdata
+
 HUGE_NUM = 10000000000000  # any big number will do!
 
 
@@ -30,7 +34,6 @@ class EndpointTestCase(TestCase):
         self.assertIsInstance(ret, dict)
         self.assertIn(ep.HELLO, ret)
 
-    @skip("In the middle of making this work.")
     def test_create_user(self):
         """
         See if we can successfully create a new user.
@@ -38,13 +41,15 @@ class EndpointTestCase(TestCase):
         """
         cu = ep.CreateUser(Resource)
         new_user = new_entity_name("user")
-        ret = cu.post(new_user)
-        users = db.get_users()
+        new_pw = new_entity_name("password")
+        ret = cu.post(new_user, new_pw)
+        users = udata.get_all_users()
         self.assertIn(new_user, users)
 
-    def test_create_room(self):
+    @skip("In the middle of making this work.")
+    def test_create_event(self):
         """
-        See if we can successfully create a new room.
+        See if we can successfully create a new event.
         Post-condition: room is in DB.
         """
         cr = ep.CreateRoom(Resource)
@@ -54,11 +59,3 @@ class EndpointTestCase(TestCase):
         rooms = db.get_rooms_as_dict()
         print(f'{rooms=}')
         self.assertIn(new_room, rooms)
-
-    def test_list_rooms1(self):
-        """
-        Post-condition 1: return is a list.
-        """
-        lr = ep.ListRooms(Resource)
-        ret = lr.get()
-        self.assertIsInstance(ret, list)
