@@ -4,6 +4,7 @@ import {useState} from 'react'; //for setting values
 import {useEffect} from 'react'; //for fetching data?
 
 import Room from './Room'; //for React Component
+import axios from 'react';
 
 
 
@@ -39,37 +40,9 @@ export default function App(){
 //==========================================================
 
 
-//Part 2 related
-  const [rooms, setRooms] = useState(undefined);
-  const [error, setError] = useState('');
-  const [showRooms, setShowRooms] = useState(true);
-
-  //npm install axios
-  //invoked when element gets rendered, like init
-  //TODO: the '' should be the url for the endpoint
-  useEffect(()=>{
-    axios.get(``)                 //a get request
-      .then((res)=>{              //only executes after receiving returned data from server
-        console.log(res); 
-        if (res.data){            //res is the object returned by server, data is a key of the res object
-          setRooms(res.data);
-        }
-      })
-      .catch((err)=>{             //error handling
-        console.log(err.toString());
-        setError(err);
-      })
-  }, [refresh]) 
-  //[] is the dependency array, MUST pass it, now the funciton only gets called when mounts or rerenders
-  //PART3 related portion: [] -> [refresh], now the function will also get called when var refresh changes 
-
-
-//==========================================================
-
-
 //Part 3 related
   //a function that returns an html component and does nothing else
-  const Title = ()_=> (
+  const Title = () => (
     <h1> hello </h1>
   )
 
@@ -91,6 +64,32 @@ export default function App(){
 //==========================================================
 
 
+
+//Part 2 related
+  const [rooms, setRooms] = useState(undefined);
+  const [error, setError] = useState('');
+  const [showRooms, setShowRooms] = useState(true);
+
+  //npm install axios
+  //invoked when element gets rendered, like init
+  //the '' should be the url for the endpoint
+  useEffect(()=>{
+    axios.get(``)                 //a get request
+      .then((res)=>{              //only executes after receiving returned data from server
+        console.log(res); 
+        if (res.data){            //res is the object returned by server, data is a key of the res object
+          setRooms(res.data);
+        }
+      })
+      .catch((err)=>{             //error handling
+        console.log(err.toString());
+        setError(err);
+      })
+  }, [refresh]) 
+  //[] is the dependency array, MUST pass it, now the funciton only gets called when mounts or rerenders
+  //PART3 related portion: [] -> [refresh], now the function will also get called when var refresh changes 
+
+//==========================================================
   return (
     <div>
     {/*===============================================================================*/}
@@ -127,17 +126,18 @@ export default function App(){
       </div>
 
     {/*.map iterates through rooms, rooms[index]=room*/}
+    {/*key = ... are javascript composing strings*/}
       <div>
         {rooms && rooms.map((room, index) => (
           <Room
-            key = {`${room.roomName}-${index}`} {/*javascript composing strings*/}
+            key = {`${room.roomName}-${index}`} 
             roomName = {room.roomName}
             numUsers = {room.num_users}
           />
         ))}
 
 {/*===============================================================================*/}
-    {/*Part 3 related :: TODO add more buttons that invoke certain fields */}
+    {/*Part 3 related*/}
         <input 
           value={newRoomName}
           onChange={(event)=>setNewRoomName(event.target.value)}
