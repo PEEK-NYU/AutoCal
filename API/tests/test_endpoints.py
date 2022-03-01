@@ -44,18 +44,22 @@ class EndpointTestCase(TestCase):
         new_pw = new_entity_name("password")
         ret = cu.post(new_user, new_pw)
         users = udata.get_all_users()
-        self.assertIn(new_user, users)
+        self.assertIn(ret, users.keys())
+        return ret  # for using uid in other testing context
 
-    @skip("In the middle of making this work.")
+    # @skip("In the middle of making this work.")
     def test_create_event(self):
         """
         See if we can successfully create a new event.
         Post-condition: room is in DB.
         """
-        cr = ep.CreateRoom(Resource)
-        new_room = new_entity_name("room")
-        ret = cr.post(new_room)
+        uid  = test_create_user()
+        cr = ep.CreateEvent(Resource)
+        event_name = new_entity_name("event")
+        start_time = new_entity_name("start")
+        end_time = new_entity_name("end")
+        ret = cr.post(uid, event_name, start_time, end_time)
         print(f'post {ret=}')
-        rooms = db.get_rooms_as_dict()
-        print(f'{rooms=}')
-        self.assertIn(new_room, rooms)
+        events = db.get_all_events()
+        print(f'{events=}')
+        self.assertIn(ret, events.keys())

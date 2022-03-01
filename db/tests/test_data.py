@@ -37,7 +37,7 @@ class DBTestCase(TestCase):
         users = udata.get_all_users()
         self.assertIsInstance(users, dict)
 
-    def test_get_eventss(self):
+    def test_get_events(self):
         """
         Can we fetch event db?
         """
