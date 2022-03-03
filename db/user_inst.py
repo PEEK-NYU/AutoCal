@@ -3,6 +3,7 @@ test file to simulate how a user's instance will interact with the system...
 """
 import user_data as udata
 
+
 def login_attempt():
     username = "example_uname"
     password = "example_pw"
@@ -10,7 +11,7 @@ def login_attempt():
     return username, password
 
 
-def session_runtime(): # should return state
+def session_runtime():  # should return state
     # init
     session_in_progress = False
     curr_user = None
