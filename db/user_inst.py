@@ -32,6 +32,7 @@ def session_runtime():  # should return state
                 curr_user = ret
         elif query == "update":
             print(curr_user)
+            assert udata.user_exists(curr_user) != udata.NOT_FOUND
             return curr_user
         elif query == "quit":
             session_in_progress = False
