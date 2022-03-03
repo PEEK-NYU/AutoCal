@@ -88,6 +88,7 @@ def add_user(username, password):
     dbc.insert_doc(GET_USERS, new_user)
     return OK
 
+
 def log_in(username, password):
     """
     Returns uid given a user's username and password

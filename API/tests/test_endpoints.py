@@ -1,8 +1,8 @@
 """
-This file holds the tests for endpoints.py.
+This file holds the tests for endpoints.py
 """
 
-from unittest import TestCase, skip 
+from unittest import TestCase, skip
 from flask_restx import Resource, Api
 import random
 
@@ -53,7 +53,7 @@ class EndpointTestCase(TestCase):
         See if we can successfully create a new event.
         Post-condition: room is in DB.
         """
-        uid  = test_create_user()
+        uid = test_create_user()
         cr = ep.CreateEvent(Resource)
         event_name = new_entity_name("event")
         start_time = new_entity_name("start")

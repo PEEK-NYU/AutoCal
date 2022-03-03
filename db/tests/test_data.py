@@ -1,5 +1,5 @@
 """
-This file holds the tests for db.py.
+This file holds the tests for db
 """
 
 from unittest import TestCase, skip

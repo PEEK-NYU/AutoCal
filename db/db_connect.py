@@ -1,6 +1,7 @@
 """
 This file contains some common MongoDB code.
 """
+
 import os
 import json
 import pymongo as pm
