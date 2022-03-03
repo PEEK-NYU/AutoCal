@@ -16,7 +16,7 @@ from event_data import EVENTS
 from user_data import USERS, OK, NOT_FOUND, DUPLICATE
 
 DEMO_HOME = os.environ["PEEK_HOME"]
-GET_CONNECTS = "events"
+GET_CONNECTS = "connections"
 
 client = dbc.get_client()
 if client is None:
@@ -28,7 +28,7 @@ def get_all_connections():
     """
     A function to return a hashmap of all user:event connections
     """
-    return dbc.fetch_all(GET_CONNECTS)
+    return dbc.fetch_all_as_dict(GET_CONNECTS, EVENTS)
 
 
 def is_connected(eid, uid):

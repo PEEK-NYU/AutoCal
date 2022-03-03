@@ -42,7 +42,7 @@ def get_all_events():
     """
     A function to return a hashmap of all events.
     """
-    return dbc.fetch_all(GET_EVENTS)
+    return dbc.fetch_all_as_dict(GET_EVENTS, EVENTS)
 
 
 def generate_eid():

@@ -40,7 +40,7 @@ def get_all_users():  # Note: name change
     A function to return a hashmap of all users.
     """
     # TODO: double-check
-    return dict(dbc.fetch_all(GET_USERS))
+    return dbc.fetch_all_as_dict(GET_USERS, USERS)
 
 
 def get_user(uid):
