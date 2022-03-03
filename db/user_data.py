@@ -88,6 +88,16 @@ def add_user(username, password):
     dbc.insert_doc(GET_USERS, new_user)
     return OK
 
+def log_in(username, password):
+    """
+    Returns uid given a user's username and password
+    """
+    curr_users = get_all_users()
+    for uid, info in curr_users.items():
+        if info[UNAME] == username and info[PW] == password:
+            return uid
+    return NOT_FOUND
+
 
 def user_exists(uid):
     """
