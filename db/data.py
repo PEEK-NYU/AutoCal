@@ -96,7 +96,7 @@ def get_users():
     """
     A function to return a list of all users.
     """
-    return dbc.fetch_all(USERS, USER_NM)
+    return dbc.fetch_all(USER_DATA, USER_NM)
 
 
 def add_user(username):
@@ -108,7 +108,7 @@ def add_user(username):
     if user_exists(username):
         return DUPLICATE
     else:
-        dbc.insert_doc(USERS, {USER_NM: username})
+        dbc.insert_doc(USER_DATA, {USER_NM: username})
         return OK
 
 
@@ -119,5 +119,5 @@ def del_user(username):
     if not user_exists(username):
         return NOT_FOUND
     else:
-        dbc.del_one(USERS, filters={USER_NM: username})
+        dbc.del_one(USER_DATA, filters={USER_NM: username})
         return OK
