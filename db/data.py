@@ -16,9 +16,9 @@ USER_DATA = "user_data" # Currently the only Collection in AutoCalDB (Autocal's 
 
 # field names in our DB:
 USER_ID = "_id" #AutoCalDB field | Unique user data ID, not sure if we need this here yet - beth
-USER_NM = "userName" #AutoCalDB field | string
+USER_NM = "username" #AutoCalDB field | string
 USER_PW = "password" #AutoCalDB field | string
-USER_NN = "nickname" #AutoCalDB field | string
+USER_EM = "email" #AutoCalDB field | string
 USER_CL = "calendar" #AutoCalDB field | json
 ROOM_NM = "roomName" # will delete soon
 NUM_USERS = "num_users" # will delete soon
