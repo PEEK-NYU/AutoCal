@@ -10,15 +10,16 @@ import bson.json_util as bsutil
 
 
 # all of these will eventually be put in the env:
-user_nm = "peekUser"
+user_nm = "AutoCal1"
 cloud_svc = "serverlessinstance0.mvrqy.mongodb.net"
 passwd = os.environ.get("MONGO_PASSWD", '')
 cloud_mdb = "mongodb+srv"
 db_params = "retryWrites=true&w=majority"
 
-db_nm = 'peekDB'
+db_nm = 'AutoCalDB'
 if int(os.environ.get("TEST_MODE", '')) == 1:
-    db_nm = "test_peekDB"
+    db_nm = "AutoCalDB"
+collect_nm = "user_data" #this is the collection under the AutoCalDB database
 
 REMOTE = "0"
 LOCAL = "1"

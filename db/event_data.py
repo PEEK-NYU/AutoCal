@@ -11,6 +11,17 @@ Sample of Event Architecture for Refrence:
     "description": "do design project homework..."
   }
 }
+
+Actual Autocal Architecture example:
+{ 
+    "_id" : ObjectId("6223ba54024eb2d8c26fc0cc"), 
+    "username" : "Elizabeth", 
+    "password" : "superSecret00", 
+    "nickname" : "Beth", 
+    "calendar" : {
+
+    }
+}
 """
 
 import os

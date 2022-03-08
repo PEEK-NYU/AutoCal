@@ -12,11 +12,16 @@ import db.db_connect as dbc
 
 ROOMS = "rooms"
 USERS = "users"
+USER_DATA = "user_data" # Currently the only Collection in AutoCalDB (Autocal's database)
 
 # field names in our DB:
-USER_NM = "userName"
-ROOM_NM = "roomName"
-NUM_USERS = "num_users"
+USER_ID = "_id" #AutoCalDB field | Unique user data ID, not sure if we need this here yet - beth
+USER_NM = "username" #AutoCalDB field | string
+USER_PW = "password" #AutoCalDB field | string
+USER_EM = "email" #AutoCalDB field | string
+USER_CL = "calendar" #AutoCalDB field | json
+ROOM_NM = "roomName" # will delete soon
+NUM_USERS = "num_users" # will delete soon
 
 OK = 0
 NOT_FOUND = 1
@@ -91,7 +96,7 @@ def get_users():
     """
     A function to return a list of all users.
     """
-    return dbc.fetch_all(USERS, USER_NM)
+    return dbc.fetch_all(USER_DATA, USER_NM)
 
 
 def add_user(username):
@@ -103,7 +108,7 @@ def add_user(username):
     if user_exists(username):
         return DUPLICATE
     else:
-        dbc.insert_doc(USERS, {USER_NM: username})
+        dbc.insert_doc(USER_DATA, {USER_NM: username})
         return OK
 
 
@@ -114,5 +119,5 @@ def del_user(username):
     if not user_exists(username):
         return NOT_FOUND
     else:
-        dbc.del_one(USERS, filters={USER_NM: username})
+        dbc.del_one(USER_DATA, filters={USER_NM: username})
         return OK
