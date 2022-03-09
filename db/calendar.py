@@ -19,24 +19,22 @@ from user_data import USERS, OK, NOT_FOUND, DUPLICATE
 def get_ics(file):
     ...
 
-def ics_parse(self):
-    # https://programtalk.com/python-examples/icalendar.Event/
-    event = icalendar.Event()
-    startExpected = datetime(2021, 4, 4, 0, 0, 0, tzinfo=UTC)
-    endExpected = datetime(2021, 4, 5, 0, 0, 0, tzinfo=UTC)
-    event['summary'] = 'Test calendar'
-    event['uid'] = '42'  # Naming?
-    event.set('dtstart', date(2015, 4, 4))
-    event.set('dtend', date(2015, 4, 5))
 
-    self._icalendar.add_component(event)
+def ics_parse(event):
+    ...
 
-    self._calendar = eventcalendar.fromICalendar(self._icalendar)
-
-    self.assertOneEventExpected(startExpected, endExpected)
 
 def show_ics(info):
     ...
 
+
 def main():  # testing
     print(".ics testing...")
+
+    test_event = icalendar.Event()
+    startExpected = datetime(2021, 4, 4, 0, 0, 0, tzinfo=UTC)
+    endExpected = datetime(2021, 4, 5, 0, 0, 0, tzinfo=UTC)
+    test_event['summary'] = 'Test calendar'
+    test_event['uid'] = '42'  # Naming?
+    test_event.set('dtstart', date(2015, 4, 4))
+    test_event.set('dtend', date(2015, 4, 5))
