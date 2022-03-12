@@ -6,6 +6,9 @@ import axios from 'react';
 
 import Button from './Components/Button';
 import Login from './Components/Login';
+import DateInput from './Components/DateInput';
+import ColorPicker from './Components/ColorPicker';
+import Inputbox from './Components/Inputbox';
 
 export default function App() {
 
@@ -13,8 +16,11 @@ export default function App() {
   return (
 
     <div>
-      <Button text={"Upload"}/>
       <Login/>
+      <Inputbox label={"An Inputbox"} placeholder={"default"}/>
+      <ColorPicker/>
+      <DateInput label={"Start:"}/>
+      <Button text={"Upload"}/>
     </div>
   )
 
