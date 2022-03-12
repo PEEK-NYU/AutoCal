@@ -35,26 +35,19 @@ if client is None:
     exit(1)
 
 
-def get_rooms():
+def get_emails():
     """
-    A function to return a list of all rooms.
+    A function to return a list of all emails.
     """
-    return dbc.fetch_all(ROOMS, ROOM_NM)
+    return dbc.fetch_all(USER_DATA, USER_EM)
 
 
-def get_rooms_as_dict():
-    """
-    A function to return a dictionary of all rooms.
-    """
-    return dbc.fetch_all_as_dict(ROOMS, ROOM_NM)
-
-
-def room_exists(roomname):
+def email_exists(email):
     """
     See if a room with roomname is in the db.
     Returns True of False.
     """
-    rec = dbc.fetch_one(ROOMS, filters={ROOM_NM: roomname})
+    rec = dbc.fetch_one(USER_DATA, filters={USER_EM: email})
     print(f"{rec=}")
     return rec is not None
 
@@ -81,13 +74,20 @@ def add_room(roomname):
         dbc.insert_doc(ROOMS, {ROOM_NM: roomname, NUM_USERS: 0})
         return OK
 
+    
+def get_rooms_as_dict():
+    """
+    A function to return a dictionary of all rooms.
+    """
+    return dbc.fetch_all_as_dict(ROOMS, ROOM_NM)
+
 
 def user_exists(username):
     """
     See if a user with username is in the db.
     Returns True of False.
     """
-    rec = dbc.fetch_one(USERS, filters={USER_NM: username})
+    rec = dbc.fetch_one(USER_DATA, filters={USER_NM: username})
     print(f"{rec=}")
     return rec is not None
 
