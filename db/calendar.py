@@ -26,11 +26,24 @@ def ics_parse(event):
 
 def show_ics(info):
     ...
+    
+
+def cal_display(cal):
+    return cal.to_ical().replace('\r\n', '\n').strip()
 
 
 def main():  # testing
     print(".ics testing...")
+    # terminal view ideas ---> $ icalendar view myfile.ics
 
+    test_cal = icalendar.Calendar()
+    test_cal['summary'] = "preliminary testing for icalendar functionality..."
+    test_cal['dtstart'] = '20220313T000000'
+    for k, v in tet_cal.items():  # test output
+        print("Test_Cal Info:", k, v)
+    print("Test_Cal tostring:\n", test_cal.to_ical)
+    cal_dispay(test_cal)
+    
     test_event = icalendar.Event()
     startExpected = datetime(2021, 4, 4, 0, 0, 0, tzinfo=UTC)
     endExpected = datetime(2021, 4, 5, 0, 0, 0, tzinfo=UTC)
