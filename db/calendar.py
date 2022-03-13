@@ -41,8 +41,8 @@ def main():  # testing
     test_cal['dtstart'] = '20220313T000000'
     for k, v in tet_cal.items():  # test output
         print("Test_Cal Info:", k, v)
-    print("Test_Cal tostring:\n", test_cal.to_ical)
-    cal_dispay(test_cal)
+    print("Test_Cal tostring:\n", test_cal.to_ical())
+    print("Fancy Cal Display:", cal_dispay(test_cal))
     
     test_event = icalendar.Event()
     startExpected = datetime(2021, 4, 4, 0, 0, 0, tzinfo=UTC)
@@ -51,3 +51,6 @@ def main():  # testing
     test_event['uid'] = '42'  # Naming?
     test_event.set('dtstart', date(2015, 4, 4))
     test_event.set('dtend', date(2015, 4, 5))
+    
+    test_cal.add_event(test_event)
+    print("Cal Display:", cal_display(test_cal))
