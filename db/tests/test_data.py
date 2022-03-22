@@ -22,7 +22,7 @@ class DBTestCase(TestCase):
         new_eid = ""
 
         # test user
-        test_get_users()
+        self.test_get_users()
 
         new_uid = self.test_create_user()
         assert new_uid != udata.NOT_FOUND
@@ -32,7 +32,7 @@ class DBTestCase(TestCase):
         assert self.test_login(new_uid, FAKE_USERNAME, FAKE_PW)
 
         # test event
-        test_get_events()
+        self.test_get_events()
 
     def tearDown(self):
         """ test deletes -w- exists """
@@ -93,3 +93,4 @@ class DBTestCase(TestCase):
         """
         Can we write to the user db?
         """
+        pass
