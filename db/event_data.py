@@ -15,11 +15,10 @@ Sample of Event Architecture for Refrence:
 Actual Autocal Architecture example: (TODO; please change - changed?)
 { 
     "_id" : ObjectId("6223ba54024eb2d8c26fc0cc"), 
-    "username" : "Elizabeth", 
-    "password" : "superSecret00", 
-    "email" : "Beth", 
+    "username" : "Elizabeth",
+    "password" : "superSecret00",
+    "email" : "Beth",
     "calendar" : {
-
     }
 }
 """

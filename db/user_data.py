@@ -19,14 +19,14 @@ import random
 import string
 
 DEMO_HOME = os.environ["DEMO_HOME"]
-GET_USERS = "user_data" # Currently the only Collection in AutoCalDB (Autocal's database)
+GET_USERS = "user_data"  # Currently the only Collection in AutoCalDB (Autocal's database)
 USERS = "_user_id"
 UNAME = "username"
 PW = "password"
 
-USER_ID = "_id" #AutoCalDB field | Unique user data ID, not sure if we need this here yet - beth
-USER_EM = "email" #AutoCalDB field | string
-USER_CL = "calendar" #AutoCalDB field | json
+USER_ID = "_id"  # AutoCalDB field | Unique user data ID, not sure if we need this here yet - beth
+USER_EM = "email"  # AutoCalDB field | string
+USER_CL = "calendar"  # AutoCalDB field | json
 
 # def of return vars: global ref in other _data.py files
 OK = 0
@@ -123,6 +123,7 @@ def del_user(uid):
     dbc.del_one(GET_USERS, filters={USERS: uid})
     edata.del_event_by_user(uid)
     return OK
+
 
 def get_emails():
     """
