@@ -86,6 +86,7 @@ def add_user(username, password):
     """
     Add a user to the database using username & password
     """
+    # TODO: add functionality to update a user's info/pw
     new_user = {}
     new_uid = generate_uid()
     new_user[new_uid] = {UNAME: username, PW: password}
@@ -133,7 +134,7 @@ def get_emails():
 
 def email_exists(email):
     """
-    returns if email exists
+    returns True if email exists
     """
     rec = dbc.fetch_one(GET_USERS, filters={USER_EM: email})
     print(f"{rec=}")
