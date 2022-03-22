@@ -127,14 +127,16 @@ def get_emails():
     """
     A function to return a list of all emails.
     """
-    return dbc.fetch_all(USER_DATA, USER_EM)
+    return dbc.fetch_all(GET_USERS, USER_EM)
+    # Note: USER_DATA previously refrenced
 
 
 def email_exists(email):
     """
-    See if a room with roomname is in the db.
-    Returns True of False.
+    returns if email exists
     """
-    rec = dbc.fetch_one(USER_DATA, filters={USER_EM: email})
+    rec = dbc.fetch_one(GET_USERS, filters={USER_EM: email})
     print(f"{rec=}")
-    return rec is not None
+    if rec is not None:
+        return OK
+    return NOT_FOUND
