@@ -63,6 +63,7 @@ User Table
 * _user_id (string) //unique database key
 * username (string)  
 * password (string)
+* email (string)
 
 Event Table
 * _event_id (string) // unique database key
@@ -89,6 +90,7 @@ Connection Table  // used to refrence which events are owned (viewable/editable)
 * Users can get their user info
   * User Name
   * Password
+  * Email
 * Users can get a list of all events and its subsequent event information
   * Event Name
   * Start Time
@@ -101,6 +103,7 @@ Connection Table  // used to refrence which events are owned (viewable/editable)
 * Users can change their user info
   * User Name
   * Password
+  * Email
 * Users can edit the information for a specific event
   * Event Name
   * Start Time
