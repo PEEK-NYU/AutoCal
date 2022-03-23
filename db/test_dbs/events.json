@@ -1,7 +1,7 @@
 {
   "events":
   {
-    "event_id_1": {
+    "_id": {
       "eventname": "study session 1",
       "start_time": "datetime?",
       "end_time": "datetime?",
