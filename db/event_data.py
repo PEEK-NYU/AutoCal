@@ -3,23 +3,13 @@ This file will manage interactions with the events and event data
 
 Sample of Event Architecture for Refrence:
 {
-  "event_id_1": {
+  "_id": {
     "eventname": "study session 1",
     "start_time": "datetime?",
     "end_time": "datetime?",
     "location": "home",
     "description": "do design project homework..."
   }
-}
-
-Actual Autocal Architecture example: (TODO; please change - changed?)
-{ 
-    "_id" : ObjectId("6223ba54024eb2d8c26fc0cc"), 
-    "username" : "Elizabeth",
-    "password" : "superSecret00",
-    "email" : "Beth",
-    "calendar" : {
-    }
 }
 """
 
@@ -35,7 +25,7 @@ from user_data import OK, NOT_FOUND, DUPLICATE
 
 DEMO_HOME = os.environ["DEMO_HOME"]
 GET_EVENTS = "events"
-EVENTS = "_event_id"
+EVENTS = "_id"
 ENAME = "eventname"
 STIME = "start_time"
 ETIME = "end_time"
