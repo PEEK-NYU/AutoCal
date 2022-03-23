@@ -5,7 +5,8 @@ Sample of User Architecture for Refrence:
 {
   "user_id_1": {
     "username": "Fake User",
-    "password": "123"
+    "password": "123",
+    "email": "fakemail@nyu.edu"
   }
 }
 """
@@ -20,13 +21,10 @@ import string
 
 DEMO_HOME = os.environ["DEMO_HOME"]
 GET_USERS = "user_data"  # Currently the only Collection in AutoCalDB (Autocal's database)
-USERS = "_user_id"
+USERS = "_id"
 UNAME = "username"
 PW = "password"
-
-USER_ID = "_id"  # AutoCalDB field | Unique user data ID, not sure if we need this here yet - beth
-USER_EM = "email"  # AutoCalDB field | string
-USER_CL = "calendar"  # AutoCalDB field | json
+EM = "emails"
 
 # def of return vars: global ref in other _data.py files
 OK = 0
@@ -129,7 +127,7 @@ def get_emails():
     """
     A function to return a list of all emails.
     """
-    return dbc.fetch_all(GET_USERS, USER_EM)
+    return dbc.fetch_all(GET_USERS, EM)
     # Note: USER_DATA previously refrenced
 
 
@@ -137,7 +135,7 @@ def email_exists(email):
     """
     returns True if email exists
     """
-    rec = dbc.fetch_one(GET_USERS, filters={USER_EM: email})
+    rec = dbc.fetch_one(GET_USERS, filters={EM: email})
     print(f"{rec=}")
     if rec is not None:
         return OK
