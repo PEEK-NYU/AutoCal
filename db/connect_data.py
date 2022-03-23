@@ -4,7 +4,10 @@ This file will manage interactions between user and event data,
 
 Sample of Connection Architecture for Refrence:
 {
-"event_id_1" : "user_id_1"
+  { "_id" : 
+    { "event_id_1" : "user_id_1"
+    }
+  }
 }
 """
 
