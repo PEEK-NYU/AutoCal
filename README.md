@@ -14,7 +14,7 @@
   * user can also login to access their previously stored calendar information
 * Advanced Features:
   * Automation of .ics import/export via google calendar login credentials
-  * Software has suggested time-slots and learns the user's habits based on software use
+  * Software has <a href="https://www.youtube.com/watch?v=9oAT8gmdrug">suggested</a> time-slots and learns the user's habits based on software use
   * Software categorizes events by type (study time, break time, etc.)
   * User can customize software's suggestions by event type
   * Extra Data: user profile images, complex event data (particpants), recurring events
