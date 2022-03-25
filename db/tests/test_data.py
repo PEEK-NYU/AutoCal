@@ -9,12 +9,10 @@ from unittest import TestCase, skip
 import db.user_data as udata
 import db.event_data as edata
 import db.connect_data as cdata
-import db.calendar as cal
 
 FAKE_USERNAME = "fake name"
 FAKE_PW = "fake password"
 fake_data = {udata.UNAME: FAKE_USERNAME, udata.PW: FAKE_PW}
-fake_cal = ""  # TODO: change to temp ics data
 
 
 class DBTestCase(TestCase):
@@ -35,9 +33,6 @@ class DBTestCase(TestCase):
 
         # test event
         self.test_get_events()
-
-        # test callendar
-        assert self.test_calendar(fake_cal) == udata.OK
 
     def tearDown(self):
         """ test deletes -w- exists """
@@ -99,12 +94,3 @@ class DBTestCase(TestCase):
         Can we write to the user db?
         """
         pass
-
-    def test_calendar(self, data):
-        """
-        Can we parse calendar data
-        """
-        parsed = cal.ics_parse(data)
-        if parsed == udata.NOT_FOUND:
-            return parsed
-        return udata.OK

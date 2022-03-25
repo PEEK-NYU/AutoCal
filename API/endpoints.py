@@ -37,21 +37,6 @@ class HelloWorld(Resource):
         return {test_key: test_value}
 
 
-@api.route('/endpoints')
-class Endpoints(Resource):
-    """
-    This class will serve as live, fetchable documentation of what endpoints
-    are available in the system.
-    """
-    @api.response(HTTPStatus.OK, 'Success')
-    def get(self):
-        """
-        The `get()` method will return a list of available endpoints.
-        """
-        endpoints = sorted(rule.rule for rule in api.app.url_map.iter_rules())
-        return {"Available endpoints": endpoints}
-
-
 @api.route('/admin/events/get')
 class ListAllEvents(Resource):
     """
@@ -147,6 +132,21 @@ class DeleteEvent(Resource):
             raise (wz.NotFound(f"Event {eid} not found."))
         else:
             return f"{eid} deleted."
+
+
+@api.route('/endpoints')  # TODO: understand why this is needed
+class Endpoints(Resource):
+    """
+    This class will serve as live, fetchable documentation of what endpoints
+    are available in the system.
+    """
+    @api.response(HTTPStatus.OK, 'Success')
+    def get(self):
+        """
+        The `get()` method will return a list of available endpoints.
+        """
+        endpoints = sorted(rule.rule for rule in api.app.url_map.iter_rules())
+        return {"Available endpoints": endpoints}
 
 
 @api.route('/admin/users/get')
