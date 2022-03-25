@@ -21,6 +21,9 @@ def get_ics(file):
 
 
 def ics_parse(event):
+    """
+    Function to take in ICS Data and output
+    """
     ...
 
 
