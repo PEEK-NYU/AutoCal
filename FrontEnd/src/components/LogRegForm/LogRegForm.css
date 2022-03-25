@@ -1,0 +1,10 @@
+
+/*https://contactmentor.com/login-form-react-js-code/*/
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 10px;
+}
+
