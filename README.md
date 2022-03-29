@@ -74,6 +74,7 @@ Event Table
 * description (string)
 
 Connection Table  // used to refrence which events are owned (viewable/editable) by which users
+* _connection_id (string) // unique database key
 * _event_id (string) // unique database key
 * _user_id (string) // unique database key
 
