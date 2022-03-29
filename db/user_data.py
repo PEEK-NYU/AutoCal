@@ -3,7 +3,7 @@ This file will manage interactions with the user and their data
 
 Sample of User Architecture for Refrence:
 {
-  "user_id_1": {
+  "_id": {
     "username": "Fake User",
     "password": "123",
     "email": "fakemail@nyu.edu"
