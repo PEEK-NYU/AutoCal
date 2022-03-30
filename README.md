@@ -1,8 +1,8 @@
 # AutoCal
 #### This is the main repository of our Design/Software Engineering project as part of CS-UY 4513 and CS-UY 4523.
-![](https://app.travis-ci.com/PEEK-NYU/PEEK.svg?branch=overhauled)
+![](https://app.travis-ci.com/PEEK-NYU/PEEK.svg?branch=main)
 
-![peekdemo](https://github.com/PEEK-NYU/PEEK/blob/overhauled/images/autocalendar.com.png)
+![peekdemo](https://github.com/PEEK-NYU/PEEK/blob/main/images/autocalendar.com.png)
 
 #### HEROKU:  https://peek-nyu.herokuapp.com/
 #### GITHUB ACTIONS: (tbd)
@@ -52,7 +52,7 @@
   * submit button for event info
 
 
-![peekdemoimport](https://github.com/PEEK-NYU/PEEK/blob/overhauled/images/autocalendar.com_events_import__calendar_.png)
+![peekdemoimport](https://github.com/PEEK-NYU/PEEK/blob/main/images/autocalendar.com_events_import__calendar_.png)
 
 
 ## Backend Overview:
@@ -116,7 +116,7 @@ Connection Table  // used to refrence which events are owned (viewable/editable)
 * Users can delete their account (along with account information)
 * Users can delete an event.
 
-![peekCreateDemoImport](https://github.com/PEEK-NYU/AutoCal/blob/overhauled/images/autocalendar.com_events_create__event_Update.png)
+![peekCreateDemoImport](https://github.com/PEEK-NYU/AutoCal/blob/main/images/autocalendar.com_events_create__event_Update.png)
 
 ## Design:
 > Note: Read/Write/Create/Update Endpoints for both events and users exist for administrative purposes
