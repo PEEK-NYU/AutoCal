@@ -49,6 +49,8 @@ class DBTestCase(TestCase):
         """
         users = udata.get_all_users()
         self.assertIsInstance(users, dict)
+        print("Found All Users:", users)
+        return
 
     def test_create_user(self):
         """
@@ -57,6 +59,7 @@ class DBTestCase(TestCase):
         user_create_result = udata.add_user(FAKE_USERNAME, FAKE_PW)
         if user_create_result == udata.NOT_FOUND:
             return user_create_result
+        print("User Created:", user_create_result)
         return user_create_result
 
     def test_user_exists(self, test_uid):
@@ -66,6 +69,7 @@ class DBTestCase(TestCase):
         user_exists_result = udata.user_exists(test_uid)
         if user_exists_result == udata.NOT_FOUND:
             return user_exists_result
+        print("User Found:", user_exists_result)
         return udata.OK
 
     def test_user_data(self, test_uid, data):
@@ -76,6 +80,7 @@ class DBTestCase(TestCase):
         for key, value in data.items():
             if test_data[key] != value:
                 return udata.NOT_FOUND
+        print("User Data Found:", test_data)
         return udata.OK
 
     def test_login(self, uid, user_name, pass_word):
@@ -85,6 +90,7 @@ class DBTestCase(TestCase):
         logged = udata.log_in(user_name, pass_word)
         if logged != uid:
             return udata.NOT_FOUND
+        print("User", user_name, "logged in!")
         return udata.OK
 
     def test_get_events(self):
@@ -93,6 +99,8 @@ class DBTestCase(TestCase):
         """
         events = edata.get_all_events()
         self.assertIsInstance(events, dict)
+        print("Found All Events:", events)
+        return
 
     def test_create_event(self):
         """

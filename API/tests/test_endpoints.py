@@ -7,7 +7,6 @@ from flask_restx import Resource, Api
 import random
 
 import API.endpoints as ep
-import db.data as db
 
 import db.user_data as udata
 import db.event_data as edata
@@ -32,7 +31,7 @@ class EndpointTestCase(TestCase):
         hello = ep.HelloWorld(Resource)
         ret = hello.get()
         self.assertIsInstance(ret, dict)
-        self.assertIn(ep.HELLO, ret)
+        self.assertIn(ep.test_key, ret)
 
     def test_create_user(self):
         """
@@ -53,13 +52,13 @@ class EndpointTestCase(TestCase):
         See if we can successfully create a new event.
         Post-condition: room is in DB.
         """
-        uid = test_create_user()
+        uid = self.test_create_user()
         cr = ep.CreateEvent(Resource)
         event_name = new_entity_name("event")
         start_time = new_entity_name("start")
         end_time = new_entity_name("end")
         ret = cr.post(uid, event_name, start_time, end_time)
-        print(f'post {ret=}')
-        events = db.get_all_events()
-        print(f'{events=}')
+        # print(f'post {ret=}')
+        events = edata.get_all_events()
+        # print(f'{events=}')
         self.assertIn(ret, events.keys())
