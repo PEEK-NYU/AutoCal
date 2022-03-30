@@ -143,23 +143,24 @@ Connection Table  // used to refrence which events are owned (viewable/editable)
 > Important: all items passed into REST not in the URL are in the body of the request
 
 ## To run the front end locally:
-* Clone the repository
+* Clone the repository:
 ```console
 user:~$ git clone https://github.com/PEEK-NYU/AutoCal.git
 ```
-* CD into the repo
+* CD into the repo:
 ```console
 user:~$ cd AutoCal/FrontEnd
 ```
-* Install Dependencies
+* Install Dependencies: (use brew for mac)
 ```console
-user:~$ npm install (make sure you have npm & node installed)
+user:~$ npm install
+user:~$ brew install npm
 ```
-* Run the app
+* Run the app:
 ```console
 user:~$ npm run start
 ```
-* An alternative way to run the app
+* An alternative way to run the app:
 ```console
 user:~$ ./local.sh
 ```
