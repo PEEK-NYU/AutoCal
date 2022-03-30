@@ -3,12 +3,15 @@ This file will manage interactions with the events and event data
 
 Sample of Event Architecture for Refrence:
 {
-  "_id": {
-    "eventname": "study session 1",
-    "start_time": "datetime?",
-    "end_time": "datetime?",
-    "location": "home",
-    "description": "do design project homework..."
+  "events":
+  {
+    "_id": {
+      "eventname": "study session 1",
+      "start_time": "datetime?",
+      "end_time": "datetime?",
+      "location": "home",
+      "description": "do design project homework..."
+    }
   }
 }
 """
@@ -20,7 +23,7 @@ import db.db_connect as dbc
 import random
 import string
 
-import db.connect_data.py as cdata
+import db.connect_data as cdata
 from user_data import OK, NOT_FOUND, DUPLICATE
 
 DEMO_HOME = os.environ["DEMO_HOME"]

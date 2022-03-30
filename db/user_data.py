@@ -3,10 +3,12 @@ This file will manage interactions with the user and their data
 
 Sample of User Architecture for Refrence:
 {
-  "_id": {
-    "username": "Fake User",
-    "password": "123",
-    "email": "fakemail@nyu.edu"
+  "user_data" :
+  {
+    "_id": {
+      "username": "Fake User",
+      "password": "123"
+    }
   }
 }
 """
@@ -14,7 +16,7 @@ Sample of User Architecture for Refrence:
 import os
 
 import db.db_connect as dbc
-import db.event_data.py as edata
+import db.event_data as edata
 
 import random
 import string
@@ -136,7 +138,7 @@ def email_exists(email):
     returns True if email exists
     """
     rec = dbc.fetch_one(GET_USERS, filters={EM: email})
-    print(f"{rec=}")
+    # print(f"{rec=}")
     if rec is not None:
         return OK
     return NOT_FOUND

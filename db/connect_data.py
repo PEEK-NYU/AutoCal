@@ -4,9 +4,11 @@ This file will manage interactions between user and event data,
 
 Sample of Connection Architecture for Refrence:
 {
-  { "_id" : 
-    { "_event_id" : "623b953e28c7bbc22066b8a9",
-      "_user_id" : "6223ba54024eb2d8c26fc0cc"
+  "connections":
+  { "_id":
+    {
+      "_event_id" : "623b953e28c7bbc22066b8a9",
+      "_user_id" : "6223ba54024eb2d8c26fc0ce"
     }
   }
 }
