@@ -151,10 +151,10 @@ user:~$ git clone https://github.com/PEEK-NYU/AutoCal.git
 ```console
 user:~$ cd AutoCal/FrontEnd
 ```
-* Install Dependencies: (use brew for mac)
+* Install Dependencies: (use extra brew command if on mac)
 ```console
-user:~$ npm install
 user:~$ brew install npm
+user:~$ npm install
 ```
 * Run the app:
 ```console
