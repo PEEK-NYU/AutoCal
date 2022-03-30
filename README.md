@@ -144,15 +144,26 @@ Connection Table  // used to refrence which events are owned (viewable/editable)
 
 ## To run the front end locally:
 * Clone the repository
-  * git clone https://github.com/PEEK-NYU/AutoCal.git
+```console
+user:~$ git clone https://github.com/PEEK-NYU/AutoCal.git
+```
 * CD into the repo
-  * cd AutoCal/FrontEnd
+```console
+user:~$ cd AutoCal/FrontEnd
+```
 * Install Dependencies
-  * npm install (make sure you have npm & node installed)
+```console
+user:~$ npm install (make sure you have npm & node installed)
+```
 * Run the app
-  * npm run start
+```console
+user:~$ npm run start
+```
 * An alternative way to run the app
-  * ./local.sh
+```console
+user:~$ ./local.sh
+```
+
 
 Runs the app in the development mode.
 Open http://localhost:3000 to view it in your browser.
