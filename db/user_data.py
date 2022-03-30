@@ -21,14 +21,14 @@ import db.event_data as edata
 import random
 import string
 
-DEMO_HOME = os.environ["DEMO_HOME"]
+AUTOCAL_HOME = os.environ["AUTOCAL_DIR"]
 GET_USERS = "user_data"  # Currently the only Collection in AutoCalDB (Autocal's database)
 USERS = "_id"
 UNAME = "username"
 PW = "password"
 EM = "emails"
 
-# def of return vars: global ref in other _data.py files
+# ref in other _data.py files
 OK = 0
 NOT_FOUND = 1
 DUPLICATE = 2

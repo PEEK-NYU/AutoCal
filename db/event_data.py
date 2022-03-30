@@ -24,9 +24,13 @@ import random
 import string
 
 import db.connect_data as cdata
-from user_data import OK, NOT_FOUND, DUPLICATE
 
-DEMO_HOME = os.environ["DEMO_HOME"]
+# ref in other _data.py files
+OK = 0
+NOT_FOUND = 1
+DUPLICATE = 2
+
+AUTOCAL_HOME = os.environ["AUTOCAL_DIR"]
 GET_EVENTS = "events"
 EVENTS = "_id"
 ENAME = "eventname"

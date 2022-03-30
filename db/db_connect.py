@@ -17,9 +17,9 @@ cloud_mdb = "mongodb+srv"
 db_params = "retryWrites=true&w=majority"
 
 db_nm = 'AutoCalDB'
-if int(os.environ.get("TEST_MODE", '')) == 1:
+if os.environ.get("TEST_MODE", ''):
     db_nm = "AutoCalDB"
-collect_nm = "user_data" #this is the collection under the AutoCalDB database
+collect_nm = "user_data"  # this is the collection under the AutoCalDB database
 
 REMOTE = "0"
 LOCAL = "1"
@@ -70,13 +70,13 @@ def fetch_all(collect_nm, key_nm):
 
 def fetch_all_as_dict(collect_nm, key_nm):
     all_list = fetch_all(collect_nm, key_nm)
-    print(f'{all_list=}')
+    # print(f'{all_list=}')
     all_dict = {}
     for doc in all_list:
-        print(f'{doc=}')
+        # print(f'{doc=}')
         all_dict[doc[key_nm]] = doc[key_nm]
     return all_dict
 
 
 def insert_doc(collect_nm, doc):
-    client[db_nm][collect_nm].insert_one(doc)
+    return client[db_nm][collect_nm].insert_one(doc)

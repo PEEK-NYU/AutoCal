@@ -18,11 +18,14 @@ import os
 
 import db.db_connect as dbc
 
-from event_data import EVENTS
-from user_data import USERS, OK, NOT_FOUND, DUPLICATE
+# ref in other _data.py files
+OK = 0
+NOT_FOUND = 1
+DUPLICATE = 2
 
-DEMO_HOME = os.environ["PEEK_HOME"]
+AUTOCAL_HOME = os.environ["AUTOCAL_DIR"]
 GET_CONNECTS = "connections"
+CONNECTIONS = "_id"
 
 client = dbc.get_client()
 if client is None:
@@ -34,7 +37,7 @@ def get_all_connections():
     """
     A function to return a hashmap of all user:event connections
     """
-    return dbc.fetch_all_as_dict(GET_CONNECTS, EVENTS)
+    return dbc.fetch_all_as_dict(GET_CONNECTS, CONNECTIONS)
 
 
 def is_connected(eid, uid):
