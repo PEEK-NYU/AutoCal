@@ -36,6 +36,7 @@ def cal_display(cal):
 
 
 def main():  # testing
+    # TODO: finish testing
     print(".ics testing...")
     # terminal view ideas ---> $ icalendar view myfile.ics
 

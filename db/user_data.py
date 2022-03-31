@@ -82,14 +82,14 @@ def generate_uid():
     return new_uid
 
 
-def add_user(username, password):
+def add_user(username, password, email=""):
     """
     Add a user to the database using username & password
     """
     # TODO: add functionality to update a user's info/pw
     new_user = {}
     new_uid = generate_uid()
-    new_user[new_uid] = {UNAME: username, PW: password}
+    new_user[new_uid] = {UNAME: username, PW: password, EM: email}
     dbc.insert_doc(GET_USERS, new_user)
     return OK
 

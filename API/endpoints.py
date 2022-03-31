@@ -9,8 +9,6 @@ from flask_cors import CORS
 from flask_restx import Resource, Api
 import werkzeug.exceptions as wz
 
-# import db.data as db
-
 import db.user_data as udata
 import db.event_data as edata
 import db.connect_data as cdata
