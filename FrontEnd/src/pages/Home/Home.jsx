@@ -10,6 +10,7 @@ export default function Home(){
       <NavButton text={'View All Rooms'} subpath={'/rooms'}/>
       <NavButton text={'View All Users'} subpath={'/users'}/>
       <NavButton text={'Login/Register'} subpath={'/logreg'}/>
+      <NavButton text={'Event Edit'} subpath={'/events_edit'}/>
     </div>
   );
 };

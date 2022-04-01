@@ -3,7 +3,7 @@ import './LogRegForm.css';
 
 export default function LogRegForm(){
   return (
-    <div className="form">
+    <div className="logregform">
       <form>
         <div className="input-container">
           <label>Username </label>

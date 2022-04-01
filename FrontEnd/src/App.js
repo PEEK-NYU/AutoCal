@@ -5,6 +5,7 @@ import Home from './pages/Home/Home';
 import Rooms from './pages/Rooms/Rooms';
 import Users from './pages/Users/Users';
 import LogReg from './pages/LogReg/LogReg';
+import Event from './pages/Event/Event';
 
 import {backendurl} from './config';
 
@@ -17,18 +18,27 @@ function App() {
       <div className="content">
         <Router>
           <Switch>
+
             <Route exact={true} path={'/'}>
               <Home />
             </Route>
+
             <Route exact={true} path={'/rooms'}>
               <Rooms />
             </Route>
+
             <Route exact={true} path={'/users'}>
               <Users />
             </Route>
+
             <Route exact={true} path={'/logreg'}>
               <LogReg />
             </Route>
+
+            <Route exact={true} path={'/events_edit'}>
+              <Event />
+            </Route>
+
           </Switch>
         </Router>
       </div>
