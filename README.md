@@ -6,6 +6,7 @@
 
 #### HEROKU:  https://peek-nyu.herokuapp.com/
 #### GITHUB ACTIONS: (tbd)
+#### NETLIFY: https://autocal-peek.netlify.app/
 
 
 ## Project Idea:
