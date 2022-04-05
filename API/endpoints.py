@@ -112,13 +112,15 @@ class CreateEvent(Resource):
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
     @api.response(HTTPStatus.NOT_ACCEPTABLE, 'A duplicate key')
-    def post(self, uid, event_name, start_time,
-             end_time, location="", description=""):
+    def post(self, uid, event_name, event_time, location="", description=""):
         """
         This method adds an event to the event db.
+        TODO: figure out a way for event_time
+              to work with 2 vars instead of a list
         """
         ret = edata.create_event(uid, event_name,
-                                 start_time, end_time, location, description)
+                                 event_time[0], event_time[1],
+                                 location, description)
         if ret == udata.NOT_FOUND:
             raise (wz.NotFound("Event db not found."))
         else:
