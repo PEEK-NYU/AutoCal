@@ -14,19 +14,24 @@ HUGE_NUM = 10000000000000  # (any big number)
 
 
 def rand_name():
+    """ randomized string method to doublecheck tests"""
     int_name = random.randint(0, HUGE_NUM)
     return " " + str(int_name)
 
 
+# NOTICE: if a user-made event contains fake_key,
+#         it will be deleted during testing
+fake_key = "duso2jkdna4oiha FAKE_KEY aebj0kfho1iuj5na"
+
 # fake user data
-FAKE_USERNAME = "fake name" + rand_name()
-FAKE_PW = "fake password" + rand_name()
+FAKE_USERNAME = "user name" + rand_name() + fake_key
+FAKE_PW = fake_key + "password" + rand_name()
 FAKE_EM = "test@testemail.com"
 fake_u_data = {udata.UNAME: FAKE_USERNAME,
                udata.PW: FAKE_PW, udata.EM: FAKE_EM}
 
 # fake event data
-FAKE_ENAME = "fake event" + rand_name()
+FAKE_ENAME = "event name" + rand_name() + fake_key
 FAKE_START = "2022-3-29 12:00:00"  # TODO: find proper structure for this
 FAKE_END = "2022-3-30 12:00:00"
 FAKE_LOC = "Your Mom's House"
@@ -42,7 +47,7 @@ fake_data = [fake_u_data, fake_e_data]
 class DBTestCase(TestCase):
     # Note: calls functions with 'test_' automatically!
     def setUp(self):
-        self.clear_db()  # clear database of all data
+        self.clear_db()  # clear past testing data
 
         # add test user
         self.test_uid = udata.add_user(FAKE_USERNAME, FAKE_PW, FAKE_EM)
@@ -52,12 +57,19 @@ class DBTestCase(TestCase):
                                            FAKE_LOC, FAKE_DESC)
 
     def tearDown(self):
-        self.clear_db()  # clear database of all data
+        self.clear_db()  # clear past testing data
 
     def clear_db(self):
-        """ clear database of all data for testing """
+        """ clear database of all past testing data for accuracy """
         # TODO: complete
-        pass
+        users = udata.get_all_users()
+        for key, value in users.items():
+            if fake_key in value[udata.UNAME]:
+                udata.del_user(key)
+        events = edata.get_all_events()
+        for key, value in events.items():
+            if fake_key in value[edata.ENAME]:
+                edata.del_event(key, cdata.get_connection_from_eid(key))
 
     # USER TESTS
     def test_get_users(self):
