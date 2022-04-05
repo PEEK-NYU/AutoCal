@@ -22,7 +22,7 @@ import random
 import string
 
 AUTOCAL_HOME = os.environ["AUTOCAL_DIR"]
-GET_USERS = "user_data"  # Currently the only Collection in AutoCalDB (Autocal's database)
+GET_USERS = "user_data"
 USERS = "_id"
 UNAME = "username"
 PW = "password"
