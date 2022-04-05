@@ -11,7 +11,7 @@ import werkzeug.exceptions as wz
 
 import db.user_data as udata
 import db.event_data as edata
-import db.connect_data as cdata
+# import db.connect_data as cdata
 
 app = Flask(__name__)
 CORS(app)
