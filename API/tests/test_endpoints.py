@@ -4,7 +4,7 @@ This file holds the tests for endpoints.py
 
 from unittest import TestCase, skip
 from flask_restx import Resource, Api
-import random
+
 
 import API.endpoints as ep
 
@@ -12,19 +12,33 @@ import db.user_data as udata
 import db.event_data as edata
 import db.connect_data as cdata
 
-HUGE_NUM = 10000000000000  # any big number will do!
-
-
-def new_entity_name(entity_type):
-    int_name = random.randint(0, HUGE_NUM)
-    return f"new {entity_type}" + str(int_name)
+from db.tests.test_data import fake_data
 
 
 class EndpointTestCase(TestCase):
     def setUp(self):
-        pass
+        self.clear_db()  # clear database of all data
+
+        # add test user
+        cu = ep.CreateUser(Resource)
+        self.test_uid = cu.post(fake_data[0][udata.UNAME],
+                                fake_data[0][udata.PW],
+                                fake_data[0][udata.EM])
+        # add test event
+        ce = ep.CreateEvent(Resource)
+        self.test_eid = ce.post(self.test_uid,
+                                fake_data[1][edata.ENAME],
+                                [fake_data[1][edata.STIME],
+                                 fake_data[1][edata.ETIME]],
+                                fake_data[1][edata.LOC],
+                                fake_data[1][edata.DESC])
 
     def tearDown(self):
+        self.clear_db()  # clear database of all data
+
+    def clear_db(self):
+        """ clear database of all data for testing """
+        # TODO: complete
         pass
 
     def test_hello(self):
@@ -38,13 +52,8 @@ class EndpointTestCase(TestCase):
         See if we can successfully create a new user.
         Post-condition: user is in DB.
         """
-        cu = ep.CreateUser(Resource)
-        new_user = new_entity_name("user")
-        new_pw = new_entity_name("password")
-        ret = cu.post(new_user, new_pw)
         users = udata.get_all_users()
-        self.assertIn(ret, users.keys())
-        return ret  # for using uid in other testing context
+        self.assertIn(self.test_uid, users.keys())
 
     # @skip("In the middle of making this work.")
     def test_create_event(self):
@@ -52,13 +61,5 @@ class EndpointTestCase(TestCase):
         See if we can successfully create a new event.
         Post-condition: room is in DB.
         """
-        uid = self.test_create_user()
-        cr = ep.CreateEvent(Resource)
-        event_name = new_entity_name("event")
-        start_time = new_entity_name("start")
-        end_time = new_entity_name("end")
-        ret = cr.post(uid, event_name, start_time, end_time)
-        # print(f'post {ret=}')
         events = edata.get_all_events()
-        # print(f'{events=}')
-        self.assertIn(ret, events.keys())
+        self.assertIn(self.test_eid, events.keys())
