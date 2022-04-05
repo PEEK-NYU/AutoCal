@@ -70,10 +70,8 @@ def find_user(keyword):
 def generate_uid():
     """
     A function that generates a random _user_id key
-    https://stackoverflow.com/questions/2257441/
-    random-string-generation-with-upper-case-letters-and-digits/2257449
+    TODO: replace with mongo method
     """
-    # TODO: replace with more reliable method
     curr_users = get_all_users()
     new_uid = ''.join(random.choices(
         string.ascii_uppercase + string.digits, k=10))

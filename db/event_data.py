@@ -54,9 +54,9 @@ def get_all_events():
 
 def generate_eid():
     """
-    A function that generates a random _user_id key
+    A function that generates a random _event_id key
+    TODO: replace with mongo method
     """
-    # TODO: replace with more reliable method
     curr_events = get_all_events()
     new_eid = ''.join(random.choices(
         string.ascii_uppercase + string.digits, k=10))
