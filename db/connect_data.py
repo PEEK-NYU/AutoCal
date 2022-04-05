@@ -15,7 +15,7 @@ Sample of Connection Architecture for Refrence:
 """
 
 import os
-
+from db.user_data import generate_uid
 import db.db_connect as dbc
 
 # ref in other _data.py files
@@ -26,6 +26,8 @@ DUPLICATE = 2
 AUTOCAL_HOME = os.environ["AUTOCAL_DIR"]
 GET_CONNECTS = "connections"
 CONNECTIONS = "_id"
+CUSER = "UID"
+CEVENT = "EID"
 
 client = dbc.get_client()
 if client is None:
@@ -45,33 +47,59 @@ def is_connected(eid, uid):
     A function to check if an event is connected to a user
     """
     curr_connections = get_all_connections()
-    if curr_connections[eid] == uid:
-        return OK
-    else:
-        return NOT_FOUND
+    for key, value in curr_connections.items():
+        if value[CUSER] == uid and value[CEVENT == eid]:
+            return OK
+    return NOT_FOUND
+
+
+def generate_cid():
+    """ cid creation ~ ref db.user_data.generate_uid() """
+    return generate_uid()
 
 
 def create_connection(eid, uid):
     """
     A function that creates a new connection
     """
-    dbc.insert_doc(GET_CONNECTS, {eid: uid})
+    dbc.insert_doc(GET_CONNECTS, {generate_uid(): {CUSER: uid, CEVENT: eid}})
+
+
+def get_connection(eid, uid):
+    """ a function that returns the connect id (cid) given (eid, uid) """
+    curr_connections = get_all_connections()
+    for key, value in curr_connections.items():
+        if value[CEVENT] == eid and value[CUSER] == uid:
+            return key
+    return NOT_FOUND
+
+
+def get_connection_from_eid(eid):
+    """ ADMIN METHOD for getting uid from eid """
+    curr_connections = get_all_connections()
+    for key, value in curr_connections.items():
+        if value[CEVENT] == eid:
+            return value[CUSER]
+    return NOT_FOUND
 
 
 def del_connection(eid, uid):
     """
     A function that deletes a given event-user connection by id
     """
-    dbc.del_one(GET_CONNECTS, filters={eid: uid})
+
+    dbc.del_one(GET_CONNECTS, filters={CONNECTIONS: get_connection(eid, uid)})
     return OK
 
 
 def del_events_by_user(del_uid):
     """
     A function that deletes all events under a user's ownership
+    TODO: find faster way
     """
     curr_connections = get_all_connections()
-    for eid, uid in curr_connections:
-        if uid == del_uid:
-            del_connection(eid, uid)
+    for key, value in curr_connections:
+        if value[CUSER] == del_uid:
+            # faster than going through del_connection
+            dbc.del_one(GET_CONNECTS, filters={CONNECTIONS: key})
     return OK
