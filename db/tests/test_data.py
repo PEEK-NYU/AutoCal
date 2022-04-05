@@ -8,15 +8,25 @@ import db.user_data as udata
 import db.event_data as edata
 import db.connect_data as cdata
 
+import random
+
+HUGE_NUM = 10000000000000  # (any big number)
+
+
+def rand_name():
+    int_name = random.randint(0, HUGE_NUM)
+    return " " + str(int_name)
+
+
 # fake user data
-FAKE_USERNAME = "fake name"
-FAKE_PW = "fake password"
+FAKE_USERNAME = "fake name" + rand_name()
+FAKE_PW = "fake password" + rand_name()
 FAKE_EM = "test@testemail.com"
 fake_u_data = {udata.UNAME: FAKE_USERNAME,
                udata.PW: FAKE_PW, udata.EM: FAKE_EM}
 
 # fake event data
-FAKE_ENAME = "fake event"
+FAKE_ENAME = "fake event" + rand_name()
 FAKE_START = "2022-3-29 12:00:00"  # TODO: find proper structure for this
 FAKE_END = "2022-3-30 12:00:00"
 FAKE_LOC = "Your Mom's House"
@@ -24,6 +34,9 @@ FAKE_DESC = "Watching Netflix"
 fake_e_data = {edata.ENAME: FAKE_ENAME, edata.STIME: FAKE_START,
                edata.ETIME: FAKE_END, edata.LOC: FAKE_LOC,
                edata.DESC: FAKE_DESC}
+
+# aggregation of data for endpoint testing
+fake_data = [fake_u_data, fake_e_data]
 
 
 class DBTestCase(TestCase):
