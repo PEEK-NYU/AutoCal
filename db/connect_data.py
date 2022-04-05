@@ -15,7 +15,7 @@ Sample of Connection Architecture for Refrence:
 """
 
 import os
-from db.user_data import generate_uid
+import random
 import db.db_connect as dbc
 
 # ref in other _data.py files
@@ -54,15 +54,15 @@ def is_connected(eid, uid):
 
 
 def generate_cid():
-    """ cid creation ~ ref db.user_data.generate_uid() """
-    return generate_uid()
+    """ cid creation ~ change to mongo method """
+    return str(random.randint(0, 10000000000000))
 
 
 def create_connection(eid, uid):
     """
     A function that creates a new connection
     """
-    dbc.insert_doc(GET_CONNECTS, {generate_uid(): {CUSER: uid, CEVENT: eid}})
+    dbc.insert_doc(GET_CONNECTS, {generate_cid(): {CUSER: uid, CEVENT: eid}})
 
 
 def get_connection(eid, uid):
