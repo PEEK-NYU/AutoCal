@@ -21,7 +21,7 @@ test_key = 'Test'
 test_value = 'is working!'
 
 
-@api.route('/hello')
+@api.route('/admin/hello')
 class HelloWorld(Resource):
     """
     The purpose of the HelloWorld class is to have a simple test to see if the
@@ -35,7 +35,7 @@ class HelloWorld(Resource):
         return {test_key: test_value}
 
 
-@api.route('/endpoints')
+@api.route('/admin/endpoints')
 class Endpoints(Resource):
     """
     This class will serve as live, fetchable documentation of what endpoints
@@ -68,7 +68,7 @@ class ListAllEvents(Resource):
             return events
 
 
-@api.route('/events/get/<_user_id>')
+@api.route('/events/get/<uid>')
 class ListEvents(Resource):
     """
     This endpoint returns a list of all events associated with a given user ID.
@@ -86,7 +86,7 @@ class ListEvents(Resource):
             return events
 
 
-@api.route('/events/get/<_event_id>')
+@api.route('/events/get/<eid>')
 class GetEvent(Resource):
     """
     This endpoint returns an event given an event ID.
@@ -125,7 +125,7 @@ class CreateEvent(Resource):
             return f"{event_name} added."
 
 
-@api.route('/events/delete/<_event_id>')
+@api.route('/events/delete/<eid>')
 class DeleteEvent(Resource):
     """
     This class enables deleting an event
@@ -165,7 +165,7 @@ class ListAllUsers(Resource):
             return users
 
 
-@api.route('/users/get/<_user_id>')
+@api.route('/users/get/<uid>')
 class GetUser(Resource):
     """
     This endpoint returns all information related to a user id.
@@ -203,7 +203,7 @@ class CreateUser(Resource):
         return f"{username} added."
 
 
-@api.route('/users/delete/<_user_id>')
+@api.route('/users/delete/<uid>')
 class DeleteUser(Resource):
     """
     This class enables deleting a user.
