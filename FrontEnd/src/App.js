@@ -6,6 +6,7 @@ import Rooms from './pages/Rooms/Rooms';
 import Users from './pages/Users/Users';
 import LogReg from './pages/LogReg/LogReg';
 import Event from './pages/Event/Event';
+import Account from './pages/Account/Account';
 
 import {backendurl} from './config';
 
@@ -37,6 +38,10 @@ function App() {
 
             <Route exact={true} path={'/events_edit'}>
               <Event />
+            </Route>
+
+            <Route exact={true} path={'/account'}>
+              <Account />
             </Route>
 
           </Switch>
