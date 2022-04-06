@@ -4,7 +4,7 @@
 
 ![peekdemo](https://github.com/PEEK-NYU/PEEK/blob/main/images/autocalendar.com.png)
 
-#### HEROKU:  https://peek-nyu.herokuapp.com/
+#### HEROKU: https://autocal-nyu.herokuapp.com/  (OLD: https://peek-nyu.herokuapp.com/)
 #### GITHUB ACTIONS: (tbd)
 #### NETLIFY: https://autocal-peek.netlify.app/
 
