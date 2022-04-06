@@ -10,6 +10,8 @@ import DateInput from '../../components/DateInput'
 
 export default function Account(){
 
+  const [newemail, setNewemail] = useState(false);
+  const [newusrname, setNewusrname] = useState(false);
   const [newpasswrd, setNewpasswrd] = useState(false);
 
 
@@ -20,22 +22,46 @@ export default function Account(){
           text="Account"
         />
       </div>
+
       <div className="Info">
-        <label>Account Name:</label>
+        <label>Email Address:</label>
         <p>----</p>
-        <label>Password</label>
+        <label>User Name:</label>
+        <p>----</p>
+        <label>Password:</label>
         <p>----</p>
       </div>
-      <button onClick={() => setNewpasswrd(!newpasswrd)}>Set New Password</button>
 
+      <div className="setNewemail">
+        <button onClick={() => setNewemail(!newemail)}>Set New Email</button>
+        {newemail && (
+          <form>
+            <Inputbox label={''} placeholder={'New Email Address'}/>
+            <input type="submit" value="Update" /> 
+          </form>
+        )}
+      </div>
 
-      {newpasswrd && (
-        <form>
-          <Inputbox label={''} placeholder={'New Password'}/>
-          <Inputbox label={''} placeholder={'Confirm New Password'}/>
-          <input type="submit" value="Update" /> 
-        </form>
-      )}
+      <div className="setNewusrname">
+        <button onClick={() => setNewusrname(!newusrname)}>Set New User Name</button>
+        {newusrname && (
+          <form>
+            <Inputbox label={''} placeholder={'New User Name'}/>
+            <input type="submit" value="Update" /> 
+          </form>
+        )}
+      </div>
+
+      <div className="setNewpasswrd">
+        <button onClick={() => setNewpasswrd(!newpasswrd)}>Set New Password</button>
+        {newpasswrd && (
+          <form>
+            <Inputbox label={''} placeholder={'New Password'}/>
+            <Inputbox label={''} placeholder={'Confirm New Password'}/>
+            <input type="submit" value="Update" /> 
+          </form>
+        )}
+      </div>
 
       <div>
         <NavButton text={'Go Back Home'} subpath={'/'}/>
