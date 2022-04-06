@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {useHistory} from 'react-router-dom';
 
 import PageTitle from '../../components/PageTitle/PageTitle';
@@ -9,6 +9,10 @@ import DateInput from '../../components/DateInput'
 
 
 export default function Account(){
+
+  const [newpasswrd, setNewpasswrd] = useState(false);
+
+
   return (
     <div className="content">
       <div className="account-header">
@@ -22,11 +26,17 @@ export default function Account(){
         <label>Password</label>
         <p>----</p>
       </div>
-      <form>
-        <Inputbox label={''} placeholder={'New Password'}/>
-        <Inputbox label={''} placeholder={'Confirm New Password'}/>
-        <input type="submit" value="Update" /> 
-      </form>
+      <button onClick={() => setNewpasswrd(!newpasswrd)}>Set New Password</button>
+
+
+      {newpasswrd && (
+        <form>
+          <Inputbox label={''} placeholder={'New Password'}/>
+          <Inputbox label={''} placeholder={'Confirm New Password'}/>
+          <input type="submit" value="Update" /> 
+        </form>
+      )}
+
       <div>
         <NavButton text={'Go Back Home'} subpath={'/'}/>
       </div>
