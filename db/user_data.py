@@ -7,7 +7,8 @@ Sample of User Architecture for Refrence:
   {
     "_id": {
       "username": "Fake User",
-      "password": "123"
+      "password": "123",
+      "email": "catslovecats@gmail.com"
     }
   }
 }
