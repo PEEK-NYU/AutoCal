@@ -25,7 +25,7 @@ fake_key = "duso2jkdna4oiha FAKE_KEY aebj0kfho1iuj5na"
 
 # fake user data
 FAKE_USERNAME = "user name" + rand_name() + fake_key
-FAKE_PW = fake_key + "password" + rand_name()
+FAKE_PW = "password" + rand_name()
 FAKE_EM = "test@testemail.com"
 fake_u_data = {udata.UNAME: FAKE_USERNAME,
                udata.PW: FAKE_PW, udata.EM: FAKE_EM}

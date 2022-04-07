@@ -2,15 +2,15 @@
 This file holds the tests for endpoints.py
 """
 
-from unittest import TestCase, skip
-from flask_restx import Resource, Api
+from unittest import TestCase  # , skip
+from flask_restx import Resource  # , Api
 
 
 import API.endpoints as ep
 
 import db.user_data as udata
 import db.event_data as edata
-import db.connect_data as cdata
+# import db.connect_data as cdata
 
 from db.tests.test_data import fake_data
 

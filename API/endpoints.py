@@ -193,11 +193,11 @@ class CreateUser(Resource):
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
     @api.response(HTTPStatus.NOT_ACCEPTABLE, 'A duplicate key')
-    def post(self, username, password):
+    def post(self, username, password, email):
         """
         This method adds a user to the user database.
         """
-        ret = udata.add_user(username, password)
+        ret = udata.add_user(username, password, email)
         if ret == udata.NOT_FOUND:
             raise (wz.NotFound("User db not found."))
         elif ret == udata.DUPLICATE:
