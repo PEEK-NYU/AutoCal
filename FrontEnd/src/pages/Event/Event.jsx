@@ -8,7 +8,7 @@ import ColorPicker from '../../components/ColorPicker'
 import DateInput from '../../components/DateInput'
 
 
-export default function LogReg(){
+export default function Event(){
   return (
     <div className="content">
       <div className="event-header">
