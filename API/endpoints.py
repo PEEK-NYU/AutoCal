@@ -17,8 +17,8 @@ app = Flask(__name__)
 CORS(app)
 api = Api(app)
 
-test_key = 'Test'
-test_value = 'is working!'
+test_key = 'hello'
+test_value = 'world'
 
 
 @api.route('/admin/hello')
@@ -30,7 +30,7 @@ class HelloWorld(Resource):
     def get(self):
         """
         A trivial endpoint to see if the server is running.
-        It just answers with "hello world."
+        It just answers with "{hello: world}."
         """
         return {test_key: test_value}
 

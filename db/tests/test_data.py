@@ -21,7 +21,7 @@ def rand_name():
 
 # NOTICE: if a user-made event contains fake_key,
 #         it will be deleted during testing
-fake_key = "duso2jkdna4oiha FAKE_KEY aebj0kfho1iuj5na"
+fake_key = " FAKE_KEY"
 
 # fake user data
 FAKE_USERNAME = "user name" + rand_name() + fake_key
