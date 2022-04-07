@@ -26,7 +26,7 @@ GET_USERS = "user_data"
 USERS = "_id"
 UNAME = "username"
 PW = "password"
-EM = "emails"
+EM = "email"
 
 # ref in other _data.py files
 OK = 0
