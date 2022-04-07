@@ -47,6 +47,7 @@ fake_data = [fake_u_data, fake_e_data]
 class DBTestCase(TestCase):
     # Note: calls functions with 'test_' automatically!
     def setUp(self):
+        # NOTE: clear_db and therefore udata.get_all_users() MUST WORK
         self.clear_db()  # clear past testing data
 
         # add test user
