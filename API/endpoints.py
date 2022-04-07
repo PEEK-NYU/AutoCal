@@ -124,7 +124,7 @@ class CreateEvent(Resource):
         if ret == udata.NOT_FOUND:
             raise (wz.NotFound("Event db not found."))
         else:
-            return f"{event_name} added."
+            return ret
 
 
 @api.route('/events/delete/<eid>')
@@ -202,7 +202,7 @@ class CreateUser(Resource):
             raise (wz.NotFound("User db not found."))
         elif ret == udata.DUPLICATE:
             raise (wz.NotAcceptable("User name already exists."))
-        return f"{username} added."
+        return ret
 
 
 @api.route('/users/delete/<uid>')

@@ -114,8 +114,16 @@ def create_event(uid, event_name, start_time, end_time,
                   LOC: location, DESC: description}
     new_eid = generate_eid()
     dbc.insert_doc(EVENTS, {new_eid: event_info})
-    cdata.create_connection(new_eid, uid)  # connect new event to current user
-    return OK
+      # connect new event to current user
+    # TODO: find a way to get this without searching*
+    maybe_events = find_event(uid, event_name)
+    if len(maybe_events) == 1:
+        new_eid = list(maybe_events.keys())[0]
+    else:
+        print("Attempted to find created event", event_name,
+              "but there are multiple instances")
+    cdata.create_connection(new_eid, uid)
+    return new_eid
 
 
 def event_exists(eid):

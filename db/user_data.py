@@ -106,8 +106,12 @@ def add_user(username, password, email=""):
     new_user = {}
     new_uid = generate_uid()
     new_user[new_uid] = {UNAME: username, PW: password, EM: email}
-    dbc.insert_doc(GET_USERS, new_user)
-    return OK
+    ret = dbc.insert_doc(GET_USERS, new_user)
+    assert ret != NOT_FOUND
+    # return OK
+    maybe_user = log_in(username, password)
+    assert maybe_user != NOT_FOUND
+    return maybe_user
 
 
 def log_in(username, password):
