@@ -54,6 +54,7 @@ if client is None:
 def get_all_users():  # Note: name change
     """
     A function to return a hashmap of all users.
+    (Is this new db structure to be updated for get emails?)
     """
     # TODO: find a way to do this automatically fetch_all_as_dict
     ret = dbc.fetch_all(GET_USERS, USERS)
