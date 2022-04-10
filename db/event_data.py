@@ -68,6 +68,16 @@ def generate_eid():
     """
     A function that generates a random _event_id key
     TODO: replace with mongo method
+    Possibly Helpful:
+    'If a document arrives to the database without 
+    an _id value, then the database itself will 
+    assign an ObjectID to the _id field.'
+    
+    And to generate a new ObjectID we can do:
+    x = ObjectId()
+    
+    In this example, the value of x would be some:
+    ObjectId("507f1f77bcf86cd799439011")
     """
     return "eid_placeholder"
 
