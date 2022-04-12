@@ -60,6 +60,9 @@ def del_one(collect_nm, filters={}):
     """
     return client[db_nm][collect_nm].delete_one(filters)
 
+def del_many(collection_nm, filters={}):
+    """ admin method for deleting all"""
+
 
 def fetch_all(collect_nm, key_nm):
     all_docs = []

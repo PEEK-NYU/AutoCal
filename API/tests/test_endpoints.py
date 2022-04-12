@@ -10,7 +10,8 @@ import API.endpoints as ep
 
 import db.user_data as udata
 import db.event_data as edata
-# import db.connect_data as cdata
+import db.connect_data as cdata
+import db.db_connect as dbc
 
 from db.tests.test_data import fake_data
 
@@ -38,8 +39,9 @@ class EndpointTestCase(TestCase):
 
     def clear_db(self):
         """ clear database of all data for testing """
-        # TODO: complete
-        pass
+        dbc.del_many(edata.GET_EVENTS, {})
+        dbc.del_many(udata.GET_USERS, {})
+        dbc.del_many(cdata.GET_CONNECTS, {})
 
     def test_hello(self):
         hello = ep.HelloWorld(Resource)

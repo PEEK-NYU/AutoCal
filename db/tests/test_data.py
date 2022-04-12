@@ -7,6 +7,7 @@ from unittest import TestCase
 import db.user_data as udata
 import db.event_data as edata
 import db.connect_data as cdata
+import db.db_connect as dbc
 
 import random
 
@@ -21,7 +22,7 @@ def rand_name():
 
 # NOTICE: if a user-made event contains fake_key,
 #         it will be deleted during testing
-fake_key = " FAKE_KEY"
+fake_key = "FAKE_KEY"
 
 # fake user data
 FAKE_USERNAME = "user name" + rand_name() + fake_key
@@ -63,14 +64,20 @@ class DBTestCase(TestCase):
     def clear_db(self):
         """ clear database of all past testing data for accuracy """
         # TODO: complete
-        users = udata.get_all_users()
-        for key, value in users.items():
-            if fake_key in value[udata.UNAME]:
-                udata.del_user(key)
-        events = edata.get_all_events()
-        for key, value in events.items():
-            if fake_key in value[edata.ENAME]:
-                edata.del_event(key, cdata.get_connection_from_eid(key))
+        # events = edata.get_all_events()
+        # for key, value in events.items():
+        #     if fake_key in value[edata.ENAME]:
+        #         # Note: should also delete connections
+        #         edata.del_event(key, cdata.get_connection_from_eid(key))
+        # # Note: must delete users AFTER events
+        # users = udata.get_all_users()
+        # for key, value in users.items():
+        #     if fake_key in value[udata.UNAME]:
+        #         udata.del_user(key)
+        dbc.del_many(edata.GET_EVENTS, {})
+        dbc.del_many(udata.GET_USERS, {})
+        dbc.del_many(cdata.GET_CONNECTS, {})
+        # check if db is empty
 
     # USER TESTS
     def test_get_users(self):
