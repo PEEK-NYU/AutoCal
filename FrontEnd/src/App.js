@@ -7,6 +7,7 @@ import Users from './pages/Users/Users';
 import LogReg from './pages/LogReg/LogReg';
 import Event from './pages/Event/Event';
 import Account from './pages/Account/Account';
+import Search from './pages/Search/Search';
 
 import {backendurl} from './config';
 
@@ -42,6 +43,10 @@ function App() {
 
             <Route exact={true} path={'/account'}>
               <Account />
+            </Route>
+
+            <Route exact={true} path={'/search'}>
+              <Search />
             </Route>
 
           </Switch>
