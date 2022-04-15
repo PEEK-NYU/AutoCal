@@ -10,8 +10,8 @@
   opacity: 0.3;
 }
 
-p {
-  border: 1px groove #94A3B8; 
+.event-item p {
+  border: 1px groove #ff0000; 
   border-radius: 5px;
   padding: 5px;
   overflow-x: scroll; 
