@@ -128,7 +128,7 @@ def user_update(doc,new_name):
     """Updates user's name ** TO DO: Add more updates"""
     if user_exists(uid) is NOT_FOUND:
         return NOT_FOUND
-    res = GET_USERS._update_document_single_field(uid, UN, new_name, "None") # (temporary), none in position of where the "parent" would be
+    res = GET_USERS._update_document_single_field(uid, UNAME, new_name, "None") # (temporary), none in position of where the "parent" would be and uid in place of doc
     return OK
 
 def get_emails():
