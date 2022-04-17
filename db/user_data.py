@@ -124,6 +124,12 @@ def del_user(uid):
     dbc.del_one(GET_USERS, filters={USERS: uid})
     return OK
 
+def user_update(doc,new_name):
+    """Updates user's name ** TO DO: Add more updates"""
+    if user_exists(uid) is NOT_FOUND:
+        return NOT_FOUND
+    res = GET_USERS._update_document_single_field(uid, UN, new_name, "None") # (temporary), none in position of where the "parent" would be
+    return OK
 
 def get_emails():
     """
