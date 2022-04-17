@@ -125,7 +125,7 @@ def del_user(uid):
     return OK
 
 def user_update(uid,new_name):
-    """Updates user's name ** TO DO: passing doc"""
+    """Updates user's name ** TO DO: passing doc, doc from uid?"""
     if user_exists(uid) is NOT_FOUND:
         return NOT_FOUND
     GET_USERS._update_document_single_field(doc, UNAME, new_name, "None") # (temporary), none in position of where the "parent" would be
@@ -155,7 +155,7 @@ def email_exists(email):
     return NOT_FOUND
 
 def email_update(uid,new_em):
-    """Updates user's name ** TO DO: passing doc"""
+    """Updates user's name ** TO DO: passing doc, doc from uid?"""
     if email_exists(uid) is NOT_FOUND:
         return NOT_FOUND
     GET_USERS._update_document_single_field(doc, EM, new_em, "None") # (temporary), none in position of where the "parent" would be and uid in place of doc
