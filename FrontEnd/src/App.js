@@ -2,6 +2,7 @@ import React from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 import Home from './pages/Home/Home';
+import Test from './pages/Test/Test';
 import Rooms from './pages/Rooms/Rooms';
 import Users from './pages/Users/Users';
 import LogReg from './pages/LogReg/LogReg';
@@ -23,6 +24,10 @@ function App() {
 
             <Route exact={true} path={'/'}>
               <Home />
+            </Route>
+
+            <Route exact={true} path={'/test'}>
+              <Test />
             </Route>
 
             <Route exact={true} path={'/rooms'}>
