@@ -124,11 +124,11 @@ def del_user(uid):
     dbc.del_one(GET_USERS, filters={USERS: uid})
     return OK
 
-def user_update(doc,new_name):
-    """Updates user's name ** TO DO: Add more updates"""
+def user_update(uid,new_name):
+    """Updates user's name ** TO DO: passing doc"""
     if user_exists(uid) is NOT_FOUND:
         return NOT_FOUND
-    res = GET_USERS._update_document_single_field(uid, UNAME, new_name, "None") # (temporary), none in position of where the "parent" would be and uid in place of doc
+    GET_USERS._update_document_single_field(doc, UNAME, new_name, "None") # (temporary), none in position of where the "parent" would be
     return OK
 
 def get_emails():
@@ -153,3 +153,10 @@ def email_exists(email):
     if rec is not None:
         return OK
     return NOT_FOUND
+
+def email_update(uid,new_em):
+    """Updates user's name ** TO DO: passing doc"""
+    if email_exists(uid) is NOT_FOUND:
+        return NOT_FOUND
+    GET_USERS._update_document_single_field(doc, EM, new_em, "None") # (temporary), none in position of where the "parent" would be and uid in place of doc
+    return OK
