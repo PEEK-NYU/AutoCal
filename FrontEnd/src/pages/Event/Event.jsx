@@ -1,5 +1,4 @@
 import React from 'react';
-import {useHistory} from 'react-router-dom';
 
 import PageTitle from '../../components/PageTitle/PageTitle';
 import NavButton from '../../components/NavButton/NavButton'

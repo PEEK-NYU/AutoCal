@@ -1,11 +1,8 @@
-import React, {useEffect, useState} from 'react';
-import {useHistory} from 'react-router-dom';
+import React, {useState} from 'react';
 
 import PageTitle from '../../components/PageTitle/PageTitle';
 import NavButton from '../../components/NavButton/NavButton'
 import Inputbox from '../../components/Inputbox/Inputbox'
-import ColorPicker from '../../components/ColorPicker'
-import DateInput from '../../components/DateInput'
 
 
 export default function Account(){
