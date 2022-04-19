@@ -91,7 +91,6 @@ def add_user(username, password, email=""):
     """
     new_user = {UNAME: username, PW: password, EM: email}
     return dbc.insert_doc(GET_USERS, new_user)  # new uid
-# TODO: add functionality to update a user's info/pw
 
 
 def log_in(username, password):
@@ -124,12 +123,17 @@ def del_user(uid):
     dbc.del_one(GET_USERS, filters={USERS: uid})
     return OK
 
-def user_update(uid,new_name):
-    """Updates user's name ** TO DO: passing doc, doc from uid?"""
+
+def update_username(uid, new_name):
+    """ Updates a user's name given a uid and new name"""
     if user_exists(uid) is NOT_FOUND:
         return NOT_FOUND
-    GET_USERS._update_document_single_field(doc, UNAME, new_name, "None") # (temporary), none in position of where the "parent" would be
+    user_info = get_user(uid)
+    user_info[UNAME] = new_name
+    # TODO: check if info is updated rather than replaced
+    dbc.update_one(GET_USERS, user_info, {USERS: uid})
     return OK
+
 
 def get_emails():
     """
@@ -146,17 +150,20 @@ def get_emails():
 def email_exists(email):
     """
     returns True if email exists
-    TODO: fix with new db structure
     """
     rec = dbc.fetch_one(GET_USERS, filters={EM: email})
-    # print(f"{rec=}")
+    print("Checking that email", email, "is", rec)
     if rec is not None:
         return OK
     return NOT_FOUND
 
-def email_update(uid,new_em):
-    """Updates user's name ** TO DO: passing doc, doc from uid?"""
+
+def update_email(uid, new_em):
+    """ Updates user's email given a uid """
     if email_exists(uid) is NOT_FOUND:
         return NOT_FOUND
-    GET_USERS._update_document_single_field(doc, EM, new_em, "None") # (temporary), none in position of where the "parent" would be and uid in place of doc
+    user_info = get_user(uid)
+    user_info[EM] = new_em
+    # TODO: check if info is updated rather than replaced
+    dbc.update_one(GET_USERS, user_info, {USERS: uid})
     return OK
