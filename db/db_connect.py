@@ -60,8 +60,10 @@ def del_one(collect_nm, filters={}):
     """
     return client[db_nm][collect_nm].delete_one(filters)
 
-def del_many(collection_nm, filters={}):
-    """ admin method for deleting all"""
+
+def del_many(collect_nm, filters={}):
+    """ admin method for deleting all records that meet a filter(s) """
+    return client[db_nm][collect_nm].delete_many(filters)
 
 
 def fetch_all(collect_nm, key_nm):
