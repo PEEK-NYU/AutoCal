@@ -99,6 +99,7 @@ def del_events_by_user(del_uid):
     curr_connections = get_all_connections()
     for key, value in curr_connections:
         if value[CUSER] == del_uid:
-            dbc.del_one(edata.GET_EVENTS, filters={edata.EVENTS: value[CEVENT]})
+            dbc.del_one(edata.GET_EVENTS,
+                        filters={edata.EVENTS: value[CEVENT]})
             dbc.del_one(GET_CONNECTS, filters={CONNECTIONS: key})
     return OK

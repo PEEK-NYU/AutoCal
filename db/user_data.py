@@ -15,7 +15,8 @@ Sample of User Architecture for Refrence:
 
 OLD Mongo List Ref:
 [{'_id': {'$oid': '624e03449ed2db7f77aaf5b1'},
-  '0YAFQ1ABPM': {'username': 'user name 2728518203020duso2jkdna4oiha FAKE_KEY aebj0kfho1iuj5na',
+  '0YAFQ1ABPM': {'username': 'user name 2728518203020duso2jkdna4oiha
+                              FAKE_KEY aebj0kfho1iuj5na',
                  'password': 'password 6921355629683',
                  'emails': 'test@testemail.com'}},
 ]
@@ -157,7 +158,7 @@ def email_exists(email):
     returns True if email exists
     """
     rec = dbc.fetch_one(GET_USERS, filters={EM: email})
-    print("Checking that email", email, "is", rec)
+    # print("Checking that email", email, "is", rec)
     if rec is not None:
         return OK
     return NOT_FOUND

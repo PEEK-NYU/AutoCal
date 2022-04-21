@@ -73,63 +73,63 @@ class DBTestCase(TestCase):
         client[dbc.db_nm][udata.GET_USERS].delete_many({})
         client[dbc.db_nm][edata.GET_EVENTS].delete_many({})
         client[dbc.db_nm][cdata.GET_CONNECTS].delete_many({})
-        print("**User, Event, & Connects DB Cleared**")
+        # print("**User, Event, & Connects DB Cleared**")
 
     # USER TESTS
     def test_get_users(self):
         """ Can we fetch user db? """
         users = udata.get_all_users()
         self.assertIsInstance(users, dict)
-        print("Found All Users:", users)
+        # print("Found All Users:", users)
 
     def test_create_user(self):
         """ Was the user creation okay? """
         self.assertIsNot(self.test_uid, udata.NOT_FOUND)
-        print("User Created:", self.test_uid)
+        # print("User Created:", self.test_uid)
 
     def test_user_exists(self):
         """ does the created user exist? """
         result = udata.user_exists(self.test_uid)
         self.assertIsNot(result, udata.NOT_FOUND)
-        print("User Found:", result)
+        # print("User Found:", result)
 
     def test_user_data(self):
         """ can we access the correct info of a user? """
         test_data = udata.get_user(self.test_uid)
         for key, value in fake_u_data.items():
-            self.assertIs(test_data[key], value)
-        print("User Data Found:", test_data)
+            self.assertEquals(test_data[key], value)
+        # print("User Data Found:", test_data)
 
     def test_login(self):
         """ can we log into a user? """
         logged = udata.log_in(FAKE_USERNAME, FAKE_PW)
-        self.assertIs(self.test_uid, logged)
-        print("User", FAKE_USERNAME, "logged in!")
+        self.assertEquals(self.test_uid, logged)
+        # print("User", FAKE_USERNAME, "logged in!")
 
     # EVENT TESTS
     def test_get_events(self):
         """ Can we fetch event db? """
         events = edata.get_all_events()
         self.assertIsInstance(events, dict)
-        print("Found All Events:", events)
+        # print("Found All Events:", events)
 
     def test_create_event(self):
         """ Was the event creation okay? """
         self.assertIsNot(self.test_eid, edata.NOT_FOUND)
-        print("Event Created:", self.test_eid)
+        # print("Event Created:", self.test_eid)
 
     def test_event_exists(self):
         """ does the created event exist? """
         result = edata.event_exists(self.test_eid)
         self.assertIsNot(result, edata.NOT_FOUND)
-        print("Event Found:", result)
+        # print("Event Found:", result)
 
     def test_event_data(self):
         """ can we access the correct info of a user? """
         test_data = edata.get_event(self.test_eid)
         for key, value in fake_e_data.items():
-            self.assertIs(test_data[key], value)
-        print("Event Data Found:", test_data)
+            self.assertEquals(test_data[key], value)
+        # print("Event Data Found:", test_data)
 
     def test_connection(self):
         """

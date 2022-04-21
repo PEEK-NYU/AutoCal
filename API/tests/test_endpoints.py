@@ -27,7 +27,8 @@ class EndpointTestCase(TestCase):
         self.test_uid = cu.post(fake_data[0][udata.UNAME],
                                 fake_data[0][udata.PW],
                                 fake_data[0][udata.EM])
-        print("Test User Created:", self.test_uid, "::", fake_data[0])
+        # print("Test User Created:", self.test_uid, "::", fake_data[0])
+
         # add test event
         ce = ep.CreateEvent(Resource)
         self.test_eid = ce.post(self.test_uid,
@@ -36,8 +37,8 @@ class EndpointTestCase(TestCase):
                                  fake_data[1][edata.ETIME],
                                 # fake_data[1][edata.LOC],
                                 fake_data[1][edata.DESC])
-        print("Test Event Created:", self.test_eid, "::", fake_data[1])
-        print()
+        # print("Test Event Created:", self.test_eid, "::", fake_data[1])
+        # print()
 
     def tearDown(self):
         self.clear_db()  # clear database of all data
@@ -48,7 +49,7 @@ class EndpointTestCase(TestCase):
         client[dbc.db_nm][udata.GET_USERS].delete_many({})
         client[dbc.db_nm][edata.GET_EVENTS].delete_many({})
         client[dbc.db_nm][cdata.GET_CONNECTS].delete_many({})
-        print("**User, Event, & Connects DB Cleared**")
+        # print("**User, Event, & Connects DB Cleared**")
 
     def test_hello(self):
         """ test trivial hello endpoint """
@@ -61,15 +62,15 @@ class EndpointTestCase(TestCase):
         """ test if we can see the user collection within the database """
         find_users = ep.ListAllUsers(Resource)
         ret = find_users.get()
-        print("Found Users (Testing):", ret)
-        self.assertIsNot(len(ret), 0)
+        # print("Found Users (Testing):", ret)
+        self.assertNotEqual(len(ret), 0)
 
     def test_find_events(self):
         """ test if we can see the event collection within the database """
         find_events = ep.ListAllEvents(Resource)
         ret = find_events.get()
-        print("Found Users (Testing):", ret)
-        self.assertIsNot(len(ret), 0)
+        # print("Found Users (Testing):", ret)
+        self.assertNotEqual(len(ret), 0)
 
     def test_create_user(self):
         """
