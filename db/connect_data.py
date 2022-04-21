@@ -42,7 +42,7 @@ def get_all_connections():
     ret = dbc.fetch_all(GET_CONNECTS, CONNECTIONS)
     final_dict = {}
     for connect_info in ret:
-        new_key = connect_info[CONNECTIONS]
+        new_key = connect_info[CONNECTIONS]['$oid']
         final_dict[new_key] = {CUSER: connect_info[CUSER],
                                CEVENT: connect_info[CEVENT]}
     # print("fetched users:", final_dict, "\n")

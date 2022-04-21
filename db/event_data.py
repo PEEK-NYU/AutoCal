@@ -47,7 +47,7 @@ def get_all_events():
     ret = dbc.fetch_all(GET_EVENTS, EVENTS)
     final_dict = {}
     for event_info in ret:
-        new_key = event_info[EVENTS]
+        new_key = event_info[EVENTS]['$oid']
         final_dict[new_key] = {ENAME: event_info[ENAME],
                                STIME: event_info[STIME],
                                ETIME: event_info[ETIME],
@@ -58,7 +58,6 @@ def get_all_events():
     return final_dict
 
 
-<<<<<<< Updated upstream
 def generate_eid():
     """
     A function that generates a random _event_id key
@@ -77,8 +76,6 @@ def generate_eid():
     return "eid_placeholder"
 
 
-=======
->>>>>>> Stashed changes
 def get_user_events(uid):
     """
     A function that returns a hashmap of events connected to a given uid

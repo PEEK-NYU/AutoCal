@@ -18,11 +18,13 @@ OLD Mongo List Ref:
   '0YAFQ1ABPM': {'username': 'user name 2728518203020duso2jkdna4oiha FAKE_KEY aebj0kfho1iuj5na',
                  'password': 'password 6921355629683',
                  'emails': 'test@testemail.com'}},
- {'_id': {'$oid': '624f0a9be96c27ac380a17e3'},
-  '0TELC3OQMF': {'username': 'user name 9147374907469duso2jkdna4oiha FAKE_KEY aebj0kfho1iuj5na',
-                 'password': 'password 234608589154',
-                 'emails': 'test@testemail.com'}}
 ]
+NEW Mongo List Ref:
+[{'_id': {'$oid': '625ed99be6d47f734671fbe2'},
+      'username': 'user name 7985917816960FAKE_KEY',
+      'password': 'password 3236232704766',
+      'email': 'test@testemail.com'}
+      ]
 """
 
 import os
@@ -57,7 +59,7 @@ def get_all_users():  # Note: name change
     ret = dbc.fetch_all(GET_USERS, USERS)
     final_dict = {}
     for user_info in ret:
-        new_key = user_info[USERS]
+        new_key = user_info[USERS]['$oid']  # mongo-generated object to
         final_dict[new_key] = {UNAME: user_info[UNAME],
                                PW: user_info[PW],
                                EM: user_info[EM]}
@@ -90,7 +92,9 @@ def add_user(username, password, email=""):
     Add a user to the database using username & password
     """
     new_user = {UNAME: username, PW: password, EM: email}
-    return dbc.insert_doc(GET_USERS, new_user)  # new uid
+    ret = dbc.insert_doc(GET_USERS, new_user)  # new uid
+    print("*Attempted create user", ret)
+    return ret['$oid']
 
 
 def log_in(username, password):
