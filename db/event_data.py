@@ -115,9 +115,9 @@ def create_event(uid, event_name, start_time, end_time,
     """
     event_info = {ENAME: event_name, STIME: start_time, ETIME: end_time,
                   LOC: location, DESC: description}
-    new_eid = dbc.insert_doc(EVENTS, event_info)
-    cdata.create_connection(new_eid, uid)
-    return new_eid
+    ret = dbc.insert_doc(EVENTS, event_info)
+    cdata.create_connection(ret.inserted_id, uid)
+    return ret.inserted_id
 
 
 def event_exists(eid):

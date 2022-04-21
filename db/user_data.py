@@ -91,10 +91,13 @@ def add_user(username, password, email=""):
     """
     Add a user to the database using username & password
     """
+    if "@" not in email:
+        return NOT_FOUND
     new_user = {UNAME: username, PW: password, EM: email}
     ret = dbc.insert_doc(GET_USERS, new_user)  # new uid
     print("*Attempted create user", ret)
-    return ret['$oid']
+    print("**New id =>", ret.inserted_id)
+    return ret.inserted_id
 
 
 def log_in(username, password):

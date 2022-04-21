@@ -53,7 +53,8 @@ def create_connection(eid, uid):
     """
     A function that creates a new connection
     """
-    dbc.insert_doc(GET_CONNECTS, {CUSER: uid, CEVENT: eid})
+    ret = dbc.insert_doc(GET_CONNECTS, {CUSER: uid, CEVENT: eid})
+    return ret.inserted_id
 
 
 def get_connection(eid, uid):
