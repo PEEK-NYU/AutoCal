@@ -55,10 +55,14 @@ class DBTestCase(TestCase):
 
         # add test user
         self.test_uid = udata.add_user(FAKE_USERNAME, FAKE_PW, FAKE_EM)
+        # print("Test User Created:", self.test_uid, "::", fake_data[0])
+
         # add test event
         self.test_eid = edata.create_event(self.test_uid, FAKE_ENAME,
                                            FAKE_START, FAKE_END,
                                            FAKE_LOC, FAKE_DESC)
+        # print("Test Event Created:", self.test_eid, "::", fake_data[1])
+        # print()
 
     def tearDown(self):
         self.clear_db()  # clear past testing data
@@ -69,6 +73,7 @@ class DBTestCase(TestCase):
         client[dbc.db_nm][udata.GET_USERS].delete_many({})
         client[dbc.db_nm][edata.GET_EVENTS].delete_many({})
         client[dbc.db_nm][cdata.GET_CONNECTS].delete_many({})
+        print("**User, Event, & Connects DB Cleared**")
 
     # USER TESTS
     def test_get_users(self):

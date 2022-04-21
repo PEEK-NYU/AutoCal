@@ -27,14 +27,17 @@ class EndpointTestCase(TestCase):
         self.test_uid = cu.post(fake_data[0][udata.UNAME],
                                 fake_data[0][udata.PW],
                                 fake_data[0][udata.EM])
+        print("Test User Created:", self.test_uid, "::", fake_data[0])
         # add test event
         ce = ep.CreateEvent(Resource)
         self.test_eid = ce.post(self.test_uid,
                                 fake_data[1][edata.ENAME],
-                                [fake_data[1][edata.STIME],
-                                 fake_data[1][edata.ETIME]],
-                                fake_data[1][edata.LOC],
+                                fake_data[1][edata.STIME],
+                                 fake_data[1][edata.ETIME],
+                                # fake_data[1][edata.LOC],
                                 fake_data[1][edata.DESC])
+        print("Test Event Created:", self.test_eid, "::", fake_data[1])
+        print()
 
     def tearDown(self):
         self.clear_db()  # clear database of all data
@@ -45,12 +48,28 @@ class EndpointTestCase(TestCase):
         client[dbc.db_nm][udata.GET_USERS].delete_many({})
         client[dbc.db_nm][edata.GET_EVENTS].delete_many({})
         client[dbc.db_nm][cdata.GET_CONNECTS].delete_many({})
+        print("**User, Event, & Connects DB Cleared**")
 
     def test_hello(self):
+        """ test trivial hello endpoint """
         hello = ep.HelloWorld(Resource)
         ret = hello.get()
         self.assertIsInstance(ret, dict)
         self.assertIn(ep.test_key, ret)
+
+    def test_find_users(self):
+        """ test if we can see the user collection within the database """
+        find_users = ep.ListAllUsers(Resource)
+        ret = find_users.get()
+        print("Found Users (Testing):", ret)
+        self.assertIsNot(len(ret), 0)
+
+    def test_find_events(self):
+        """ test if we can see the event collection within the database """
+        find_events = ep.ListAllEvents(Resource)
+        ret = find_events.get()
+        print("Found Users (Testing):", ret)
+        self.assertIsNot(len(ret), 0)
 
     def test_create_user(self):
         """
@@ -60,7 +79,6 @@ class EndpointTestCase(TestCase):
         users = udata.get_all_users()
         self.assertIn(self.test_uid, users.keys())
 
-    # @skip("In the middle of making this work.")
     def test_create_event(self):
         """
         See if we can successfully create a new event.

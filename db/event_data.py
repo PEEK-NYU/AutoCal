@@ -53,7 +53,7 @@ def get_all_events():
                                ETIME: event_info[ETIME],
                                LOC: event_info[LOC],
                                DESC: event_info[DESC]}
-    print("fetched events:", final_dict, "\n")
+    # print("fetched events:", final_dict, "\n")
     # print("unformatted:", ret)
     return final_dict
 
