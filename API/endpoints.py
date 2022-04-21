@@ -104,7 +104,7 @@ class GetEvent(Resource):
             return event
 
 
-@api.route('/events/create')
+@api.route('/events/create/<uid>/<eventname>/<start_time>/<end_time>/<description>')
 class CreateEvent(Resource):
     """
     This class supports creating an event
@@ -112,22 +112,19 @@ class CreateEvent(Resource):
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
     @api.response(HTTPStatus.NOT_ACCEPTABLE, 'A duplicate key')
-    def post(self, uid, event_name, event_time, location="", description=""):
+    def post(self, uid, eventname, start_time, end_time, description):
         """
         This method adds an event to the event db.
-        TODO: figure out a way for event_time
-              to work with 2 vars instead of a list
         """
-        ret = edata.create_event(uid, event_name,
-                                 event_time[0], event_time[1],
-                                 location, description)
-        if ret == udata.NOT_FOUND:
-            raise (wz.NotFound("Event db not found."))
-        else:
-            return ret
+        ret = edata.create_event(uid, eventname, start_time,
+                                 end_time, "", description)
+        # if ret == udata.NOT_FOUND:
+        #     raise (wz.NotFound("Event db not found."))
+        # else:
+        return ret
 
 
-@api.route('/events/delete/<eid>')
+@api.route('/events/delete/<eid>/<uid>')
 class DeleteEvent(Resource):
     """
     This class enables deleting an event
@@ -185,7 +182,7 @@ class GetUser(Resource):
             return user
 
 
-@api.route('/users/create')
+@api.route('/users/create/<username>/<password>/<email>')
 class CreateUser(Resource):
     """
     This class supports adding a user to the user database.
@@ -193,7 +190,7 @@ class CreateUser(Resource):
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
     @api.response(HTTPStatus.NOT_ACCEPTABLE, 'A duplicate key')
-    def post(self, username, password, email):
+    def post(self, username, password, email=""):
         """
         This method adds a user to the user database.
         """
