@@ -188,17 +188,15 @@ class CreateUser(Resource):
     This class supports adding a user to the user database.
     """
     @api.response(HTTPStatus.OK, 'Success')
-    @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
-    @api.response(HTTPStatus.NOT_ACCEPTABLE, 'A duplicate key')
+    @api.response(HTTPStatus.NOT_ACCEPTABLE, 'Bad Inputs')
     def post(self, username, password, email=""):
         """
         This method adds a user to the user database.
+        email must contain an @ symbol
         """
         ret = udata.add_user(username, password, email)
         if ret == udata.NOT_FOUND:
-            raise (wz.NotFound("User db not found."))
-        elif ret == udata.DUPLICATE:
-            raise (wz.NotAcceptable("User name already exists."))
+            raise (wz.NotAcceptable("Not suitable email: add @"))
         return ret
 
 
