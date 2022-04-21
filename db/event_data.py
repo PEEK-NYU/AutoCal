@@ -53,27 +53,7 @@ def get_all_events():
                                ETIME: event_info[ETIME],
                                LOC: event_info[LOC],
                                DESC: event_info[DESC]}
-    # print("fetched events:", final_dict, "\n")
-    # print("unformatted:", ret)
     return final_dict
-
-
-def generate_eid():
-    """
-    A function that generates a random _event_id key
-    TODO: replace with mongo method
-    Possibly Helpful:
-    'If a document arrives to the database without 
-    an _id value, then the database itself will 
-    assign an ObjectID to the _id field.'
-    
-    And to generate a new ObjectID we can do:
-    x = ObjectId()
-    
-    In this example, the value of x would be some:
-    ObjectId("507f1f77bcf86cd799439011")
-    """
-    return "eid_placeholder"
 
 
 def get_user_events(uid):
@@ -116,7 +96,7 @@ def create_event(uid, event_name, start_time, end_time,
     # TODO: check user exists without creating partial init error
     event_info = {ENAME: event_name, STIME: start_time, ETIME: end_time,
                   LOC: location, DESC: description}
-    ret = dbc.insert_doc(EVENTS, event_info)
+    ret = dbc.insert_doc(GET_EVENTS, event_info)
     cdata.create_connection(str(ret.inserted_id), uid)
     return str(ret.inserted_id)
 
