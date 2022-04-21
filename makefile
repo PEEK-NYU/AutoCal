@@ -4,10 +4,10 @@ prod: all_tests github
 
 github: FORCE
 	- git commit -a
-	git push origin overhauled
+	git push origin main
 
 dev_env: FORCE
-	- ./setup.sh PEEK_HOME
+	- ./setup.sh Autocal-nyu
 	pip install -r $(REQ_DIR)/requirements-dev.txt
 
 all_tests: FORCE
