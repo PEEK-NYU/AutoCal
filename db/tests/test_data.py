@@ -44,6 +44,8 @@ fake_e_data = {edata.ENAME: FAKE_ENAME, edata.STIME: FAKE_START,
 # aggregation of data for endpoint testing
 fake_data = [fake_u_data, fake_e_data]
 
+client = dbc.get_client()  # global inst of client
+
 
 class DBTestCase(TestCase):
     # Note: calls functions with 'test_' automatically!
@@ -63,21 +65,10 @@ class DBTestCase(TestCase):
 
     def clear_db(self):
         """ clear database of all past testing data for accuracy """
-        # TODO: complete
-        # events = edata.get_all_events()
-        # for key, value in events.items():
-        #     if fake_key in value[edata.ENAME]:
-        #         # Note: should also delete connections
-        #         edata.del_event(key, cdata.get_connection_from_eid(key))
-        # # Note: must delete users AFTER events
-        # users = udata.get_all_users()
-        # for key, value in users.items():
-        #     if fake_key in value[udata.UNAME]:
-        #         udata.del_user(key)
-        dbc.del_many(edata.GET_EVENTS, {})
-        dbc.del_many(udata.GET_USERS, {})
-        dbc.del_many(cdata.GET_CONNECTS, {})
-        # check if db is empty
+        # dbc.del_many(edata.GET_EVENTS, {})
+        client[dbc.db_nm][udata.GET_USERS].delete_many({})
+        client[dbc.db_nm][edata.GET_EVENTS].delete_many({})
+        client[dbc.db_nm][cdata.GET_CONNECTS].delete_many({})
 
     # USER TESTS
     def test_get_users(self):

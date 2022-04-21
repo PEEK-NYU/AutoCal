@@ -15,6 +15,8 @@ import db.db_connect as dbc
 
 from db.tests.test_data import fake_data
 
+client = dbc.get_client()  # global inst of client
+
 
 class EndpointTestCase(TestCase):
     def setUp(self):
@@ -38,10 +40,11 @@ class EndpointTestCase(TestCase):
         self.clear_db()  # clear database of all data
 
     def clear_db(self):
-        """ clear database of all data for testing """
-        dbc.del_many(edata.GET_EVENTS, {})
-        dbc.del_many(udata.GET_USERS, {})
-        dbc.del_many(cdata.GET_CONNECTS, {})
+        """ clear database of all past testing data for accuracy """
+        # dbc.del_many(edata.GET_EVENTS, {})
+        client[dbc.db_nm][udata.GET_USERS].delete_many({})
+        client[dbc.db_nm][edata.GET_EVENTS].delete_many({})
+        client[dbc.db_nm][cdata.GET_CONNECTS].delete_many({})
 
     def test_hello(self):
         hello = ep.HelloWorld(Resource)
