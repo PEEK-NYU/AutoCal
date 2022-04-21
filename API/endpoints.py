@@ -104,7 +104,8 @@ class GetEvent(Resource):
             return event
 
 
-@api.route('/events/create/<uid>/<eventname>/<start_time>/<end_time>/<description>')
+@api.route('/events/create/<uid>/<eventname>/'
+           '<start_time>/<end_time>/<description>')
 class CreateEvent(Resource):
     """
     This class supports creating an event
@@ -118,10 +119,10 @@ class CreateEvent(Resource):
         """
         ret = edata.create_event(uid, eventname, start_time,
                                  end_time, "", description)
-        # if ret == udata.NOT_FOUND:
-        #     raise (wz.NotFound("Event db not found."))
-        # else:
-        return ret
+        if ret == udata.NOT_FOUND:
+            raise (wz.NotFound("Event db not found."))
+        else:
+            return ret
 
 
 @api.route('/events/delete/<eid>/<uid>')

@@ -113,11 +113,12 @@ def create_event(uid, event_name, start_time, end_time,
     """
     A function that creates an event
     """
+    # TODO: check user exists without creating partial init error
     event_info = {ENAME: event_name, STIME: start_time, ETIME: end_time,
                   LOC: location, DESC: description}
     ret = dbc.insert_doc(EVENTS, event_info)
-    cdata.create_connection(ret.inserted_id, uid)
-    return ret.inserted_id
+    cdata.create_connection(str(ret.inserted_id), uid)
+    return str(ret.inserted_id)
 
 
 def event_exists(eid):
