@@ -8,7 +8,7 @@ from pathlib import Path
 
 # Creating icalendar/event
 event = Event()
-event.add('summary', 'Python meeting about calendaring')
+event.add('summary', 'Python meeting about calendaring on Autocal')
 event.add('dtstart', datetime(2021, 1, 12, 8, 0, 0, tzinfo=pytz.utc))
 event.add('dtend', datetime(2021, 1, 12, 10, 0, 0, tzinfo=pytz.utc))
 event.add('dtstamp', datetime(2021, 1, 12, 0, 10, 0, tzinfo=pytz.utc))
@@ -39,3 +39,21 @@ f.write(cal.to_ical())
 f.close()
 
 # vim: ft=python
+
+"""
+What we have here:
+
+BEGIN:VCALENDAR
+BEGIN:VEVENT
+SUMMARY:Python meeting about calendaring on Autocal
+DTSTART;VALUE=DATE-TIME:20220423T080000Z
+DTEND;VALUE=DATE-TIME:20220423T100000Z
+DTSTAMP;VALUE=DATE-TIME:20220423T001000Z
+ATTENDEE;CN="Wolverine";ROLE=REQ-PARTICIPANT:MAILTO:paulfullmoon@wolves.com
+LOCATION:Zoom Link:https://zoom.com/123456
+ORGANIZER;CN=Organizer;ROLE=Kitten:MAILTO:kitkatakora@kawaiiland.com
+END:VEVENT
+END:VCALENDAR
+
+
+"""
