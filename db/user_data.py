@@ -56,7 +56,7 @@ def get_all_users():  # Note: name change
     """
     A function to return a hashmap of all users.
     (Is this new db structure to be updated for get emails?)
-    (Currently it returns all user documents (name, email, pw, etc))
+    (Currently it returns all user documents (name, email, pw, etc~))
     """
     ret = dbc.fetch_all(GET_USERS, USERS)
     final_dict = {}
