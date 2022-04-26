@@ -81,6 +81,7 @@ class DBTestCase(TestCase):
         users = udata.get_all_users()
         self.assertIsInstance(users, dict)
         # print("Found All Users:", users)
+        # from command line, type: python -c 'import user_data; print(user_data.get_all_users())'
 
     def test_create_user(self):
         """ Was the user creation okay? """
