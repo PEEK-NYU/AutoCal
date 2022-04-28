@@ -33,6 +33,8 @@ import db.db_connect as dbc
 # import db.event_data as edata
 import db.connect_data as cdata
 
+from bson.objectid import ObjectId
+
 
 AUTOCAL_HOME = os.environ["AUTOCAL_DIR"]
 GET_USERS = "user_data"
@@ -127,7 +129,7 @@ def del_user(uid):
     if user_exists(uid) is NOT_FOUND:
         return NOT_FOUND
     cdata.del_events_by_user(uid)
-    dbc.del_one(GET_USERS, filters={USERS: uid})
+    dbc.del_one(GET_USERS, filters={USERS: ObjectId(uid)})
     return OK
 
 
@@ -137,8 +139,8 @@ def update_username(uid, new_name):
         return NOT_FOUND
     user_info = get_user(uid)
     user_info[UNAME] = new_name
-    # TODO: check if info is updated rather than replaced
-    dbc.update_one(GET_USERS, user_info, {USERS: uid})
+    # TODO: check if info is updated rather than replaced (if obj = str)
+    dbc.update_one(GET_USERS, user_info, {USERS: ObjectId(uid)})
     return OK
 
 
@@ -172,5 +174,5 @@ def update_email(uid, new_em):
     user_info = get_user(uid)
     user_info[EM] = new_em
     # TODO: check if info is updated rather than replaced
-    dbc.update_one(GET_USERS, user_info, {USERS: uid})
+    dbc.update_one(GET_USERS, user_info, {USERS: ObjectId(uid)})
     return OK
