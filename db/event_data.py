@@ -87,7 +87,9 @@ def get_event(eid):
     """
     A function that returns all event information for a given event (eid)
     """
-    return get_all_events()[eid]
+    curr_events = get_all_events()
+    # print("Getting events", curr_events[eid], " actual events:", curr_events)
+    return curr_events[eid]
 
 
 def create_event(uid, event_name, start_time, end_time,

@@ -31,7 +31,7 @@ NEW Mongo List Ref:
 import os
 import db.db_connect as dbc
 # import db.event_data as edata
-import db.connect_data as cdata
+# import db.connect_data as cdata
 
 from bson.objectid import ObjectId
 
@@ -128,7 +128,7 @@ def del_user(uid):
     # curr_users = get_all_users()
     if user_exists(uid) is NOT_FOUND:
         return NOT_FOUND
-    cdata.del_events_by_user(uid)
+    # cdata.del_events_by_user(uid)  # TODO: fix
     dbc.del_one(GET_USERS, filters={USERS: ObjectId(uid)})
     return OK
 

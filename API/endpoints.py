@@ -98,10 +98,10 @@ class GetEvent(Resource):
         Returns an event given an event ID.
         """
         event = edata.get_event(eid)
-        if not edata.event_exists(eid):
-            raise (wz.NotFound("Event db not found."))
+        if edata.event_exists(eid) == edata.NOT_FOUND:
+            raise (wz.NotFound("Event not found."))
         else:
-            return event
+            return event  # {"TEST": event} TODO: fix
 
 
 @api.route('/events/create/<uid>/<eventname>/'
@@ -177,7 +177,7 @@ class GetUser(Resource):
         Returns all information related to a user id.
         """
         user = udata.get_user(uid)
-        if udata.user_exists(uid) is udata.NOT_FOUND:
+        if udata.user_exists(uid) == udata.NOT_FOUND:
             raise (wz.NotFound("User not found."))
         else:
             return user
