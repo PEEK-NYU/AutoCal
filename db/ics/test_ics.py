@@ -1,5 +1,5 @@
 """
-WIP
+Create_ics.py tests
 """
 import db.ics.create_ics as ci
 
@@ -16,12 +16,6 @@ test_event = ci.create_event(organizer, title, start, end, desc, attendees, loca
 
 test_cal = ci.add_to_cal(test_event, 'test_calendar.ics')
 
+print("********      updated calendar file     ********\n")
 print(test_cal)
-
-
-
-
-
-
-
-
+print("\n")
