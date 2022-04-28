@@ -18,6 +18,8 @@ import os
 import db.db_connect as dbc
 import db.event_data as edata
 
+from bson.objectid import ObjectId
+
 # ref in other _data.py files
 OK = 0
 NOT_FOUND = 1
@@ -87,7 +89,8 @@ def del_connection(eid, uid):
     """
     A function that deletes a given event-user connection by id
     """
-    dbc.del_one(GET_CONNECTS, filters={CUSER: uid, CEVENT: eid})
+    dbc.del_one(GET_CONNECTS,
+                filters={CUSER: ObjectId(uid), CEVENT: ObjectId(eid)})
     return OK
 
 
@@ -100,6 +103,6 @@ def del_events_by_user(del_uid):
     for key, value in curr_connections:
         if value[CUSER] == del_uid:
             dbc.del_one(edata.GET_EVENTS,
-                        filters={edata.EVENTS: value[CEVENT]})
-            dbc.del_one(GET_CONNECTS, filters={CONNECTIONS: key})
+                        filters={edata.EVENTS: ObjectId(value[CEVENT])})
+            dbc.del_one(GET_CONNECTS, filters={CONNECTIONS: ObjectId(key)})
     return OK

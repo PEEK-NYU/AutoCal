@@ -13,7 +13,8 @@ import db.event_data as edata
 import db.connect_data as cdata
 import db.db_connect as dbc
 
-from db.tests.test_data import fake_data
+from db.tests.test_data import fake_data, fake_key
+from bson.objectid import ObjectId
 
 client = dbc.get_client()  # global inst of client
 
@@ -45,11 +46,19 @@ class EndpointTestCase(TestCase):
 
     def clear_db(self):
         """ clear database of all past testing data for accuracy """
-        # dbc.del_many(edata.GET_EVENTS, {})
-        client[dbc.db_nm][udata.GET_USERS].delete_many({})
-        client[dbc.db_nm][edata.GET_EVENTS].delete_many({})
-        client[dbc.db_nm][cdata.GET_CONNECTS].delete_many({})
-        # print("**User, Event, & Connects DB Cleared**")
+        for uid, user_info in udata.get_all_users().items():
+            if fake_key in user_info[udata.UNAME]:
+                # print("found user to delete!", user_info)
+                # delete connection and users with fake_key in them
+                client[dbc.db_nm][cdata.GET_CONNECTS]. \
+                    delete_many({cdata.CUSER: ObjectId(uid)})
+                client[dbc.db_nm][udata.GET_USERS]. \
+                    delete_one({udata.USERS: ObjectId(uid)})
+        for eid, event_info in edata.get_all_events().items():
+            if fake_key in event_info[edata.ENAME]:
+                # print("found event to delete!", event_info)
+                client[dbc.db_nm][edata.GET_EVENTS]. \
+                    delete_one({edata.EVENTS: ObjectId(eid)})
 
     def test_hello(self):
         """ test trivial hello endpoint """

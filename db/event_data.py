@@ -20,6 +20,8 @@ import os
 import db.db_connect as dbc
 import db.connect_data as cdata
 
+from bson.objectid import ObjectId
+
 # ref in other _data.py files
 OK = 0
 NOT_FOUND = 1
@@ -118,5 +120,5 @@ def del_event(eid, uid):
     if event_exists(eid) is NOT_FOUND:
         return NOT_FOUND  # check for event
     assert cdata.is_connected(eid, uid) is OK  # check user connected to event
-    dbc.del_one(GET_EVENTS, filters={EVENTS: eid})
+    dbc.del_one(GET_EVENTS, filters={EVENTS: ObjectId(eid)})
     return cdata.del_connection(eid, uid)

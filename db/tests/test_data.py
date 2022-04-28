@@ -10,6 +10,7 @@ import db.connect_data as cdata
 import db.db_connect as dbc
 
 import random
+from bson.objectid import ObjectId
 
 HUGE_NUM = 10000000000000  # (any big number)
 
@@ -69,10 +70,23 @@ class DBTestCase(TestCase):
 
     def clear_db(self):
         """ clear database of all past testing data for accuracy """
-        # dbc.del_many(edata.GET_EVENTS, {})
-        client[dbc.db_nm][udata.GET_USERS].delete_many({})
-        client[dbc.db_nm][edata.GET_EVENTS].delete_many({})
-        client[dbc.db_nm][cdata.GET_CONNECTS].delete_many({})
+        # client[dbc.db_nm][udata.GET_USERS].delete_many({})
+        # client[dbc.db_nm][edata.GET_EVENTS].delete_many({})
+        # client[dbc.db_nm][cdata.GET_CONNECTS].delete_many({})
+        for uid, user_info in udata.get_all_users().items():
+            if fake_key in user_info[udata.UNAME]:
+                # print("found user to delete!", user_info)
+                # delete connection and users with fake_key in them
+                client[dbc.db_nm][cdata.GET_CONNECTS].\
+                    delete_many({cdata.CUSER: ObjectId(uid)})
+                client[dbc.db_nm][udata.GET_USERS].\
+                    delete_one({udata.USERS: ObjectId(uid)})
+        for eid, event_info in edata.get_all_events().items():
+            if fake_key in event_info[edata.ENAME]:
+                # print("found event to delete!", event_info)
+                client[dbc.db_nm][edata.GET_EVENTS].\
+                    delete_one({edata.EVENTS: ObjectId(eid)})
+
         # print("**User, Event, & Connects DB Cleared**")
 
     # USER TESTS
@@ -81,7 +95,8 @@ class DBTestCase(TestCase):
         users = udata.get_all_users()
         self.assertIsInstance(users, dict)
         # print("Found All Users:", users)
-        # from command line, type: python -c 'import user_data; print(user_data.get_all_users())'
+        # from command line, type: python -c 'import user_data;
+        # print(user_data.get_all_users())'
 
     def test_create_user(self):
         """ Was the user creation okay? """
