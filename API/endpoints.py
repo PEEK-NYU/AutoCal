@@ -183,6 +183,24 @@ class GetUser(Resource):
             return user
 
 
+@api.route('/users/login/<username>/<password')
+class Login(Resource):
+    """
+    This endpoint returns a user id given a user's login information
+    """
+    @api.response(HTTPStatus.OK, 'Success')
+    @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
+    def get(self, username, password):
+        """
+        Returns a uid given a username and password
+        """
+        user = udata.log_in(username, password)
+        if user == udata.NOT_FOUND:
+            raise (wz.NotFound("User not found."))
+        else:
+            return user
+
+
 @api.route('/users/create/<username>/<password>/<email>')
 class CreateUser(Resource):
     """
