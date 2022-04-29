@@ -183,7 +183,7 @@ class GetUser(Resource):
             return user
 
 
-@api.route('/users/login/<username>/<password')
+@api.route('/users/login/<username>/<password>')
 class Login(Resource):
     """
     This endpoint returns a user id given a user's login information
