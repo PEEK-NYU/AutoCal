@@ -15,7 +15,7 @@ export default function Event(){
           text="Event"
         />
       </div>
-      <form>
+      <form onSubmit={e=>{e.preventDefault()}}>
         <div className="input-container">
           <Inputbox label={''} placeholder={'Event Name'}/>
         </div>

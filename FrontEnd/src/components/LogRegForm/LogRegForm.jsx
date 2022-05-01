@@ -12,7 +12,8 @@ export default function LogRegForm({setToken}){
   const [password, setPassword] = useState(0);  
   const [error, setError] = useState(undefined);
 
-  const handleLogin = (e) => { e.preventDefault()
+  const handleLogin = (e) => { 
+    e.preventDefault();
     //axios.post(`${backendurl}/users/login/${username}/${password}`)
     console.log(`${backendurl}/admin/hello`)
     axios.get(`${backendurl}/admin/hello`)
@@ -37,7 +38,7 @@ export default function LogRegForm({setToken}){
         </div>
       )}
 
-      <form>
+      <form onSubmit={e=>{e.preventDefault()}}>
         <label>
           <p>Username</p>
           <input type="text" onChange={e => setUserName(e.target.value)}/>

@@ -1,20 +1,22 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import FullCalendar from '@fullcalendar/react' // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid' // a plugin
 
 import NavButton from '../../components/NavButton/NavButton';
+import { useTokenContext } from '../../components/TokenContext/TokenContext';
 
 export default function Home(){
 
-  const [isLoggedIn, setisLoggedIn] = useState(true); //set to true for testing, should be false
+  const {token, setToken, dummy, setDummy} = useTokenContext(); //token, setToken
+  // const context = useTokenContext(); //context.token, context.setToken
 
   return (
     <div className="content">
       <h1>AutoCal</h1>
       <p> CALENDER PLANNER FOR ALL </p>
       <div>
-        {isLoggedIn ? 
-            <button onClick={() => setisLoggedIn(false)}>
+        {token ? 
+            <button onClick={() => setToken(null)}>
               Logout
             </button>
         : (

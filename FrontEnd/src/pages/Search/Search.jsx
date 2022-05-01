@@ -1,12 +1,14 @@
 //https://www.emgoto.com/react-search-bar/
 
-import React from 'react';
+import React, {useState} from 'react';
 
 import EventItem from '../../components/EventItem/EventItem';
 import PageTitle from '../../components/PageTitle/PageTitle';
 import NavButton from '../../components/NavButton/NavButton';
 
 import './Search.css';
+import axios from 'axios';
+import { backendurl } from '../../config';
 
 const events = [
   { eventname: 'Meeting1', start_time: '11:00', location: '1' },
@@ -16,6 +18,8 @@ const events = [
 ];
 
 export default function Search() {
+
+  const [query, setQuery] = useState('');
 
   //function for filtering events
   const filterEvents = (events, query) => {
@@ -27,17 +31,21 @@ export default function Search() {
         return eventname.includes(query);
     });
   };
- 
-  const { search } = window.location;
-  const query = new URLSearchParams(search).get('input'); //the input string
+
+  // prevetn ? in URL
+  const refresh = (e) => {
+    e.preventDefault();
+    setQuery(e.currentTarget.input.value)
+    //console.log(e.currentTarget.input.value);
+  }
+
   const filteredEvents = filterEvents(events, query); //list of events matching
 
   return (
     <div className="content">
-
       <PageTitle text={'Event Search'}/>
       
-      <form action="/search" method="get">
+      <form onSubmit={refresh}>
         <input
             type="text"
             id="header-search"
