@@ -5,6 +5,10 @@
 export LOCAL_MONGO=1   # we could make this a parameter!
 
 export API_PORT=8000
+export AUTOCAL_DB_PASS=autocall000
+export AUTOCAL_DIR=/home/kali/Desktop/AutoCal
+
+
 # look for a process running on $PORT:
 export server=$(ps -ef | grep "[p]ort=$API_PORT")
 echo "Server = $server"
@@ -12,7 +16,7 @@ if [ -z "$server" ]
 then
     # run local server in the background:
     echo "No running Chat API server detected: launching."
-    cd $DEMO_HOME && ./local.sh &
+    cd $AUTOCAL_DIR && ./local.sh &
 else
     echo "A server is already running on port $API_PORT"
 fi

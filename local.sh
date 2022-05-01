@@ -2,6 +2,10 @@
 
 HOST=127.0.0.1
 PORT=8000
+
+export AUTOCAL_DB_PASS=autocall000
+export AUTOCAL_DIR=/home/kali/Desktop/AutoCal
+
 if [ $ANUBIS ]
 then
     HOST=0.0.0.0
