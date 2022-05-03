@@ -13,6 +13,8 @@ import db.user_data as udata
 import db.event_data as edata
 # import db.connect_data as cdata
 
+import db.ics.create_ics as cal
+
 app = Flask(__name__)
 CORS(app)
 api = Api(app)
@@ -234,6 +236,27 @@ class DeleteUser(Resource):
         This method deletes a user from the user db.
         """
         ret = udata.del_user(uid)
+        if ret == udata.NOT_FOUND:
+            raise (wz.NotFound(f"User {uid} not found."))
+        else:
+            return f"{uid} deleted."
+
+
+@api.route('/users/calendar/<uid>/<ics_data>')
+class AddCalendar(Resource):
+    """
+    This class enables deleting a user.
+    While 'Forbidden` is a possible return value, we have not yet implemented
+    a user privileges section, so it isn't used yet.
+    """
+    @api.response(HTTPStatus.OK, 'Success')
+    @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
+    @api.response(HTTPStatus.FORBIDDEN, 'A user can only delete themselves.')
+    def post(self, uid, ics_data):
+        """
+        This method deletes a user from the user db.
+        """
+        ret = cal.add_calendar(uid, ics_data)
         if ret == udata.NOT_FOUND:
             raise (wz.NotFound(f"User {uid} not found."))
         else:
