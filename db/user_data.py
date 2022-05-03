@@ -95,11 +95,23 @@ def add_user(username, password, email=""):
     """
     Add a user to the database using username & password
     """
-    if "@" not in email:
+    if valid_email(email):
         return NOT_FOUND
     new_user = {UNAME: username, PW: password, EM: email}
     ret = dbc.insert_doc(GET_USERS, new_user)  # new uid
     return str(ret.inserted_id)
+
+
+def valid_email(email):
+    """
+    validates emails -> makes sure contains . and @
+    Note: accepts empty string case for simplicty
+    """
+    if email == "":
+        return OK
+    elif "@" not in email or "." not in email:
+        return NOT_FOUND
+    return OK
 
 
 def log_in(username, password):
@@ -133,15 +145,15 @@ def del_user(uid):
     return OK
 
 
-def update_username(uid, new_name):
-    """ Updates a user's name given a uid and new name"""
-    if user_exists(uid) is NOT_FOUND:
-        return NOT_FOUND
-    user_info = get_user(uid)
-    user_info[UNAME] = new_name
-    # TODO: check if info is updated rather than replaced (if obj = str)
-    dbc.update_one(GET_USERS, user_info, {USERS: ObjectId(uid)})
-    return OK
+# def update_username(uid, new_name):
+#     """ Updates a user's name given a uid and new name"""
+#     if user_exists(uid) is NOT_FOUND:
+#         return NOT_FOUND
+#     user_info = get_user(uid)
+#     user_info[UNAME] = new_name
+#     # TODO: check if info is updated rather than replaced (if obj = str)
+#     dbc.update_one(GET_USERS, user_info, {USERS: ObjectId(uid)})
+#     return OK
 
 
 def get_emails():
@@ -167,12 +179,12 @@ def email_exists(email):
     return NOT_FOUND
 
 
-def update_email(uid, new_em):
-    """ Updates user's email given a uid """
-    if email_exists(uid) is NOT_FOUND:
-        return NOT_FOUND
-    user_info = get_user(uid)
-    user_info[EM] = new_em
-    # TODO: check if info is updated rather than replaced
-    dbc.update_one(GET_USERS, user_info, {USERS: ObjectId(uid)})
-    return OK
+# def update_email(uid, new_em):
+#     """ Updates user's email given a uid """
+#     if email_exists(uid) is NOT_FOUND:
+#         return NOT_FOUND
+#     user_info = get_user(uid)
+#     user_info[EM] = new_em
+#     # TODO: check if info is updated rather than replaced
+#     dbc.update_one(GET_USERS, user_info, {USERS: ObjectId(uid)})
+#     return OK
