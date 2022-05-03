@@ -128,7 +128,7 @@ class EndpointTestCase(TestCase):
         self.assertEqual(test_login, self.test_uid)
 
     def test_del_event(self):
-        """ see if we can delete our test event"""
+        """ see if we can delete our test event """
         event_del = ep.DeleteEvent(Resource)
         deleted = event_del.post(self.test_eid, self.test_uid)
         self.assertNotIn(self.test_eid, edata.get_all_events().keys())

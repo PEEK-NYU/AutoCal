@@ -147,8 +147,28 @@ class DBTestCase(TestCase):
             self.assertEquals(test_data[key], value)
         # print("Event Data Found:", test_data)
 
+    def test_get_event_by_user(self):
+        """ can we get an event from our user id """
+        temp_events = edata.get_user_events(self.test_uid)
+        self.assertIn(self.test_eid, temp_events.keys())
+
+    def test_get_event_by_keyword(self):
+        """ can we get an event from our user id """
+        temp_events = edata.find_event(self.test_uid, fake_key)
+        self.assertIn(self.test_eid, temp_events.keys())
+
     def test_connection(self):
         """
         test that the connection made between our test event and user exists
         """
         self.assert_(cdata.is_connected(self.test_eid, self.test_uid))
+
+    def test_del_event(self):
+        """ see if we can delete our test event """
+        deleted = edata.del_event(self.test_eid, self.test_uid)
+        self.assertNotIn(self.test_eid, edata.get_all_events().keys())
+
+    def test_del_user(self):
+        """ see if we can delete our test user """
+        deleted = udata.del_user(self.test_uid)
+        self.assertNotIn(self.test_uid, udata.get_all_users().keys())
