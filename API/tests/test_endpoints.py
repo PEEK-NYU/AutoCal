@@ -126,3 +126,15 @@ class EndpointTestCase(TestCase):
         test_login = get_login.get(fake_data[0][udata.UNAME],
                                    fake_data[0][udata.PW])
         self.assertEqual(test_login, self.test_uid)
+
+    def test_del_event(self):
+        """ see if we can delete our test event"""
+        event_del = ep.DeleteEvent(Resource)
+        deleted = event_del.post(self.test_eid, self.test_uid)
+        self.assertNotIn(self.test_eid, edata.get_all_events().keys())
+
+    def test_del_user(self):
+        """ see if we can delete our test user """
+        user_del = ep.DeleteUser(Resource)
+        deleted = user_del.post(self.test_uid)
+        self.assertNotIn(self.test_uid, udata.get_all_users().keys())
