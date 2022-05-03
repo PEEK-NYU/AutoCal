@@ -61,11 +61,7 @@ def create_connection(eid, uid):
 
 def get_connection(eid, uid):
     """ a function that returns the connect id (cid) given (eid, uid) """
-    curr_connections = get_all_connections()
-    for key, value in curr_connections.items():
-        if value[CEVENT] == eid and value[CUSER] == uid:
-            return key
-    return NOT_FOUND
+    return dbc.fetch_one(GET_CONNECTS, filters={CUSER: uid, CEVENT: eid})
 
 
 def is_connected(eid, uid):

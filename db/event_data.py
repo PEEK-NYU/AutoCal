@@ -121,6 +121,6 @@ def del_event(eid, uid):
     """
     if event_exists(eid) is NOT_FOUND:
         return NOT_FOUND  # check for event
-    assert cdata.is_connected(eid, uid) is OK  # check user connected to event
+    assert cdata.is_connected(eid, uid)  # check user connected to event
     dbc.del_one(GET_EVENTS, filters={EVENTS: ObjectId(eid)})
     return cdata.del_connection(eid, uid)
