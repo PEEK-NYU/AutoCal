@@ -61,7 +61,11 @@ def create_connection(eid, uid):
 
 def get_connection(eid, uid):
     """ a function that returns the connect id (cid) given (eid, uid) """
-    return dbc.fetch_one(GET_CONNECTS, filters={CUSER: uid, CEVENT: eid})
+    ret = dbc.fetch_one(GET_CONNECTS, filters={CUSER: uid, CEVENT: eid})
+    if ret is None:
+        return NOT_FOUND
+    else:
+        return ret
 
 
 def is_connected(eid, uid):
@@ -85,8 +89,9 @@ def del_connection(eid, uid):
     """
     A function that deletes a given event-user connection by id
     """
+    cid = get_connection(eid, uid)[CONNECTIONS]
     dbc.del_one(GET_CONNECTS,
-                filters={CUSER: ObjectId(uid), CEVENT: ObjectId(eid)})
+                filters={CONNECTIONS: ObjectId(cid)})  # CUSER: uid
     return OK
 
 
@@ -98,7 +103,6 @@ def del_events_by_user(del_uid):
     curr_connections = get_all_connections()
     for key, value in curr_connections:
         if value[CUSER] == del_uid:
-            dbc.del_one(edata.GET_EVENTS,
-                        filters={edata.EVENTS: ObjectId(value[CEVENT])})
+            edata.del_event(value[CEVENT], del_uid)
             dbc.del_one(GET_CONNECTS, filters={CONNECTIONS: ObjectId(key)})
     return OK

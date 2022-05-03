@@ -45,6 +45,9 @@ def get_client():
                                     + "retryWrites=true&w=majority",
                                     server_api=ServerApi('1'), tls=True,
                                     tlsAllowInvalidCertificates=True)
+            """ Prof's Comparison:
+                mongodb+srv://koukoumongo1.yud9b.mongodb.net/
+                apiDB" --apiVersion 1 --username gcallah """
     return client
 
 
