@@ -97,6 +97,12 @@ class EndpointTestCase(TestCase):
         events = edata.get_all_events()
         self.assertIn(self.test_eid, events.keys())
 
+    def test_find_event(self):
+        """ see if we can find an event with our user """
+        events = ep.ListEvents()
+        our_events = events.get(self.test_uid)
+        self.assertIn(self.test_eid, our_events)
+
     def test_get_user(self):
         """ see if we can fetch a user again """
         get_user = ep.GetUser(Resource)
@@ -113,3 +119,10 @@ class EndpointTestCase(TestCase):
         self.assertEqual(temp_event_info[edata.STIME], fake_data[1][edata.STIME])
         self.assertEqual(temp_event_info[edata.ETIME], fake_data[1][edata.ETIME])
         self.assertEqual(temp_event_info[edata.DESC], fake_data[1][edata.DESC])
+
+    def test_login(self):
+        """ see if we can log into a user again """
+        get_login = ep.Login(Resource)
+        test_login = get_login.get(fake_data[0][udata.UNAME],
+                                   fake_data[0][udata.PW])
+        self.assertEqual(test_login, self.test_uid)
