@@ -28,8 +28,8 @@ DUPLICATE = 2
 AUTOCAL_HOME = os.environ["AUTOCAL_DIR"]
 GET_CONNECTS = "connections"
 CONNECTIONS = "_id"
-CUSER = "UID"
-CEVENT = "EID"
+CUSER = "uid"
+CEVENT = "eid"
 
 client = dbc.get_client()
 if client is None:

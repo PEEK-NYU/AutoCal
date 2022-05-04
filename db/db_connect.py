@@ -5,7 +5,7 @@ This file contains some common MongoDB code.
 import os
 import json
 import pymongo as pm
-from pymongo.server_api import ServerApi
+# from pymongo.server_api import ServerApi
 import bson.json_util as bsutil
 
 
@@ -35,19 +35,24 @@ def get_client():
     """
     global client
     if client is None:  # only do this once
+
         if os.environ.get("LOCAL_MONGO", REMOTE) == LOCAL:
             print("Connecting to Mongo locally.")
             client = pm.MongoClient()
         else:
             print("Connecting to Mongo remotely.")
-            client = pm.MongoClient(f"mongodb+srv://{user_nm}:{passwd}@"
-                                    + f"{cloud_svc}/{db_nm}?"
-                                    + "retryWrites=true&w=majority",
-                                    server_api=ServerApi('1'), tls=True,
-                                    tlsAllowInvalidCertificates=True)
-            """ Prof's Comparison:
-                mongodb+srv://koukoumongo1.yud9b.mongodb.net/
-                apiDB" --apiVersion 1 --username gcallah """
+            client = pm.MongoClient("mongodb+srv://AutoCal1:autocal000@"
+                                    + "cluster1.trnwt.mongodb.net/"
+                                    + "AutoCalDB?retryWrites="
+                                    + "true&w=majority")
+            # client = pm.MongoClient(f"mongodb+srv://{user_nm}:{passwd}@"
+            #                         + f"{cloud_svc}/{db_nm}?"
+            #                         + "retryWrites=true&w=majority",
+            #                         server_api=ServerApi('1'), tls=True,
+            #                         tlsAllowInvalidCertificates=True)
+        """ Prof's Comparison:
+            mongodb+srv://koukoumongo1.yud9b.mongodb.net/
+            apiDB" --apiVersion 1 --username gcallah """
     return client
 
 
