@@ -69,11 +69,14 @@ class DBTestCase(TestCase):
     def tearDown(self):
         self.clear_db()  # clear past testing data
 
+    def admin_clear_db(self):
+        """ clear all of db (not just test data) """
+        client[dbc.db_nm][udata.GET_USERS].delete_many({})
+        client[dbc.db_nm][edata.GET_EVENTS].delete_many({})
+        client[dbc.db_nm][cdata.GET_CONNECTS].delete_many({})
+
     def clear_db(self):
         """ clear database of all past testing data for accuracy """
-        # client[dbc.db_nm][udata.GET_USERS].delete_many({})
-        # client[dbc.db_nm][edata.GET_EVENTS].delete_many({})
-        # client[dbc.db_nm][cdata.GET_CONNECTS].delete_many({})
         for uid, user_info in udata.get_all_users().items():
             if fake_key in user_info[udata.UNAME]:
                 # print("found user to delete!", user_info)

@@ -41,7 +41,7 @@ def get_client():
             client = pm.MongoClient()
         else:
             print("Connecting to Mongo remotely.")
-            client = pm.MongoClient("mongodb+srv://AutoCal1:autocal000@"
+            client = pm.MongoClient(f"mongodb+srv://{user_nm}:autocal000@"
                                     + "cluster1.trnwt.mongodb.net/"
                                     + "AutoCalDB?retryWrites="
                                     + "true&w=majority")
