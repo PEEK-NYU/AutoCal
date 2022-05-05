@@ -59,17 +59,18 @@ def convert_event_dict(ics_data):
     # event_data = {edata.ENAME: "", edata.STIME: "", edata.ETIME: "",
     #               edata.LOC: "", edata.DESC: ""}
     # TODO: finish
-    return {}
+    yield {}
 
 
 def add_calendar(uid, ics_data):
     """ takes in a uid and ics data and imports an event """
     if not udata.user_exists(uid):
         return NOT_FOUND
-    event_data = convert_event_dict(ics_data)
-    if len(event_data) == 0:
-        return NOT_FOUND
-    edata.create_event(uid, event_data[edata.ENAME], event_data[edata.STIME],
-                       event_data[edata.ETIME], event_data[edata.LOC],
-                       event_data[edata.DESC])
+
+    # if len(event_data) == 0:
+    #     return NOT_FOUND
+    for event_data in convert_event_dict(ics_data):
+        edata.create_event(uid, event_data[edata.ENAME], event_data[edata.STIME],
+                           event_data[edata.ETIME], event_data[edata.LOC],
+                           event_data[edata.DESC])
     return OK
