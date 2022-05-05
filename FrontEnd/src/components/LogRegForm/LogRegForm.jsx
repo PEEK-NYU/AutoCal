@@ -1,27 +1,28 @@
 import React, {useState} from 'react';
-import PropTypes from 'prop-types';
 import axios from 'axios';
+import { useTokenContext } from '../../components/TokenContext/TokenContext';
+import {useHistory} from 'react-router-dom';
+
 
 import {backendurl} from '../../config';
 import './LogRegForm.css';
 
 
-export default function LogRegForm({setToken}){
+export default function LogRegForm(){
 
+  const history = useHistory();
   const [username, setUserName] = useState('');
-  const [password, setPassword] = useState(0);  
+  const [password, setPassword] = useState('');  
   const [error, setError] = useState(undefined);
+  const {token, setToken} = useTokenContext(); //token, setToken
 
   const handleLogin = (e) => { 
     e.preventDefault();
-    //axios.post(`${backendurl}/users/login/${username}/${password}`)
-    console.log(`${backendurl}/admin/hello`)
-    axios.get(`${backendurl}/admin/hello`)
+    axios.get(`${backendurl}/users/login/${username}/${password}`)
       .then((response) => {
         console.log(response.data);
-        //triiger navigation to home
-        //set token to user id
-        //setRefresh(refresh + 1);
+        setToken(response.data);
+        history.push('/');
       })
       .catch(error => {
         setError(error);
@@ -54,8 +55,3 @@ export default function LogRegForm({setToken}){
     </div>
   )
 }
-
-// // Add in the PropType from the new prop and destructure the props object to pull out the setToken prop
-// LogRegForm.propTypes = {
-//   setToken: PropTypes.func.isRequired
-// }

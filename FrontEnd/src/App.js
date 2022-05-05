@@ -5,7 +5,8 @@ import Home from './pages/Home/Home';
 import Test from './pages/Test/Test';
 import Rooms from './pages/Rooms/Rooms';
 import Users from './pages/Users/Users';
-import LogReg from './pages/LogReg/LogReg';
+import Login from './pages/Login/Login';
+import Register from './pages/Register/Register';
 import Event from './pages/Event/Event';
 import Account from './pages/Account/Account';
 import Search from './pages/Search/Search';
@@ -14,7 +15,6 @@ import { TokenContextProvider } from './components/TokenContext/TokenContext';
 import {backendurl} from './config';
 
 import './App.css';
-
 
 
 function App() {
@@ -42,8 +42,12 @@ function App() {
                 <Users />
               </Route>
 
-              <Route exact={true} path={'/logreg'}>
-                <LogReg />
+              <Route exact={true} path={'/login'}>
+                <Login />
+              </Route>
+
+              <Route exact={true} path={'/register'}>
+                <Register />
               </Route>
 
               <Route exact={true} path={'/events_edit'}>

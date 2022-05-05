@@ -103,7 +103,7 @@ class GetEvent(Resource):
         if edata.event_exists(eid) == edata.NOT_FOUND:
             raise (wz.NotFound("Event not found."))
         else:
-            return event  # {"TEST": event} TODO: fix
+            return event  # TODO: fix
 
 
 @api.route('/events/create/<uid>/<eventname>/'
@@ -245,13 +245,10 @@ class DeleteUser(Resource):
 @api.route('/users/calendar/<uid>/<ics_data>')
 class AddCalendar(Resource):
     """
-    This class enables deleting a user.
-    While 'Forbidden` is a possible return value, we have not yet implemented
-    a user privileges section, so it isn't used yet.
+    This class enables adding user calendar info given ics data.
     """
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
-    @api.response(HTTPStatus.FORBIDDEN, 'A user can only delete themselves.')
     def post(self, uid, ics_data):
         """
         This method deletes a user from the user db.

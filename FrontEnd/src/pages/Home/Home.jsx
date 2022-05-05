@@ -14,21 +14,27 @@ export default function Home(){
     <div className="content">
       <h1>AutoCal</h1>
       <p> CALENDER PLANNER FOR ALL </p>
-      <div>
-        {token ? 
+      {token ? 
+          <div>
             <button onClick={() => setToken(null)}>
               Logout
             </button>
-        : (
-            <NavButton text={'Login/Register'} subpath={'/logreg'}/>
-        )}
-      </div>
-      <FullCalendar
-        plugins={[ dayGridPlugin ]}
-        initialView="dayGridMonth"
-        aspectRatio={2}
-        height={500}
-      />
+            <NavButton text={'Account Settings'} subpath={'/account'}/>
+            <NavButton text={'Event Search'} subpath={'/search'}/>
+            <NavButton text={'Import'} subpath={'/'}/>
+          </div>
+      : (
+          <div>
+            <NavButton text={'Login'} subpath={'/login'}/>
+            <NavButton text={'Register'} subpath={'/register'}/>
+            <FullCalendar
+              plugins={[ dayGridPlugin ]}
+              initialView="dayGridMonth"
+              aspectRatio={2}
+              height={500}
+            />
+          </div>
+      )}
     </div>
   );
 };

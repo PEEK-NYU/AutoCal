@@ -2,10 +2,10 @@
 
 # See if something is already running on our port.
 
-export LOCAL_MONGO=1   # we could make this a parameter!
+export LOCAL_MONGO=0   # we could make this a parameter!
 
 export API_PORT=8000
-export AUTOCAL_DB_PASS=autocall000
+export AUTOCAL_DB_PASS=autocal000
 export AUTOCAL_DIR=/home/kali/Desktop/AutoCal
 
 

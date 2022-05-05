@@ -83,13 +83,16 @@ def find_event(uid, keyword):
     return event_list
 
 
-def get_event(eid):
+def get_event(new_eid):
     """
     A function that returns all event information for a given event (eid)
     """
     curr_events = get_all_events()
     # print("Getting events", curr_events[eid], " actual events:", curr_events)
-    return curr_events[eid]
+    for eid, event_info in curr_events.items():
+        if eid == new_eid:  # connection_data.py
+            return event_info
+    return NOT_FOUND
 
 
 def create_event(uid, event_name, start_time, end_time,
