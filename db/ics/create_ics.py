@@ -69,8 +69,15 @@ def add_calendar(uid, ics_data):
 
     # if len(event_data) == 0:
     #     return NOT_FOUND
+    has_imported = False
     for event_data in convert_event_dict(ics_data):
+        if bool(event_data):  # bool checks if empty
+            if has_imported:
+                return OK
+            else:
+                return NOT_FOUND
         edata.create_event(uid, event_data[edata.ENAME], event_data[edata.STIME],
                            event_data[edata.ETIME], event_data[edata.LOC],
                            event_data[edata.DESC])
+        has_imported = True
     return OK
