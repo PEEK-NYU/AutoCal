@@ -65,7 +65,7 @@ def convert_event_dict(ics_data):
     # TODO: finish 
     result = jicson.fromFile(ics_data) # to dict
         
-    return result # returns dictionary of ?
+    return result
 
 
 def add_calendar(uid, ics_data):

@@ -1,5 +1,5 @@
 import pytest
-import json
+#import json
 from ics import Event
 import db.ics.create_ics as c_ics
 
@@ -23,7 +23,7 @@ def test_convert_event_dict():
     """
     Convert ics to dict
     """
-    new_event_dict = c_ics.convert_event_dict('./demo_calendar.ics')
+    new_event_dict = c_ics.convert_event_dict('demo_calendar.ics')
     assert isinstance(new_event_dict,dict)
 
 def test_uid_add_calendar(): 
