@@ -88,7 +88,7 @@ class ListEvents(Resource):
             return events
 
 
-@api.route('/events/get/<eid>')
+@api.route('/events/get_by_eid/<eid>')
 class GetEvent(Resource):
     """
     This endpoint returns an event given an event ID.
@@ -99,10 +99,12 @@ class GetEvent(Resource):
         """
         Returns an event given an event ID.
         """
+        print("Accessed this method!!")
         event = edata.get_event(eid)
-        if edata.event_exists(eid) == edata.NOT_FOUND:
+        if event == edata.NOT_FOUND:
             raise (wz.NotFound("Event not found."))
         else:
+            print("Got to the proper output place")
             return event  # TODO: fix
 
 
