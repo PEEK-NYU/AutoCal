@@ -1,6 +1,7 @@
 //https://www.emgoto.com/react-search-bar/
 
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import { useTokenContext } from '../../components/TokenContext/TokenContext';
 
 import EventItem from '../../components/EventItem/EventItem';
 import PageTitle from '../../components/PageTitle/PageTitle';
@@ -19,7 +20,31 @@ const events = [
 
 export default function Search() {
 
+  const {token, setToken} = useTokenContext(); //token, setToken
   const [query, setQuery] = useState('');
+  const [error, setError] = useState('');
+  // const [events, setEvents] = useState(undefined);
+
+  useEffect(() => {
+    axios.get(`${backendurl}/events/get/${token}`)
+      .then((response) => {
+        var keys = Object.keys(response.data);
+        var key0 = keys[0];
+        console.log(response.data[key0]);
+        console.log(keys);
+        console.log(key0);
+        console.log(token);
+        console.log(events);
+        // console.log(response.data[token]); //the field is the token, how to access?
+        // if (response.data){
+        //   setEvents(response.data[key0]);
+        // }
+      })
+      .catch(error => {
+        console.log(error);
+        setError(error);
+      });
+  }, [])
 
   //function for filtering events
   const filterEvents = (events, query) => {
@@ -32,7 +57,7 @@ export default function Search() {
     });
   };
 
-  // prevetn ? in URL
+  // prevent ? in URL
   const refresh = (e) => {
     e.preventDefault();
     setQuery(e.currentTarget.input.value)
