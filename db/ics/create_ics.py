@@ -11,6 +11,7 @@ from ics import Calendar, Event
 from db import user_data as udata
 # from db import connect_data
 from db import event_data as edata
+import jicson # Python ICS to JSon library @ https://github.com/CalyFactory/python-jicson
 
 cal = Calendar()  # demo empty calendar
 
@@ -21,8 +22,9 @@ DUPLICATE = 2
 
 def create_event(organizer, title, start, end, desc, attendees=None,
                  location=None):  # noqa E501
-    """ ... """
-    # TODO: Create event object with entered data....
+    """ 
+    Create event object with user's event details 
+    """
     new_event = Event(name=title)
     new_event.organizer = organizer
     new_event.begin = start
@@ -39,10 +41,12 @@ def create_event(organizer, title, start, end, desc, attendees=None,
     return new_event
 
 
-def add_to_cal(event, file):
-    """ ... """
+def add_to_cal(event, user_ics_data):
+    """ 
+    Add event to user ics file 
+    """
     cal.events.add(event)
-    with open(file, 'w') as my_file:
+    with open(user_ics_data, 'w') as my_file:
         my_file.writelines(cal)
     return cal
 
@@ -58,8 +62,10 @@ def convert_event_dict(ics_data):
     """
     # event_data = {edata.ENAME: "", edata.STIME: "", edata.ETIME: "",
     #               edata.LOC: "", edata.DESC: ""}
-    # TODO: finish
-    return {}
+    # TODO: finish 
+    result = jicson.fromFile(ics_data) # to dict
+        
+    return result # returns dictionary of ?
 
 
 def add_calendar(uid, ics_data):
@@ -73,3 +79,10 @@ def add_calendar(uid, ics_data):
                        event_data[edata.ETIME], event_data[edata.LOC],
                        event_data[edata.DESC])
     return OK
+
+#def ics_parse(ics_data, event):
+# #   """
+#    Function to take in ICS Data and output suggested event time
+#    """
+#
+#    return
