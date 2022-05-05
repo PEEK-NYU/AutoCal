@@ -6,14 +6,14 @@ Manipulate calendars, connects extsiting users to events and
     stores event data in database
 """
 
-# from ics import Calendar, Event
-# from datetime import datetime
+from ics import Calendar, Event
+from datetime import datetime
 from db import user_data as udata
 # from db import connect_data
 from db import event_data as edata
 import jicson # Python ICS to JSon library @ https://github.com/CalyFactory/python-jicson
 
-# cal = Calendar()  # demo empty calendar
+cal = Calendar()  # demo empty calendar
 
 OK = 0
 NOT_FOUND = 1
