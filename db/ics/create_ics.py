@@ -63,9 +63,12 @@ def convert_event_dict(ics_data):
     cal = result['VCALENDAR']
     events = cal[0]['VEVENT']
     event_date = {}
-    for event in events:
-        event_data = {edata.ENAME: event['SUMMARY'], edata.STIME: event['DTSTART'], edata.ETIME: event['DTEND'],
-                     edata.LOC: event['LOCATION'], edata.DESC: event['DESCRIPTION']}
+    if len(events)>0:
+        for event in events:
+            event_data = {edata.ENAME: event['SUMMARY'], edata.STIME: event['DTSTART'], edata.ETIME: event['DTEND'],
+                        edata.LOC: event['LOCATION'], edata.DESC: event['DESCRIPTION']}
+            yield event_data
+    else:
         yield event_data
 
 def add_calendar(uid, ics_data):
