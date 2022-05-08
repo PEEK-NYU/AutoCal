@@ -53,7 +53,7 @@ export default function Search() {
   const filteredEvents = filterEvents(events, query); //list of events matching
 
   return (
-    <div className="content">
+    <div className="Search">
       <PageTitle text={'Event Search'}/>
       
       <form onSubmit={refresh}>
@@ -72,6 +72,7 @@ export default function Search() {
             key={`${event.eventname}-${index}`}
             name={event.eventname}
             start_time={event.start_time}
+            end_time={event.end_time}
             location={event.location}
           />
         )) : (

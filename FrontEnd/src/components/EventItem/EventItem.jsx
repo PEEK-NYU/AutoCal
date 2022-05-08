@@ -2,14 +2,13 @@ import React from 'react';
 
 import './EventItem.css';
 
-export default function EventItem({name, start_time, location}) {
+export default function EventItem({name, start_time, end_time, location}) {
   return (
     <div className="event-item">
-      <p> {name} </p>
-      <p> {start_time} </p>
-      <p> {location} </p>
+      <h2> {name} </h2>
+      <p> start@ {start_time} </p>
+      <p> end@ {end_time} </p>
+      <p> location@ {location} </p>
     </div>
   );
 }
-
-

@@ -26,7 +26,7 @@ export default function Home(){
               <ul className = "NavBar">
                 <li><NavButton text={'Account Settings'} subpath={'/account'}/></li>
                 <li><NavButton text={'Event Search'} subpath={'/search'}/></li>
-                <li><NavButton text={'Import'} subpath={'/import'}/></li>
+                <li><NavButton text={'Add Event'} subpath={'/add'}/></li>
                 <li><NavButton text={'Import'} subpath={'/import'}/></li>
               </ul> 
               <div className = 'Calendar'>
@@ -49,7 +49,7 @@ export default function Home(){
               <ul className = "NavBar">
                 <li><NavButton text={'Account Settings'} subpath={'/'}/></li>
                 <li><NavButton text={'Event Search'} subpath={'/'}/></li>
-                <li><NavButton text={'Import'} subpath={'/'}/></li>
+                <li><NavButton text={'Add Event'} subpath={'/'}/></li>
                 <li><NavButton text={'Import'} subpath={'/'}/></li>
               </ul> 
               <div className = 'Calendar'>

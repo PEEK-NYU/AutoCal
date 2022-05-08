@@ -1,20 +1,27 @@
 .event-item {
-  width: 100%;
   padding: 10px;
-  display: flex;
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
   border-radius: 5px;
   border: 1px solid #94A3B8;
   background-color: green;
   opacity: 0.3;
+  color: blue;
+  font-weight:1000;
 }
 
 .event-item p {
-  border: 1px groove #ff0000; 
-  border-radius: 5px;
-  padding: 5px;
-  overflow-x: scroll; 
-  overflow-y: hidden; 
+  margin-left: 5px;
+  margin-right: 5px;
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   text-align: center;
+}
+
+.event-item h2 {
+  color: #ff0000;
 }

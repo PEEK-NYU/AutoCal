@@ -43,36 +43,36 @@ export default function Account(){
 
       <div className="setNewemail">
       <p>Email Address: {email}</p>
-        <button onClick={() => setNewemail(!newemail)}>Set New Email</button>
+        {/* <button onClick={() => setNewemail(!newemail)}>Set New Email</button>
         {newemail && (
           <form onSubmit={e=>{e.preventDefault()}}>
             <Inputbox label={''} placeholder={'New Email Address'}/>
             <input type="submit" value="Update" /> 
           </form>
-        )}
+        )} */}
       </div>
 
       <div className="setNewusrname">
         <p>User Name: {usrname}</p>
-        <button onClick={() => setNewusrname(!newusrname)}>Set New User Name</button>
+        {/* <button onClick={() => setNewusrname(!newusrname)}>Set New User Name</button>
         {newusrname && (
           <form onSubmit={e=>{e.preventDefault()}}>
             <Inputbox label={''} placeholder={'New User Name'}/>
             <input type="submit" value="Update" /> 
           </form>
-        )}
+        )} */}
       </div>
 
       <div className="setNewpasswrd">
         <p>Password: {passwrd}</p>
-        <button onClick={() => setNewpasswrd(!newpasswrd)}>Set New Password</button>
+        {/* <button onClick={() => setNewpasswrd(!newpasswrd)}>Set New Password</button>
         {newpasswrd && (
           <form onSubmit={e=>{e.preventDefault()}}>
             <Inputbox label={''} placeholder={'New Password'}/>
             <Inputbox label={''} placeholder={'Confirm New Password'}/>
             <input type="submit" value="Update" /> 
           </form>
-        )}
+        )} */}
       </div>
 
       <div>

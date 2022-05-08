@@ -5,10 +5,10 @@ import Home from './pages/Home/Home';
 import Test from './pages/Test/Test';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
-import Event from './pages/Event/Event';
 import Account from './pages/Account/Account';
 import Search from './pages/Search/Search';
 import Import from './pages/Import/Import';
+import Add from './pages/Add/Add';
 import { TokenContextProvider } from './components/TokenContext/TokenContext';
 
 import {backendurl} from './config';
@@ -41,10 +41,6 @@ function App() {
                 <Register />
               </Route>
 
-              <Route exact={true} path={'/events_edit'}>
-                <Event />
-              </Route>
-
               <Route exact={true} path={'/account'}>
                 <Account />
               </Route>
@@ -55,6 +51,10 @@ function App() {
 
               <Route exact={true} path={'/import'}>
                 <Import />
+              </Route>
+
+              <Route exact={true} path={'/add'}>
+                <Add />
               </Route>
 
             </Switch>
