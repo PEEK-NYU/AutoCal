@@ -217,6 +217,8 @@ class DBTestCase(TestCase):
         """ testing that ics parsing works """
         test_cal = idata.add_calendar(self.test_uid, FAKE_ics)
         self.assertNotEqual(test_cal, udata.NOT_FOUND)
+        print("ICS stuff:", test_cal)
+        assert False
 
     # DELETION TESTS
     def test_del_event(self):
