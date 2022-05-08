@@ -22,6 +22,10 @@ else
 fi
 
 export REACT_APP_BACKEND_URL=http://127.0.0.1:$API_PORT/
+
+
+#npm install
+#npm install @fullcalendar/react @fullcalendar/daygrid
 npm run start
 echo "If you need to kill the API Server, you can run the ps command and kill its PID."
 

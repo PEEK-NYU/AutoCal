@@ -1,16 +1,37 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
+import { useTokenContext } from '../../components/TokenContext/TokenContext';
 
 import PageTitle from '../../components/PageTitle/PageTitle';
 import NavButton from '../../components/NavButton/NavButton'
 import Inputbox from '../../components/Inputbox/Inputbox'
 
+import { backendurl } from '../../config';
 
 export default function Account(){
 
-  const [newemail, setNewemail] = useState(false);
-  const [newusrname, setNewusrname] = useState(false);
-  const [newpasswrd, setNewpasswrd] = useState(false);
+  const {token, setToken} = useTokenContext(); //token, setToken
+  const [newemail, setNewemail] = useState('');
+  const [newusrname, setNewusrname] = useState('');
+  const [newpasswrd, setNewpasswrd] = useState('');
+  const [email, setEmail] = useState('');
+  const [usrname, setUsrname] = useState('');
+  const [passwrd, setPasswrd] = useState('');
+  const [error, setError] = useState('');
 
+  useEffect(() => {
+    axios.get(`${backendurl}/users/get/${token}`)
+      .then((response) => {
+        console.log(response.data);
+        setEmail(response.data.email);
+        setUsrname(response.data.username);
+        setPasswrd(response.data.password);
+      })
+      .catch(error => {
+        console.log(error);
+        setError(error);
+      });
+  }, [])
 
   return (
     <div className="content">
@@ -20,16 +41,8 @@ export default function Account(){
         />
       </div>
 
-      <div className="Info">
-        <label>Email Address:</label>
-        <p>----</p>
-        <label>User Name:</label>
-        <p>----</p>
-        <label>Password:</label>
-        <p>----</p>
-      </div>
-
       <div className="setNewemail">
+      <p>Email Address: {email}</p>
         <button onClick={() => setNewemail(!newemail)}>Set New Email</button>
         {newemail && (
           <form onSubmit={e=>{e.preventDefault()}}>
@@ -40,6 +53,7 @@ export default function Account(){
       </div>
 
       <div className="setNewusrname">
+        <p>User Name: {usrname}</p>
         <button onClick={() => setNewusrname(!newusrname)}>Set New User Name</button>
         {newusrname && (
           <form onSubmit={e=>{e.preventDefault()}}>
@@ -50,6 +64,7 @@ export default function Account(){
       </div>
 
       <div className="setNewpasswrd">
+        <p>Password: {passwrd}</p>
         <button onClick={() => setNewpasswrd(!newpasswrd)}>Set New Password</button>
         {newpasswrd && (
           <form onSubmit={e=>{e.preventDefault()}}>

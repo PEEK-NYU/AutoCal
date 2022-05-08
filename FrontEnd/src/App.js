@@ -10,11 +10,12 @@ import Register from './pages/Register/Register';
 import Event from './pages/Event/Event';
 import Account from './pages/Account/Account';
 import Search from './pages/Search/Search';
+import Import from './pages/Import/Import';
 import { TokenContextProvider } from './components/TokenContext/TokenContext';
 
 import {backendurl} from './config';
 
-import './App.css';
+//import './App.css';
 
 
 function App() {
@@ -60,6 +61,10 @@ function App() {
 
               <Route exact={true} path={'/search'}>
                 <Search />
+              </Route>
+
+              <Route exact={true} path={'/import'}>
+                <Import />
               </Route>
 
             </Switch>

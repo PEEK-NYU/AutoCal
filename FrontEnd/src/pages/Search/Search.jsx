@@ -11,34 +11,19 @@ import './Search.css';
 import axios from 'axios';
 import { backendurl } from '../../config';
 
-const events = [
-  { eventname: 'Meeting1', start_time: '11:00', location: '1' },
-  { eventname: 'Meeting2', start_time: '12:00', location: '2' },
-  { eventname: 'Gym', start_time: '13:00', location: '3' },
-  { eventname: 'Bar', start_time: '14:00', location: '4' },
-];
 
 export default function Search() {
 
   const {token, setToken} = useTokenContext(); //token, setToken
   const [query, setQuery] = useState('');
   const [error, setError] = useState('');
-  // const [events, setEvents] = useState(undefined);
+  const [events, setEvents] = useState({});
 
   useEffect(() => {
     axios.get(`${backendurl}/events/get/${token}`)
       .then((response) => {
-        var keys = Object.keys(response.data);
-        var key0 = keys[0];
-        console.log(response.data[key0]);
-        console.log(keys);
-        console.log(key0);
-        console.log(token);
-        console.log(events);
-        // console.log(response.data[token]); //the field is the token, how to access?
-        // if (response.data){
-        //   setEvents(response.data[key0]);
-        // }
+        setEvents(response.data);
+        console.log(Object.values(response.data));
       })
       .catch(error => {
         console.log(error);
@@ -46,23 +31,24 @@ export default function Search() {
       });
   }, [])
 
-  //function for filtering events
-  const filterEvents = (events, query) => {
-    if (!query) {
-        return events;
-    }
-    return events.filter((event) => {
-        const eventname = event.eventname.toLowerCase();
-        return eventname.includes(query);
-    });
-  };
-
   // prevent ? in URL
   const refresh = (e) => {
     e.preventDefault();
     setQuery(e.currentTarget.input.value)
     //console.log(e.currentTarget.input.value);
   }
+
+  //function for filtering events
+  const filterEvents = (events, query) => {
+
+    if (!query) {
+        return Object.values(events);
+    }
+    return Object.values(events).filter((event) => {
+        const eventname = event.eventname.toLowerCase();
+        return eventname.includes(query);
+    });
+  };
 
   const filteredEvents = filterEvents(events, query); //list of events matching
 
@@ -83,7 +69,7 @@ export default function Search() {
       <div className="event-list">
         {filteredEvents ? filteredEvents.map((event, index) => (
           <EventItem
-            key={`${event.evetnname}-${index}`}
+            key={`${event.eventname}-${index}`}
             name={event.eventname}
             start_time={event.start_time}
             location={event.location}

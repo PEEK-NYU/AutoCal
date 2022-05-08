@@ -8,6 +8,8 @@ import {backendurl} from '../../config';
 import PageTitle from '../../components/PageTitle/PageTitle';
 import NavButton from '../../components/NavButton/NavButton';
 
+import './login.css'
+
 
 export default function Login(){
 
@@ -32,12 +34,10 @@ export default function Login(){
   }
 
   return (
-    <div className="content">
-      <div className="login-header">
+    <div className="Login">
         <PageTitle
           text="Login"
         />
-      </div>
 
       {error && (
           <div className="login-error-box">

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './pagetitle.css';
+//import './pagetitle.css';
 
 export default function PageTitle({text}) {
   return (
