@@ -20,7 +20,7 @@ NOT_FOUND = 1
 DUPLICATE = 2
 
 
-#def create_event(organizer, title, start, end, desc, attendees=None,
+# def create_event(organizer, title, start, end, desc, attendees=None,
 #                 location=None):  # noqa E501
 #    """ 
 #    Create event object with user's event details 
@@ -41,7 +41,7 @@ DUPLICATE = 2
 #    return new_event
 #
 #
-#def add_to_cal(event, user_ics_data):
+# def add_to_cal(event, user_ics_data):
 #    """ 
 #    Add event to user ics file 
 #    """
@@ -72,21 +72,26 @@ def convert_event_dict(ics_data):
 
 
 def add_calendar(uid, ics_data):
-    """ takes in a uid and ics data and imports an event """
+    """
+    takes in a uid and ics data and imports an event
+    returns input data on success
+    """
     if not udata.user_exists(uid):
         return NOT_FOUND
-
     # if len(event_data) == 0:
     #     return NOT_FOUND
+
     has_imported = False
+    input_data = []
     for event_data in convert_event_dict(ics_data):
         if bool(event_data):  # bool checks if empty
             if has_imported:
-                return OK
+                return input_data
             else:
                 return NOT_FOUND
+        input_data.append(ics_data)
         edata.create_event(uid, event_data[edata.ENAME], event_data[edata.STIME],
                            event_data[edata.ETIME], event_data[edata.LOC],
                            event_data[edata.DESC])
         has_imported = True
-    return OK
+    return input_data

@@ -140,7 +140,7 @@ class DeleteEvent(Resource):
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
     @api.response(HTTPStatus.FORBIDDEN,
                   'Only the owner of a event can delete it.')
-    def post(self, eid, uid):
+    def delete(self, eid, uid):
         """
         This method deletes an event from the event db.
         """
@@ -233,7 +233,7 @@ class DeleteUser(Resource):
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
     @api.response(HTTPStatus.FORBIDDEN, 'A user can only delete themselves.')
-    def post(self, uid):
+    def delete(self, uid):
         """
         This method deletes a user from the user db.
         """
@@ -259,4 +259,4 @@ class AddCalendar(Resource):
         if ret == udata.NOT_FOUND:
             raise (wz.NotFound(f"User {uid} not found."))
         else:
-            return f"{uid} deleted."
+            return ret
