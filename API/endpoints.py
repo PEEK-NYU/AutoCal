@@ -117,8 +117,10 @@ class CreateEvent(Resource):
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
     @api.response(HTTPStatus.NOT_ACCEPTABLE, 'A duplicate key')
-    def post(self, 
-    uid, eventname, start_time, end_time, location, description):
+    def post(
+            self, uid, eventname, start_time, 
+            end_time, location, description
+    ):
         """
         This method adds an event to the event db.
         """
