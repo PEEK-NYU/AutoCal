@@ -61,7 +61,7 @@ def convert_event_dict(ics_data):
     """
     result = jicson.fromFile(ics_data)
     cal = result['VCALENDAR']
-    events = cal[0]['VEVENT']  # why only 0? 0 is the location of 'VEVENT' which holds the list of all events in cal :)
+    events = cal[0]['VEVENT']
     if len(events) > 0:
         for event in events:
             event_data = {edata.ENAME: event['SUMMARY'], edata.STIME: event['DTSTART'], edata.ETIME: event['DTEND'],

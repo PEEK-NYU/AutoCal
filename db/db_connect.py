@@ -12,7 +12,7 @@ import bson.json_util as bsutil
 # all of these will eventually be put in the env:
 user_nm = "AutoCal1"
 cloud_svc = "cluster1.trnwt.mongodb.net"
-passwd = os.environ.get("AUTOCAL_DB_PASS", '')
+passwd = os.environ.get("AUTOCAL_DB_PASS", 'autocal000')
 cloud_mdb = "mongodb+srv"
 db_params = "retryWrites=true&w=majority"
 
