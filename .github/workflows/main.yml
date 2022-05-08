@@ -42,5 +42,5 @@ jobs:
       - uses: akhileshns/heroku-deploy@v3.12.12
         with:
             heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-            heroku_app_name: "peek-nyu"
-            heroku_email: "	ea2327@nyu.edu"
+            heroku_app_name: "autocal-nyu"
+            heroku_email: "korastuff@gmail.com"
