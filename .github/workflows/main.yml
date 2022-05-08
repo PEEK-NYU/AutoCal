@@ -13,7 +13,10 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 env:
-  AUTOCAL_HOME: /home/runner/work/AutoCal/AutoCal
+  AUTOCAL_HOME: ${{secrets.AUTOCAL_DIR}}
+  AUTOCAL_DIR: ${{secrets.AUTOCAL_DIR}}
+  AUTOCAL_DB_PASS: ${{secrets.AUTOCAL_DB_PASS}}
+  MONGO_PASSWD: ${{secrets.MONGO_PASSWD}}
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
