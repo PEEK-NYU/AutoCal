@@ -59,13 +59,14 @@ def convert_event_dict(ics_data):
                edata.ETIME: end_time, edata.LOC: location,
                edata.DESC: description}
     """
-    # event_data = {edata.ENAME: "", edata.STIME: "", edata.ETIME: "",
-    #               edata.LOC: "", edata.DESC: ""}
-    # TODO: finish 
-    result = jicson.fromFile(ics_data) # to dict
-    # TODO: Now to Event dict
-    yield {}
-
+    result = jicson.fromFile(ics_data)
+    cal = result['VCALENDAR']
+    events = cal[0]['VEVENT']
+    event_date = {}
+    for event in events:
+        event_data = {edata.ENAME: event['SUMMARY'], edata.STIME: event['DTSTART'], edata.ETIME: event['DTEND'],
+                     edata.LOC: event['LOCATION'], edata.DESC: event['DESCRIPTION']}
+        yield event_data
 
 def add_calendar(uid, ics_data):
     """ takes in a uid and ics data and imports an event """
@@ -86,10 +87,3 @@ def add_calendar(uid, ics_data):
                            event_data[edata.DESC])
         has_imported = True
     return OK
-
-#def ics_parse(ics_data, event):
-# #   """
-#    Function to take in ICS Data and output suggested event time
-#    """
-#
-#    return
