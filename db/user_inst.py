@@ -1,5 +1,6 @@
 """
 test file to simulate how a user's instance will interact with the system...
+NOTE: NOT IN USE: IGNORE IN TESTS
 """
 import user_data as udata
 

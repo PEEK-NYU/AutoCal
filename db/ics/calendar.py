@@ -7,6 +7,8 @@ https://fileinfo.com/extension/ics
 
 TODO: maybe add to makefile? -->  pip install icalendar
 (aslo for datetime)
+
+NOTE: NOT IN USE: IGNORE IN TESTS
 """
 
 # import icalendar
