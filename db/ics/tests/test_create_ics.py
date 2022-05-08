@@ -38,12 +38,12 @@ class DBICSTestCase(TestCase):
         """
         TODO: add_calendar must be properly defined or create skeleton
         """
-        good_uid = '6223ba54024eb2d8c26fc0cd'
-        good_ics_data = 'demo_calendar.ics'
+        # good_uid = '6223ba54024eb2d8c26fc0cd'
+        # good_ics_data = 'demo_calendar.ics'
 
     def test_bad_uid_add_calendar(self):
         """
         Testing create_event() with good inputs
         """
-        bad_uid = '12345678'
-        good_ics_data = 'demo_calendar.ics'
+        # bad_uid = '12345678'
+        # good_ics_data = 'demo_calendar.ics'

@@ -76,15 +76,10 @@ def add_calendar(uid, ics_data):
     takes in a uid and ics data and imports an event
     returns input data on success
     """
-    if not udata.user_exists(uid):
-        return NOT_FOUND
-    # if len(event_data) == 0:
-    #     return NOT_FOUND
-
     has_imported = False
     input_data = []
     for event_data in convert_event_dict(ics_data):
-        if bool(event_data):  # bool checks if empty
+        if len(event_data) == 0:  # bool checks if empty
             if has_imported:
                 return input_data
             else:

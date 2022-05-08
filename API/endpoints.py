@@ -232,7 +232,6 @@ class DeleteUser(Resource):
     """
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
-    @api.response(HTTPStatus.FORBIDDEN, 'A user can only delete themselves.')
     def delete(self, uid):
         """
         This method deletes a user from the user db.
@@ -251,12 +250,15 @@ class AddCalendar(Resource):
     """
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
+    @api.response(HTTPStatus.NOT_ACCEPTABLE, 'Bad User ID Access')
     def post(self, uid, ics_data):
         """
         This method deletes a user from the user db.
         """
         ret = cal.add_calendar(uid, ics_data)
-        if ret == udata.NOT_FOUND:
-            raise (wz.NotFound(f"User {uid} not found."))
+        if not udata.user_exists(uid):
+            raise (wz.NotAcceptable(f"User {uid} not found."))
+        elif ret == udata.NOT_FOUND:
+            raise (wz.NotFound("No ICS Data Found"))
         else:
             return ret

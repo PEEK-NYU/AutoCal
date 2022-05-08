@@ -7,6 +7,7 @@ from unittest import TestCase
 import db.user_data as udata
 import db.event_data as edata
 import db.connect_data as cdata
+import db.ics.create_ics as idata
 import db.db_connect as dbc
 
 import random
@@ -43,8 +44,15 @@ fake_e_data = {edata.ENAME: FAKE_ENAME, edata.STIME: FAKE_START,
                edata.ETIME: FAKE_END, edata.LOC: FAKE_LOC,
                edata.DESC: FAKE_DESC}
 
+FAKE_ics = "BEGIN:VCALENDAR\nVERSION:2.0\nCALSCALE:GREGORIAN\nBEGIN:VEVENT"\
+           + "\nSUMMARY:Access-A-Ride Pickup\nDTSTART;TZID=America/New_York:20130802T103400" \
+           + "\nDTEND;TZID=America/New_York:20130802T110400\nLOCATION:1000 Broadway Ave.\, Brooklyn" \
+           + "\nDESCRIPTION: Access-A-Ride trip to 900 Jay St.\, Brooklyn" \
+           + "\nSTATUS:CONFIRMED\nSEQUENCE:3\nBEGIN:VALARM\nTRIGGER:-PT10M\nDESCRIPTION:Pickup Reminder" \
+           + "\nACTION:DISPLAY\nEND:VALARM\nEND:VEVENT\nEND:VCALENDAR"
+
 # aggregation of data for endpoint testing
-fake_data = [fake_u_data, fake_e_data]
+fake_data = [fake_u_data, fake_e_data, FAKE_ics]
 
 client = dbc.get_client()  # global inst of client
 
@@ -205,6 +213,11 @@ class DBTestCase(TestCase):
         """ test that we can access our connection via eid """
         self.assertEquals(self.test_uid, cdata.get_connection_from_eid(self.test_eid))
 
+    def test_ics(self):
+        """ testing that ics parsing works """
+        test_cal2 = idata.add_calendar(self.test_uid, FAKE_ics)
+        self.assertNotEqual(test_cal2, udata.NOT_FOUND)
+
     # DELETION TESTS
     def test_del_event(self):
         """
@@ -213,7 +226,6 @@ class DBTestCase(TestCase):
         """
         deleted = edata.del_event(self.test_eid, self.test_uid)
         self.assertNotIn(self.test_eid, edata.get_all_events().keys())
-        # de
         self.assertFalse(cdata.is_connected(self.test_eid, self.test_uid))
 
     def test_del_user(self):
