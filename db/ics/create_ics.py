@@ -58,26 +58,29 @@ def convert_event_dict(ics_data):
                edata.ETIME: end_time, edata.LOC: location,
                edata.DESC: description}
     """
-    if ics_data[-3:] == "ics":
-        result = jicson.fromFile(ics_data)
+    if ics_data[-3:]=="ics" or "DAR":
+        if ics_data[-3:] == "ics":
+            result = jicson.fromFile(ics_data)
+        else:
+            result = jicson.fromText(ics_data)
+        cal = result['VCALENDAR']
+        events = cal[0]['VEVENT']
+        if len(events) > 0:
+            for event in events:
+                dtstart= 'DTSTART'
+                dtend = 'DTEND'
+                for key in event.keys():
+                    if key.find('DTSTART') > -1:
+                        dtstart= key
+                    elif key.find('DTEND')>-1:
+                        dtend=key
+                event_data = {edata.ENAME: event['SUMMARY'], edata.STIME: event[dtstart], edata.ETIME: event[dtend],
+                            edata.LOC: event['LOCATION'], edata.DESC: event['DESCRIPTION']}
+                yield event_data
+        else:
+            yield {}
     else:
-        result = jicson.fromText(ics_data)
-    cal = result['VCALENDAR']
-    events = cal[0]['VEVENT']
-    if len(events) > 0:
-        for event in events:
-            dtstart= 'DTSTART'
-            dtend = 'DTEND'
-            for key in event.keys():
-                if key.find('DTSTART') > -1:
-                    dtstart= key
-                elif key.find('DTEND')>-1:
-                    dtend=key
-            event_data = {edata.ENAME: event['SUMMARY'], edata.STIME: event[dtstart], edata.ETIME: event[dtend],
-                        edata.LOC: event['LOCATION'], edata.DESC: event['DESCRIPTION']}
-            yield event_data
-    else:
-        yield {}
+        yield{}
 
 
 def add_calendar(uid, ics_data):
