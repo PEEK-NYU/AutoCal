@@ -9,35 +9,35 @@ import Inputbox from '../../components/Inputbox/Inputbox'
 
 
 import { backendurl } from '../../config';
+import './add.css';
 
 
-const fields = ['Event Name','Start Time','End Time', 'Description'];
 
 export default function Add(){
 
   const history = useHistory();
   const {token, setToken} = useTokenContext(); //token, setToken
-  const [endurl, setEndurl] = useState(`${backendurl}/events/create/${token}`);
-  // const [fields,setFields] = useState({});
+  const [fields, setFields] = useState(undefined);
 
-  // useEffect(() => {
-  //   axios.get(`${backendurl}/events/getfields`)
-  //     .then((response) => {
-  //       setFields(response.data);
-  //       console.log(response.data);
-  //     })
-  //     .catch(error => {
-  //       console.log(error);
-  //     });
-  // }, [])
+  const create_url = `${backendurl}/events/create/${token}`;
+
+  useEffect(() => {
+    axios.get(`${backendurl}/events/get_fields`)
+      .then((response) => {
+        setFields(response.data);
+        //console.log(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, [])
 
   const handleAdd = (e) => { 
     e.preventDefault();
-    setEndurl( endurl +
-      Object.values(e.target.efield).map((field_content, index) => {
-        return `/${field_content.value}`
-      }).join("")
-    ); //didn't join the string right away, async maybe?
+    let endurl = create_url + 
+            Object.values(e.target.efield).map((field_content, index) => {
+              return `/${field_content.value}`
+            }).join("");
     console.log(endurl);
     axios.post(endurl)
       .then((response) => {
@@ -51,7 +51,7 @@ export default function Add(){
 
 
   return (
-    <div className="content">
+    <div className="Add">
       <div className="event-header">
         <PageTitle
           text="Event"
@@ -60,7 +60,7 @@ export default function Add(){
 
       <form onSubmit={handleAdd}>
         {fields ? fields.map((field, index) => (
-          <div key={index}>
+          <div key={index} className="inputbox">
             <input type="text" name="efield" placeholder={field}/>
           </div>
         )) : (
@@ -74,7 +74,6 @@ export default function Add(){
             <button type="submit">Add Event</button>
           </div>
         )}
-
       </form>
 
       <div className="Edit Event">
