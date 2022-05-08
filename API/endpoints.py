@@ -109,7 +109,7 @@ class GetEvent(Resource):
 
 
 @api.route('/events/create/<uid>/<eventname>/'
-           '<start_time>/<end_time>/<location>/<description>')
+           '<start_time>/<end_time>/<description>')
 class CreateEvent(Resource):
     """
     This class supports creating an event
@@ -117,15 +117,12 @@ class CreateEvent(Resource):
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
     @api.response(HTTPStatus.NOT_ACCEPTABLE, 'A duplicate key')
-    def post(
-            self, uid, eventname, start_time,
-            end_time, location, description
-    ):
+    def post(self, uid, eventname, start_time, end_time, description):
         """
         This method adds an event to the event db.
         """
         ret = edata.create_event(uid, eventname, start_time,
-                                 end_time, location, description)
+                                 end_time, "", description)
         if ret == udata.NOT_FOUND:
             raise (wz.NotFound("Event db not found."))
         else:
@@ -144,7 +141,7 @@ class GetEventFields(Resource):
         this method shows input field names for events
         """
         # return [edata.ETIME, edata.STIME, edata.ETIME, edata.LOC, edata.DESC]
-        return [edata.ENAME, edata.STIME, edata.ETIME, edata.LOC, edata.DESC]
+        return [edata.ENAME, edata.STIME, edata.ETIME, edata.DESC]
 
 
 @api.route('/events/delete/<eid>/<uid>')
