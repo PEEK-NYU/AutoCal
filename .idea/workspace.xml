@@ -9,7 +9,6 @@
       <change beforePath="$PROJECT_DIR$/API/endpoints.py" beforeDir="false" afterPath="$PROJECT_DIR$/API/endpoints.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/API/tests/test_endpoints.py" beforeDir="false" afterPath="$PROJECT_DIR$/API/tests/test_endpoints.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db/ics/create_ics.py" beforeDir="false" afterPath="$PROJECT_DIR$/db/ics/create_ics.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/ics/tests/test_create_ics.py" beforeDir="false" afterPath="$PROJECT_DIR$/db/ics/tests/test_create_ics.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db/tests/test_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/db/tests/test_data.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

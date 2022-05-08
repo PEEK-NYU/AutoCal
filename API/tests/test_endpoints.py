@@ -111,11 +111,11 @@ class EndpointTestCase(TestCase):
         self.assertEqual(temp_user_info[udata.PW], fake_data[0][udata.PW])
         self.assertEqual(temp_user_info[udata.EM], fake_data[0][udata.EM])
 
-    # def test_ics(self):
-    #     """ see if ics importing is working """
-    #     cal = ep.AddCalendar(Resource)
-    #     test_cal2 = cal.post(self.test_uid, fake_data[2])
-    #     self.assertNotEqual(test_cal2, udata.NOT_FOUND)
+    def test_ics(self):
+        """ see if ics importing is working """
+        cal = ep.AddCalendar(Resource)
+        test_cal = cal.post(self.test_uid, fake_data[2])
+        self.assertNotEqual(test_cal, udata.NOT_FOUND)
 
     def test_get_event(self):
         """ see if we can fetch a user again """

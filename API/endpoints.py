@@ -105,7 +105,7 @@ class GetEvent(Resource):
             raise (wz.NotFound("Event not found."))
         else:
             print("Got to the proper output place")
-            return event  # TODO: fix
+            return event
 
 
 @api.route('/events/create/<uid>/<eventname>/'
@@ -256,7 +256,7 @@ class AddCalendar(Resource):
         This method deletes a user from the user db.
         """
         ret = cal.add_calendar(uid, ics_data)
-        if not udata.user_exists(uid):
+        if udata.user_exists(uid) == udata.NOT_FOUND:
             raise (wz.NotAcceptable(f"User {uid} not found."))
         elif ret == udata.NOT_FOUND:
             raise (wz.NotFound("No ICS Data Found"))

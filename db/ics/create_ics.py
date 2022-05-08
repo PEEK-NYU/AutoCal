@@ -58,7 +58,7 @@ def convert_event_dict(ics_data):
                edata.ETIME: end_time, edata.LOC: location,
                edata.DESC: description}
     """
-    if ics_data[-3:]=="ics":
+    if ics_data[-3:] == "ics":
         result = jicson.fromFile(ics_data)
     else:
         result = jicson.fromText(ics_data)
@@ -68,7 +68,7 @@ def convert_event_dict(ics_data):
         for event in events:
             dtstart= 'DTSTART'
             dtend = 'DTEND'
-            for key in events.keys():
+            for key in event.keys():
                 if key.find('DTSTART') > -1:
                     dtstart= key
                 elif key.find('DTEND')>-1:
@@ -78,6 +78,7 @@ def convert_event_dict(ics_data):
             yield event_data
     else:
         yield {}
+
 
 def add_calendar(uid, ics_data):
     """
