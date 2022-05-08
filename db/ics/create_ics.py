@@ -62,14 +62,14 @@ def convert_event_dict(ics_data):
     result = jicson.fromFile(ics_data)
     cal = result['VCALENDAR']
     events = cal[0]['VEVENT']
-    event_date = {}
+    event_date = {}  # @beth what is this used for?
     if len(events)>0:
         for event in events:
             event_data = {edata.ENAME: event['SUMMARY'], edata.STIME: event['DTSTART'], edata.ETIME: event['DTEND'],
                         edata.LOC: event['LOCATION'], edata.DESC: event['DESCRIPTION']}
             yield event_data
     else:
-        yield event_data
+        yield {}
 
 def add_calendar(uid, ics_data):
     """ takes in a uid and ics data and imports an event """
