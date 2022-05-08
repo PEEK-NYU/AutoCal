@@ -8,7 +8,7 @@ import {backendurl} from '../../config';
 import PageTitle from '../../components/PageTitle/PageTitle';
 import NavButton from '../../components/NavButton/NavButton';
 
-import './login.css'
+//import './logreg.css'
 
 
 export default function Login(){
@@ -45,7 +45,7 @@ export default function Login(){
           </div>
       )}
 
-      <div className="login-form">
+      <div className="logreg-form">
         <form onSubmit={e=>{e.preventDefault()}}>
           <label>
             <p>Username</p>
@@ -56,7 +56,7 @@ export default function Login(){
             <input type="password" onChange={e => setPassword(e.target.value)}/>
           </label>
           <div>
-            <button type="submit" onClick={handleLogin}>Submit</button>
+            <button type="submit" onClick={handleLogin}>Log Me In</button>
           </div>
         </form>
       </div>

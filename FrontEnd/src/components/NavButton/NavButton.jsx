@@ -1,7 +1,7 @@
 import React from 'react';
 //import {useEffect} from 'react';
 import {useHistory} from 'react-router-dom';
-import './NavButton.css';
+//import './NavButton.css';
 
 
 export default function NavButton({text,subpath}){

@@ -3,8 +3,6 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 import Home from './pages/Home/Home';
 import Test from './pages/Test/Test';
-import Rooms from './pages/Rooms/Rooms';
-import Users from './pages/Users/Users';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import Event from './pages/Event/Event';
@@ -15,7 +13,7 @@ import { TokenContextProvider } from './components/TokenContext/TokenContext';
 
 import {backendurl} from './config';
 
-//import './App.css';
+import './App.css';
 
 
 function App() {
@@ -33,14 +31,6 @@ function App() {
 
               <Route exact={true} path={'/test'}>
                 <Test />
-              </Route>
-
-              <Route exact={true} path={'/rooms'}>
-                <Rooms />
-              </Route>
-
-              <Route exact={true} path={'/users'}>
-                <Users />
               </Route>
 
               <Route exact={true} path={'/login'}>
