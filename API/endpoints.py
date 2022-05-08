@@ -118,7 +118,7 @@ class CreateEvent(Resource):
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
     @api.response(HTTPStatus.NOT_ACCEPTABLE, 'A duplicate key')
     def post(
-            self, uid, eventname, start_time, 
+            self, uid, eventname, start_time,
             end_time, location, description
     ):
         """
