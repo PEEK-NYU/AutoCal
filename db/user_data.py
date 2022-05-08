@@ -28,7 +28,7 @@ NEW Mongo List Ref:
       ]
 """
 
-import os
+# import os
 import db.db_connect as dbc
 # import db.event_data as edata
 # import db.connect_data as cdata
@@ -36,7 +36,6 @@ import db.db_connect as dbc
 from bson.objectid import ObjectId
 
 
-AUTOCAL_HOME = os.environ["AUTOCAL_DIR"]
 GET_USERS = "user_data"
 USERS = "_id"
 UNAME = "username"
