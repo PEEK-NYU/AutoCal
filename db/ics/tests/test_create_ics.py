@@ -1,7 +1,7 @@
 # import pytest
 # import json
 # from ics import Event
-import db.ics.create_ics as c_ics
+# import db.ics.create_ics as c_ics
 
 from unittest import TestCase  # , skip
 

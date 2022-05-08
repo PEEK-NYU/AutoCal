@@ -6,14 +6,14 @@ Manipulate calendars, connects extsiting users to events and
     stores event data in database
 """
 
-#from ics import Calendar, Event
-#from datetime import datetime
+# from ics import Calendar, Event
+# from datetime import datetime
 from db import user_data as udata
 # from db import connect_data
 from db import event_data as edata
-import jicson # Python ICS to JSon library @ https://github.com/CalyFactory/python-jicson
+import jicson  # Python ICS to JSon library @ https://github.com/CalyFactory/python-jicson
 
-#cal = Calendar()  # demo empty calendar
+# cal = Calendar()  # demo empty calendar
 
 OK = 0
 NOT_FOUND = 1
@@ -61,7 +61,7 @@ def convert_event_dict(ics_data):
     """
     result = jicson.fromFile(ics_data)
     cal = result['VCALENDAR']
-    events = cal[0]['VEVENT']
+    events = cal[0]['VEVENT']  # why only 0?
     if len(events) > 0:
         for event in events:
             event_data = {edata.ENAME: event['SUMMARY'], edata.STIME: event['DTSTART'], edata.ETIME: event['DTEND'],
@@ -69,6 +69,7 @@ def convert_event_dict(ics_data):
             yield event_data
     else:
         yield {}
+
 
 def add_calendar(uid, ics_data):
     """ takes in a uid and ics data and imports an event """
