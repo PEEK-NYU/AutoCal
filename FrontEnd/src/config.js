@@ -1,2 +1,2 @@
 // export const backendurl = process.env.REACT_APP_BACKEND_URL || 'https://demo-repo23.herokuapp.com/';
-export const backendurl = process.env.REACT_APP_BACKEND_URL;
+export const backendurl = process.env.REACT_APP_BACKEND_URL || 'https://autocal-nyu.herokuapp.com/';
