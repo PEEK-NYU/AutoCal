@@ -129,6 +129,20 @@ class CreateEvent(Resource):
             return ret
 
 
+@api.route('/events/get_fields')
+class GetEventFields(Resource):
+    """
+    This class shows all the input fields for events
+    """
+    @api.response(HTTPStatus.OK, 'Success')
+    @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
+    def get(self):
+        """
+        this method shows input field names for events
+        """
+        return [edata.ETIME, edata.STIME, edata.ETIME, edata.LOC, edata.DESC]
+
+
 @api.route('/events/delete/<eid>/<uid>')
 class DeleteEvent(Resource):
     """
@@ -221,6 +235,20 @@ class CreateUser(Resource):
         if ret == udata.NOT_FOUND:
             raise (wz.NotAcceptable("Not suitable email: add @"))
         return ret
+
+
+@api.route('/users/get_fields')
+class GetUserFields(Resource):
+    """
+    This class shows all the input fields for users
+    """
+    @api.response(HTTPStatus.OK, 'Success')
+    @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
+    def get(self):
+        """
+        this method shows input field names for users
+        """
+        return [udata.UNAME, udata.PW, udata.EM]
 
 
 @api.route('/users/delete/<uid>')
