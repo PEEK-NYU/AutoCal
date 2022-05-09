@@ -300,14 +300,13 @@ class AddCalendar(Resource):
     """
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
-    @api.response(HTTPStatus.NOT_ACCEPTABLE, 'Bad User ID Access')
     def post(self, uid, ics_data):
         """
         This method deletes a user from the user db.
         """
         ret = cal.add_calendar(uid, ics_data)
         if udata.user_exists(uid) == udata.NOT_FOUND:
-            raise (wz.NotAcceptable(f"User {uid} not found."))
+            raise (wz.NotFound(f"User {uid} not found."))
         elif ret == udata.NOT_FOUND:
             raise (wz.NotFound("No ICS Data Found"))
         else:
