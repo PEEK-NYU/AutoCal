@@ -11,7 +11,7 @@ import werkzeug.exceptions as wz
 
 import db.user_data as udata
 import db.event_data as edata
-# import db.connect_data as cdata
+import db.connect_data as cdata
 
 import db.ics.create_ics as cal
 
@@ -164,6 +164,27 @@ class DeleteEvent(Resource):
             raise (wz.NotFound(f"Event {eid} not found."))
         else:
             return f"{eid} deleted."
+
+
+@api.route('/admin/events/delete/<eid>')
+class AdminDeleteEvent(Resource):
+    """
+    This class enables deleting an event via eid only
+    """
+    @api.response(HTTPStatus.OK, 'Success')
+    @api.response(HTTPStatus.NOT_FOUND, 'Not Found')
+    def delete(self, eid):
+        """
+        This method deletes an event from the event db.
+        """
+        uid = cdata.get_connection_from_eid(eid)
+        if not uid == cdata.NOT_FOUND:
+            ret = edata.del_event(eid, uid)
+            if ret == udata.NOT_FOUND:
+                raise (wz.NotFound(f"Event {eid} not found."))
+        else:
+            edata.admin_del_event(eid)
+        return f"{eid} deleted."
 
 
 @api.route('/admin/users/get')

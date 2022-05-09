@@ -127,3 +127,8 @@ def del_event(eid, uid):
     assert cdata.is_connected(eid, uid)  # check user connected to event
     dbc.del_one(GET_EVENTS, filters={EVENTS: ObjectId(eid)})
     return cdata.del_connection(eid, uid)
+
+
+def admin_del_event(eid):
+    """ admin method for deleting an event without a connection """
+    return dbc.del_one(GET_EVENTS, filters={EVENTS: ObjectId(eid)})
